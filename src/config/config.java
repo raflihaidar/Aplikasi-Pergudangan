@@ -7,7 +7,7 @@ import java.sql.DriverManager;
  *
  * @author rafli
  */
-public class config {
+public class Config {
     
     public static Connection connectDB() {
         Connection con = null;
