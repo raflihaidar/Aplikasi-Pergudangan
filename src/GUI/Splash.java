@@ -21,7 +21,7 @@ public class Splash extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(this);
         aksi();
-        timer = new Timer(300,action);
+        timer = new Timer(350,action);
         timer.start();
     }
 
@@ -50,7 +50,7 @@ public class Splash extends javax.swing.JFrame {
 
         progress.setBackground(new java.awt.Color(10, 10, 10));
         progress.setFont(new java.awt.Font("Ebrima", 1, 11)); // NOI18N
-        progress.setForeground(new java.awt.Color(255, 255, 255));
+        progress.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Testing/7lrK.gif"))); // NOI18N
@@ -145,7 +145,7 @@ public class Splash extends javax.swing.JFrame {
         action = new ActionListener(){
             
             public void actionPerformed(ActionEvent e){
-                progress.setValue(progress.getValue()+3);
+                progress.setValue(progress.getValue()+4);
                 progress.setStringPainted(true);
                 if(progress.getPercentComplete()==1.0){
                     timer.stop();
