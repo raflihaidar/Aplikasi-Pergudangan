@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 /**
@@ -13,6 +9,8 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    private String  USERNAME = "";
+    private String  PASSWORD = "";
     public Login() {
         initComponents();
     }
