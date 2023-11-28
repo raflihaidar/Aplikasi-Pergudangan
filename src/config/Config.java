@@ -3,10 +3,7 @@ package config;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-/**
- *
- * @author rafli
- */
+
 public class Config {
     
     public static Connection connectDB() {
