@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package GUI;
+package Page;
 
-/**
- *
- * @author ACER
- */
 public class Register extends javax.swing.JFrame {
 
     /**

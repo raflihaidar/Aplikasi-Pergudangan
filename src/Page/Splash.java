@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package GUI;
+package Page;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
-/**
- *
- * @author ACER
- */
 public class Splash extends javax.swing.JFrame {
 
     Timer timer;
@@ -53,7 +45,12 @@ public class Splash extends javax.swing.JFrame {
         progress.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Testing/7lrK.gif"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/7lrK.gif"))); // NOI18N
+        jLabel2.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jLabel2ComponentShown(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -77,7 +74,7 @@ public class Splash extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(27, 27, 27)
                 .addComponent(progress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -98,6 +95,10 @@ public class Splash extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel2ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel2ComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel2ComponentShown
 
     /**
      * @param args the command line arguments
@@ -147,7 +148,7 @@ public class Splash extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e){
                 progress.setValue(progress.getValue()+4);
                 progress.setStringPainted(true);
-                if(progress.getPercentComplete()==1.0){
+                if(progress.getPercentComplete() == 1.0){
                     timer.stop();
                     dispose();
                     Login l =new Login();
