@@ -1,10 +1,17 @@
 package Page;
+import javax.swing.JOptionPane;
 
 public class Register extends javax.swing.JFrame {
 
     /**
      * Creates new form Register
      */
+    public static String username;
+    public static String password;
+    private static String fullname;
+    
+    
+    
     public Register() {
         initComponents();
     }
@@ -29,12 +36,13 @@ public class Register extends javax.swing.JFrame {
         txtFullName = new javax.swing.JTextField();
         txtUsernameRegis = new javax.swing.JTextField();
         txtPasswordRegis = new javax.swing.JPasswordField();
-        jTextField3 = new javax.swing.JTextField();
         btnRegisterNow = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         btnLoginback = new javax.swing.JButton();
         RdioMale = new javax.swing.JRadioButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        RdioFemale = new javax.swing.JRadioButton();
+        txtWarningregis = new javax.swing.JLabel();
+        txtRepass = new javax.swing.JPasswordField();
 
         jLabel6.setBackground(new java.awt.Color(0, 0, 0));
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -55,7 +63,7 @@ public class Register extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setText("Email");
+        jLabel3.setText("Re Password");
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
@@ -77,12 +85,13 @@ public class Register extends javax.swing.JFrame {
         txtPasswordRegis.setForeground(new java.awt.Color(0, 0, 0));
         txtPasswordRegis.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jTextField3.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField3.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
         btnRegisterNow.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         btnRegisterNow.setText("REGISTER");
+        btnRegisterNow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterNowActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
@@ -107,12 +116,20 @@ public class Register extends javax.swing.JFrame {
         RdioMale.setBorder(null);
         RdioMale.setContentAreaFilled(false);
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton1.setText("Female");
-        jRadioButton1.setAlignmentY(0.0F);
-        jRadioButton1.setBorder(null);
+        RdioFemale.setBackground(new java.awt.Color(255, 255, 255));
+        RdioFemale.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        RdioFemale.setForeground(new java.awt.Color(0, 0, 0));
+        RdioFemale.setText("Female");
+        RdioFemale.setAlignmentY(0.0F);
+        RdioFemale.setBorder(null);
+
+        txtWarningregis.setBackground(new java.awt.Color(255, 255, 255));
+        txtWarningregis.setForeground(new java.awt.Color(204, 0, 51));
+
+        txtRepass.setBackground(new java.awt.Color(255, 255, 255));
+        txtRepass.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        txtRepass.setForeground(new java.awt.Color(0, 0, 0));
+        txtRepass.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -120,11 +137,6 @@ public class Register extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(239, 239, 239)
-                        .addComponent(jLabel7)
-                        .addGap(3, 3, 3)
-                        .addComponent(btnLoginback))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(130, 130, 130)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,24 +146,29 @@ public class Register extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
                         .addGap(63, 63, 63)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(RdioMale)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jRadioButton1)
-                                    .addComponent(btnRegisterNow)))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtUsernameRegis, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                                .addComponent(txtFullName)
-                                .addComponent(txtPasswordRegis)
-                                .addComponent(jTextField3)))))
-                .addContainerGap(222, Short.MAX_VALUE))
+                                .addGap(46, 46, 46)
+                                .addComponent(RdioFemale))
+                            .addComponent(txtUsernameRegis, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                            .addComponent(txtFullName)
+                            .addComponent(txtPasswordRegis)
+                            .addComponent(txtWarningregis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtRepass)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(242, 242, 242)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnRegisterNow)
+                            .addComponent(jLabel7))
+                        .addGap(4, 4, 4)
+                        .addComponent(btnLoginback)))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(229, Short.MAX_VALUE)
+                .addContainerGap(230, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -163,22 +180,24 @@ public class Register extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPasswordRegis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(32, 32, 32)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(33, 33, 33)
+                    .addComponent(jLabel3)
+                    .addComponent(txtRepass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtWarningregis, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(RdioMale)
-                    .addComponent(jRadioButton1))
-                .addGap(18, 18, 18)
+                    .addComponent(RdioFemale))
+                .addGap(75, 75, 75)
                 .addComponent(btnRegisterNow)
-                .addGap(47, 47, 47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(btnLoginback))
-                .addGap(60, 60, 60))
+                .addGap(39, 39, 39))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -202,6 +221,39 @@ public class Register extends javax.swing.JFrame {
         Login l =new Login();
         l.setVisible(true);
     }//GEN-LAST:event_btnLoginbackActionPerformed
+
+   
+    
+    
+    private void btnRegisterNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterNowActionPerformed
+        // TODO add your handling code here:
+        
+       try{
+           fullname = txtFullName.getText();
+           username = txtUsernameRegis.getText();
+           password = txtPasswordRegis.getText(); 
+           
+           if (fullname.isEmpty() || username.isEmpty() || password.isEmpty() ) {
+            // Tampilkan pesan kesalahan jika tidak diisi
+            JOptionPane.showMessageDialog(this, "Silakan isi semua field!", "Error", JOptionPane.ERROR_MESSAGE);
+           }else{
+              if(txtPasswordRegis.getText().equals(txtRepass.getText())){
+                dispose();
+                Login l =new Login();
+                l.setVisible(true);
+                JOptionPane.showMessageDialog(this, "Registrasi berhasil!");
+            } else{ 
+            txtWarningregis.setText("Password Not Match");
+            txtPasswordRegis.setText("");
+            txtRepass.setText("");
+            
+            } 
+          }
+       }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Terjadi kesalahan!", "Error", JOptionPane.ERROR_MESSAGE);
+       }
+       
+    }//GEN-LAST:event_btnRegisterNowActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,6 +291,7 @@ public class Register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton RdioFemale;
     private javax.swing.JRadioButton RdioMale;
     private javax.swing.JButton btnLoginback;
     private javax.swing.JButton btnRegisterNow;
@@ -251,10 +304,10 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField txtFullName;
     private javax.swing.JPasswordField txtPasswordRegis;
+    private javax.swing.JPasswordField txtRepass;
     private javax.swing.JTextField txtUsernameRegis;
+    private javax.swing.JLabel txtWarningregis;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,7 +13,7 @@ public class Splash extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(this);
         aksi();
-        timer = new Timer(350,action);
+        timer = new Timer(250,action);
         timer.start();
     }
 
