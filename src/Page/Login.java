@@ -1,12 +1,12 @@
 package Page;
 
+import javax.swing.JOptionPane;
+
 public class Login extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
      */
-    private String  USERNAME = "";
-    private String  PASSWORD = "";
     public Login() {
         initComponents();
     }
@@ -195,27 +195,23 @@ public class Login extends javax.swing.JFrame {
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
         dispose();
-        Register r =new Register();
+        Register r = new Register();
         r.setVisible(true);
     }//GEN-LAST:event_btnRegisterActionPerformed
 
-    private void IsEmpty(){
-        txtUsername.setText("");
-        txtPassword.setText("");
-    }
-    
-    
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-    if(txtUsername.getText().equals(Register.username)&&(txtPassword.getText().equals(Register.password))){
-        dispose();
-        MainMenus r =new MainMenus();
-        r.setVisible(true);
-        
-        }else{
-        txtWarningLog.setText("Username or Password is Invalid");
-        IsEmpty();
-       }
+        if (txtUsername.getText().equals(Register.username) && (txtPassword.getText().equals(Register.password))) {
+            JOptionPane.showMessageDialog(this, "Login Successful!");
+            dispose();
+            MainMenus r = new MainMenus();
+            r.setVisible(true);
+
+        } else {
+            txtWarningLog.setText("Username or Password is Invalid");
+            txtUsername.setText("");
+            txtPassword.setText("");
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void jLabel4ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel4ComponentShown

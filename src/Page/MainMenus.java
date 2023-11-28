@@ -30,7 +30,7 @@ public class MainMenus extends javax.swing.JFrame {
 
         navbar = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        txtUsernameMain = new javax.swing.JLabel();
         humbMenu = new javax.swing.JLabel();
         profileImage = new javax.swing.JLabel();
         sidebar = new javax.swing.JPanel();
@@ -53,11 +53,20 @@ public class MainMenus extends javax.swing.JFrame {
         title.setForeground(new java.awt.Color(0, 0, 0));
         title.setText("SIMAG");
 
-        jLabel1.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Admin");
+        txtUsernameMain.setBackground(new java.awt.Color(204, 204, 204));
+        txtUsernameMain.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        txtUsernameMain.setForeground(new java.awt.Color(0, 0, 0));
+        txtUsernameMain.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtUsernameMain.setText("Admin");
+        txtUsernameMain.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                txtUsernameMainAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         humbMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         humbMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/menu.png"))); // NOI18N
@@ -79,7 +88,7 @@ public class MainMenus extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 382, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtUsernameMain, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(profileImage, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
@@ -91,7 +100,7 @@ public class MainMenus extends javax.swing.JFrame {
                 .addGroup(navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(humbMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
+                        .addComponent(txtUsernameMain)
                         .addComponent(title)
                         .addComponent(profileImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -146,6 +155,11 @@ public class MainMenus extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_formComponentShown
 
+    private void txtUsernameMainAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtUsernameMainAncestorAdded
+        // TODO add your handling code here:
+        txtUsernameMain.setText(Register.username+"");
+    }//GEN-LAST:event_txtUsernameMainAncestorAdded
+
     /**
      * @param args the command line arguments
      */
@@ -184,13 +198,13 @@ public class MainMenus extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel content;
     private javax.swing.JLabel humbMenu;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel listMenu;
     private javax.swing.JPanel navbar;
     private javax.swing.JLabel profileImage;
     private javax.swing.JPanel sidebar;
     private javax.swing.JLabel title;
+    private javax.swing.JLabel txtUsernameMain;
     // End of variables declaration//GEN-END:variables
 
     private void execute() {
