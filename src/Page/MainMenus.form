@@ -52,7 +52,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="title" min="-2" pref="85" max="-2" attributes="0"/>
                   <EmptySpace pref="382" max="32767" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="txtUsernameMain" min="-2" pref="90" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="profileImage" min="-2" pref="37" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
@@ -66,7 +66,7 @@
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Component id="humbMenu" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtUsernameMain" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="title" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="profileImage" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -88,7 +88,7 @@
             <Property name="text" type="java.lang.String" value="SIMAG"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="txtUsernameMain">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -102,6 +102,9 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Admin"/>
           </Properties>
+          <Events>
+            <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="txtUsernameMainAncestorAdded"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="humbMenu">
           <Properties>

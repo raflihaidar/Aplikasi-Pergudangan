@@ -1,4 +1,5 @@
 package Page;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -7,13 +8,12 @@ public class Splash extends javax.swing.JFrame {
 
     Timer timer;
     ActionListener action;
-    Splash sp;
-    
+
     public Splash() {
         initComponents();
         setLocationRelativeTo(this);
         aksi();
-        timer = new Timer(250,action);
+        timer = new Timer(250, action);
         timer.start();
     }
 
@@ -143,15 +143,15 @@ public class Splash extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void aksi() {
-        action = new ActionListener(){
-            
-            public void actionPerformed(ActionEvent e){
-                progress.setValue(progress.getValue()+4);
+        action = new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                progress.setValue(progress.getValue() + 4);
                 progress.setStringPainted(true);
-                if(progress.getPercentComplete() == 1.0){
+                if (progress.getPercentComplete() == 1.0) {
                     timer.stop();
                     dispose();
-                    Login l =new Login();
+                    Login l = new Login();
                     l.setVisible(true);
                 }
             }
