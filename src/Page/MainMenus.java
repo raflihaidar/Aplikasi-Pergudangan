@@ -1,6 +1,9 @@
 package Page;
 
 import Components.MenuItem;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -10,10 +13,13 @@ public class MainMenus extends javax.swing.JFrame {
     /**
      * Creates new form MainMenus
      */
+
     public MainMenus() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         execute();
+        listMenu.setPreferredSize(new Dimension(350, 0));
+
     }
 
     /**
@@ -24,7 +30,9 @@ public class MainMenus extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         navbar = new javax.swing.JPanel();
@@ -62,8 +70,10 @@ public class MainMenus extends javax.swing.JFrame {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 txtUsernameMainAncestorAdded(evt);
             }
+
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
+
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
@@ -74,6 +84,11 @@ public class MainMenus extends javax.swing.JFrame {
         humbMenu.setMaximumSize(new java.awt.Dimension(26, 26));
         humbMenu.setMinimumSize(new java.awt.Dimension(26, 26));
         humbMenu.setPreferredSize(new java.awt.Dimension(26, 26));
+        humbMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                humbMenuMouseClicked(evt);
+            }
+        });
 
         profileImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/profile.png"))); // NOI18N
         profileImage.setPreferredSize(new java.awt.Dimension(35, 35));
@@ -81,37 +96,45 @@ public class MainMenus extends javax.swing.JFrame {
         javax.swing.GroupLayout navbarLayout = new javax.swing.GroupLayout(navbar);
         navbar.setLayout(navbarLayout);
         navbarLayout.setHorizontalGroup(
-            navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(navbarLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(humbMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 382, Short.MAX_VALUE)
-                .addComponent(txtUsernameMain, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(profileImage, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
-        );
+                navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(navbarLayout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(humbMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 26,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 85,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 382,
+                                        Short.MAX_VALUE)
+                                .addComponent(txtUsernameMain, javax.swing.GroupLayout.PREFERRED_SIZE, 90,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(profileImage, javax.swing.GroupLayout.PREFERRED_SIZE, 37,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)));
         navbarLayout.setVerticalGroup(
-            navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(navbarLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(humbMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtUsernameMain)
-                        .addComponent(title)
-                        .addComponent(profileImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
+                navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(navbarLayout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addGroup(navbarLayout
+                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(humbMenu, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(navbarLayout
+                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(txtUsernameMain)
+                                                .addComponent(title)
+                                                .addComponent(profileImage, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(18, Short.MAX_VALUE)));
 
         getContentPane().add(navbar, java.awt.BorderLayout.PAGE_START);
 
         sidebar.setBackground(new java.awt.Color(204, 204, 204));
-        sidebar.setPreferredSize(new java.awt.Dimension(170, 369));
+        sidebar.setPreferredSize(new java.awt.Dimension(220, 369));
 
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setBackground(new java.awt.Color(204, 204, 204));
         jScrollPane1.setBorder(null);
 
         listMenu.setBackground(new java.awt.Color(204, 204, 204));
@@ -120,6 +143,7 @@ public class MainMenus extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 listMenuMouseEntered(evt);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 listMenuMouseExited(evt);
             }
@@ -135,55 +159,46 @@ public class MainMenus extends javax.swing.JFrame {
         javax.swing.GroupLayout sidebarLayout = new javax.swing.GroupLayout(sidebar);
         sidebar.setLayout(sidebarLayout);
         sidebarLayout.setHorizontalGroup(
-            sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-        );
+                sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1));
         sidebarLayout.setVerticalGroup(
-            sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
-        );
+                sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1));
 
         getContentPane().add(sidebar, java.awt.BorderLayout.LINE_START);
 
         content.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
-        content.setLayout(contentLayout);
-        contentLayout.setHorizontalGroup(
-            contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 499, Short.MAX_VALUE)
-        );
-        contentLayout.setVerticalGroup(
-            contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 369, Short.MAX_VALUE)
-        );
-
+        content.setLayout(new java.awt.BorderLayout());
         getContentPane().add(content, java.awt.BorderLayout.CENTER);
 
         setSize(new java.awt.Dimension(683, 446));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void listMenuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listMenuMouseExited
+    private void listMenuMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_listMenuMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_listMenuMouseExited
+    }// GEN-LAST:event_listMenuMouseExited
 
-    private void listMenuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listMenuMouseEntered
+    private void listMenuMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_listMenuMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_listMenuMouseEntered
+    }// GEN-LAST:event_listMenuMouseEntered
 
-    private void listMenuComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_listMenuComponentShown
+    private void listMenuComponentShown(java.awt.event.ComponentEvent evt) {// GEN-FIRST:event_listMenuComponentShown
         // TODO add your handling code here:
-    }//GEN-LAST:event_listMenuComponentShown
+    }// GEN-LAST:event_listMenuComponentShown
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {// GEN-FIRST:event_formComponentShown
         // TODO add your handling code here:
     }// GEN-LAST:event_formComponentShown
 
-    private void txtUsernameMainAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtUsernameMainAncestorAdded
+    private void txtUsernameMainAncestorAdded(javax.swing.event.AncestorEvent evt) {// GEN-FIRST:event_txtUsernameMainAncestorAdded
         // TODO add your handling code here:
-        txtUsernameMain.setText(Register.username+"");
-    }//GEN-LAST:event_txtUsernameMainAncestorAdded
+        txtUsernameMain.setText(Register.username + "");
+    }// GEN-LAST:event_txtUsernameMainAncestorAdded
+
+    private void humbMenuMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_humbMenuMouseClicked
+        // TODO add your handling code here:
+    }// GEN-LAST:event_humbMenuMouseClicked
 
     /**
      * @param args the command line arguments
@@ -241,27 +256,35 @@ public class MainMenus extends javax.swing.JFrame {
         ImageIcon iconMaster = new ImageIcon(getClass().getResource("/image/master.png"));
         ImageIcon iconBarang = new ImageIcon(getClass().getResource("/image/barang.png"));
 
-        MenuItem menuBarang = new MenuItem(iconBarang, "Barang", null);
-        MenuItem menuBarang2 = new MenuItem(iconBarang, "Distributor", null);
-        MenuItem menuBarang3 = new MenuItem(iconBarang, "Staff", null);
-        MenuItem menuMaster = new MenuItem(iconMaster, "Master", null, menuBarang, menuBarang2,
+        MenuItem menuBarang = new MenuItem(iconBarang, true, "Barang", null);
+        MenuItem menuBarang2 = new MenuItem(iconBarang, true, "Distributor", null);
+        MenuItem menuBarang3 = new MenuItem(iconBarang, true, "Staff", null);
+        MenuItem menuMaster = new MenuItem(iconMaster, false, "Master", null, menuBarang, menuBarang2,
                 menuBarang3);
 
-        MenuItem menuAdmin = new MenuItem(null, "Admin", null);
-        MenuItem menuDashboard = new MenuItem(null, "Dashboard", null);
-        
-        MenuItem menuTransaction1 = new MenuItem(iconBarang, "Barang Masuk", null);
-        MenuItem menuTransaction2 = new MenuItem(iconBarang, "Barang Keluar", null);
-        MenuItem menuTransaction3 = new MenuItem(iconBarang, "Pemesanan", null);
-        MenuItem menuTransaction = new MenuItem(null, "Transaksi", null, menuTransaction1, menuTransaction2, menuTransaction3);
-        
-        MenuItem menuReport1 = new MenuItem(iconBarang, "Transaksi", null);
-        MenuItem menuReport2 = new MenuItem(iconBarang, "Kinerja Staff", null);
-        MenuItem menuReport = new MenuItem(null, "Laporan", null, menuReport1, menuReport2);
-        
-        MenuItem menuSettings = new MenuItem(null, "Pengaturan", null);
+        MenuItem menuAdmin = new MenuItem(null, false, "Admin", null);
+        MenuItem menuDashboard = new MenuItem(null, false, "Dashboard", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                content.add(new Dashboard());
+                content.repaint();
+                content.revalidate();
+            }
+        });
 
-        addMenu(menuAdmin, menuDashboard,menuMaster, menuTransaction, menuReport, menuSettings);
+        MenuItem menuTransaction1 = new MenuItem(iconBarang, true, "Barang Masuk", null);
+        MenuItem menuTransaction2 = new MenuItem(iconBarang, true, "Barang Keluar", null);
+        MenuItem menuTransaction3 = new MenuItem(iconBarang, true, "Pemesanan", null);
+        MenuItem menuTransaction = new MenuItem(null, false, "Transaksi", null, menuTransaction1, menuTransaction2,
+                menuTransaction3);
+
+        MenuItem menuReport1 = new MenuItem(iconBarang, true, "Transaksi", null);
+        MenuItem menuReport2 = new MenuItem(iconBarang, true, "Kinerja Staff", null);
+        MenuItem menuReport = new MenuItem(null, false, "Laporan", null, menuReport1, menuReport2);
+
+        MenuItem menuSettings = new MenuItem(null, false, "Pengaturan", null);
+
+        addMenu(menuAdmin, menuDashboard, menuMaster, menuTransaction, menuReport, menuSettings);
     }
 
     private void addMenu(MenuItem... menu) {

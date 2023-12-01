@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.Icon;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -34,12 +35,16 @@ public class MenuItem extends javax.swing.JPanel {
     private final Color normalBackgroundColor = new Color(204,204,204);
     private final Color hoverBackgroundColor = new Color(220,220,220);
 
-    public MenuItem(Icon icon, String menuName, ActionListener act, MenuItem... subMenu) {
+    public MenuItem(Icon icon, boolean submenu, String menuName, ActionListener act, MenuItem... subMenu) {
         initComponents();
         lbIcon.setIcon(icon);
         lbName.setText(menuName);
         if (act != null) {
             this.act = act;
+        }
+        
+        if(submenu){
+            this.setBorder(new EmptyBorder(0, 35, 0, 0));
         }
         this.setSize(new Dimension(Integer.MAX_VALUE, 45));
         this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 45));
