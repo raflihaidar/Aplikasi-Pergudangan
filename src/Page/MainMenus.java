@@ -12,6 +12,11 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JRootPane;
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import javax.swing.JPanel;
 
 public class MainMenus extends javax.swing.JFrame {
 
@@ -22,11 +27,23 @@ public class MainMenus extends javax.swing.JFrame {
     public MainMenus() {
         initComponents();
         execute();
+        ImageIcon iconClose = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/close_FILL0_wght400_GRAD0_opsz24.png");
+        lbClose.setIcon(iconClose);
         listMenu.setPreferredSize(new Dimension(350, 0));
         this.setUndecorated(true);
         // this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
     }
 
+    protected void paintComponent(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        int w = getWidth();
+        int h = getHeight();
+        Color color1 = Color.BLACK;
+        Color color2 = Color.GREEN;
+        GradientPaint gp = new GradientPaint(0, 0, color1, 0, h, color2);
+        g2d.setPaint(gp);
+        g2d.fillRect(0, 0, w, h);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,6 +63,7 @@ public class MainMenus extends javax.swing.JFrame {
         txtUsernameMain = new javax.swing.JLabel();
         humbMenu = new javax.swing.JLabel();
         profileImage = new javax.swing.JLabel();
+        lbClose = new javax.swing.JLabel();
         sidebar = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listMenu = new javax.swing.JPanel();
@@ -54,6 +72,7 @@ public class MainMenus extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SIMAG");
         setBackground(new java.awt.Color(204, 204, 204));
+        setPreferredSize(new java.awt.Dimension(669, 460));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -66,7 +85,16 @@ public class MainMenus extends javax.swing.JFrame {
         });
 
         navbar.setBackground(new java.awt.Color(255, 255, 255));
-        navbar.setPreferredSize(new java.awt.Dimension(669, 70));
+        navbar.setPreferredSize(new java.awt.Dimension(669, 90));
+        navbar.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                navbarAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         title.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
         title.setForeground(new java.awt.Color(0, 0, 0));
@@ -75,7 +103,7 @@ public class MainMenus extends javax.swing.JFrame {
         txtUsernameMain.setBackground(new java.awt.Color(204, 204, 204));
         txtUsernameMain.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         txtUsernameMain.setForeground(new java.awt.Color(0, 0, 0));
-        txtUsernameMain.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtUsernameMain.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtUsernameMain.setText("Admin");
         txtUsernameMain.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
@@ -102,6 +130,21 @@ public class MainMenus extends javax.swing.JFrame {
         profileImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/profile.png"))); // NOI18N
         profileImage.setPreferredSize(new java.awt.Dimension(35, 35));
 
+        lbClose.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                lbCloseAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        lbClose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbCloseMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout navbarLayout = new javax.swing.GroupLayout(navbar);
         navbar.setLayout(navbarLayout);
         navbarLayout.setHorizontalGroup(
@@ -111,23 +154,27 @@ public class MainMenus extends javax.swing.JFrame {
                 .addComponent(humbMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 909, Short.MAX_VALUE)
-                .addComponent(txtUsernameMain, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 778, Short.MAX_VALUE)
+                .addComponent(txtUsernameMain, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(profileImage, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, navbarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lbClose, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         navbarLayout.setVerticalGroup(
             navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(navbarLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(humbMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, navbarLayout.createSequentialGroup()
+                .addComponent(lbClose)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGroup(navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtUsernameMain)
                         .addComponent(title)
-                        .addComponent(profileImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(humbMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(profileImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12))
         );
 
         getContentPane().add(navbar, java.awt.BorderLayout.PAGE_START);
@@ -166,7 +213,7 @@ public class MainMenus extends javax.swing.JFrame {
         );
         sidebarLayout.setVerticalGroup(
             sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
         );
 
         getContentPane().add(sidebar, java.awt.BorderLayout.LINE_START);
@@ -178,6 +225,22 @@ public class MainMenus extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1210, 635));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lbCloseAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lbCloseAncestorAdded
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_lbCloseAncestorAdded
+
+    private void lbCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCloseMouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_lbCloseMouseClicked
+
+    private void navbarAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_navbarAncestorAdded
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_navbarAncestorAdded
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
@@ -254,6 +317,7 @@ public class MainMenus extends javax.swing.JFrame {
     private javax.swing.JPanel content;
     private javax.swing.JLabel humbMenu;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbClose;
     private javax.swing.JPanel listMenu;
     private javax.swing.JPanel navbar;
     private javax.swing.JLabel profileImage;
@@ -270,7 +334,7 @@ public class MainMenus extends javax.swing.JFrame {
         MenuItem menuBarang = new MenuItem(iconBarang, true, "Barang", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                content.removeAll();
+                //content.removeAll();
                 content.add(new Barang());
                 content.repaint();
                 content.revalidate();
