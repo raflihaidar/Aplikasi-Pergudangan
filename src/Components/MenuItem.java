@@ -32,7 +32,7 @@ public class MenuItem extends javax.swing.JPanel {
     private final ArrayList<MenuItem> subMenu = new ArrayList<>();
     private ActionListener act;
     
-    private final Color normalBackgroundColor = new Color(204,204,204);
+    private final Color normalBackgroundColor = new Color(255,255,255);
     private final Color hoverBackgroundColor = new Color(220,220,220);
 
     public MenuItem(Icon icon, boolean submenu, String menuName, ActionListener act, MenuItem... subMenu) {
@@ -83,7 +83,7 @@ public class MenuItem extends javax.swing.JPanel {
         lbIcon = new javax.swing.JLabel();
         lbName = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(204,204,204));
+        setBackground(new java.awt.Color(255,255,255));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 formMousePressed(evt);

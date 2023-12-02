@@ -1,12 +1,17 @@
 package Page;
 
+import Form.Dashboard;
 import Components.MenuItem;
+import Form.Barang;
+import Form.Distributor;
+import Form.Staff;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JRootPane;
 
 public class MainMenus extends javax.swing.JFrame {
 
@@ -16,10 +21,10 @@ public class MainMenus extends javax.swing.JFrame {
 
     public MainMenus() {
         initComponents();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         execute();
         listMenu.setPreferredSize(new Dimension(350, 0));
-
+        this.setUndecorated(true);
+        // this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
     }
 
     /**
@@ -32,7 +37,8 @@ public class MainMenus extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         navbar = new javax.swing.JPanel();
@@ -53,8 +59,13 @@ public class MainMenus extends javax.swing.JFrame {
                 formComponentShown(evt);
             }
         });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
-        navbar.setBackground(new java.awt.Color(204, 204, 204));
+        navbar.setBackground(new java.awt.Color(255, 255, 255));
         navbar.setPreferredSize(new java.awt.Dimension(669, 70));
 
         title.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
@@ -70,10 +81,8 @@ public class MainMenus extends javax.swing.JFrame {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 txtUsernameMainAncestorAdded(evt);
             }
-
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
-
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
@@ -96,54 +105,47 @@ public class MainMenus extends javax.swing.JFrame {
         javax.swing.GroupLayout navbarLayout = new javax.swing.GroupLayout(navbar);
         navbar.setLayout(navbarLayout);
         navbarLayout.setHorizontalGroup(
-                navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(navbarLayout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(humbMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 26,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 85,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 382,
-                                        Short.MAX_VALUE)
-                                .addComponent(txtUsernameMain, javax.swing.GroupLayout.PREFERRED_SIZE, 90,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(profileImage, javax.swing.GroupLayout.PREFERRED_SIZE, 37,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)));
+            navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(navbarLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(humbMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 909, Short.MAX_VALUE)
+                .addComponent(txtUsernameMain, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(profileImage, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
+        );
         navbarLayout.setVerticalGroup(
-                navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(navbarLayout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addGroup(navbarLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(humbMenu, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(navbarLayout
-                                                .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(txtUsernameMain)
-                                                .addComponent(title)
-                                                .addComponent(profileImage, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(18, Short.MAX_VALUE)));
+            navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(navbarLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(humbMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtUsernameMain)
+                        .addComponent(title)
+                        .addComponent(profileImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
 
         getContentPane().add(navbar, java.awt.BorderLayout.PAGE_START);
 
-        sidebar.setBackground(new java.awt.Color(204, 204, 204));
-        sidebar.setPreferredSize(new java.awt.Dimension(220, 369));
+        sidebar.setBackground(new java.awt.Color(255, 255, 255));
+        sidebar.setPreferredSize(new java.awt.Dimension(160, 369));
 
-        jScrollPane1.setBackground(new java.awt.Color(204, 204, 204));
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
-        listMenu.setBackground(new java.awt.Color(204, 204, 204));
+        listMenu.setBackground(new java.awt.Color(255, 255, 255));
         listMenu.setPreferredSize(new java.awt.Dimension(0, 200));
         listMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 listMenuMouseEntered(evt);
             }
-
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 listMenuMouseExited(evt);
             }
@@ -159,11 +161,13 @@ public class MainMenus extends javax.swing.JFrame {
         javax.swing.GroupLayout sidebarLayout = new javax.swing.GroupLayout(sidebar);
         sidebar.setLayout(sidebarLayout);
         sidebarLayout.setHorizontalGroup(
-                sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1));
+            sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+        );
         sidebarLayout.setVerticalGroup(
-                sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1));
+            sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
+        );
 
         getContentPane().add(sidebar, java.awt.BorderLayout.LINE_START);
 
@@ -171,9 +175,16 @@ public class MainMenus extends javax.swing.JFrame {
         content.setLayout(new java.awt.BorderLayout());
         getContentPane().add(content, java.awt.BorderLayout.CENTER);
 
-        setSize(new java.awt.Dimension(683, 446));
+        setSize(new java.awt.Dimension(1210, 635));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        content.add(new Dashboard());
+        content.repaint();
+        content.revalidate();
+    }// GEN-LAST:event_formWindowOpened
 
     private void listMenuMouseExited(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_listMenuMouseExited
         // TODO add your handling code here:
@@ -256,16 +267,39 @@ public class MainMenus extends javax.swing.JFrame {
         ImageIcon iconMaster = new ImageIcon(getClass().getResource("/image/master.png"));
         ImageIcon iconBarang = new ImageIcon(getClass().getResource("/image/barang.png"));
 
-        MenuItem menuBarang = new MenuItem(iconBarang, true, "Barang", null);
-        MenuItem menuBarang2 = new MenuItem(iconBarang, true, "Distributor", null);
-        MenuItem menuBarang3 = new MenuItem(iconBarang, true, "Staff", null);
+        MenuItem menuBarang = new MenuItem(iconBarang, true, "Barang", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                content.removeAll();
+                content.add(new Barang());
+                content.repaint();
+                content.revalidate();
+            }
+        });
+        MenuItem menuBarang2 = new MenuItem(iconBarang, true, "Distributor", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                content.removeAll();
+                content.add(new Distributor());
+                content.repaint();
+                content.revalidate();
+            }
+        });
+        MenuItem menuBarang3 = new MenuItem(iconBarang, true, "Staff", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                content.removeAll();
+                content.add(new Staff());
+                content.repaint();
+                content.revalidate();
+            }
+        });
         MenuItem menuMaster = new MenuItem(iconMaster, false, "Master", null, menuBarang, menuBarang2,
                 menuBarang3);
-
-        MenuItem menuAdmin = new MenuItem(null, false, "Admin", null);
         MenuItem menuDashboard = new MenuItem(null, false, "Dashboard", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                content.removeAll();
                 content.add(new Dashboard());
                 content.repaint();
                 content.revalidate();
@@ -284,7 +318,7 @@ public class MainMenus extends javax.swing.JFrame {
 
         MenuItem menuSettings = new MenuItem(null, false, "Pengaturan", null);
 
-        addMenu(menuAdmin, menuDashboard, menuMaster, menuTransaction, menuReport, menuSettings);
+        addMenu(menuDashboard, menuMaster, menuTransaction, menuReport, menuSettings);
     }
 
     private void addMenu(MenuItem... menu) {
