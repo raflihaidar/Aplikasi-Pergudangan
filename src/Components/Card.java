@@ -40,8 +40,8 @@ public class Card extends javax.swing.JPanel {
     }
 
     public void setData(ModelCard data) {
-//        lbIcon.setIcon(data.getIcon());
-        lbIcon.setText(data.getTitle());
+        lbIcon.setIcon(data.getIcon());
+        lbTitle.setText(data.getTitle());
         lbValues.setText(data.getValues());
     }
     
@@ -79,12 +79,12 @@ public class Card extends javax.swing.JPanel {
 
         lbIcon.setText("Icon");
 
-        lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        lbTitle.setForeground(new java.awt.Color(0, 0, 0));
+        lbTitle.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
+        lbTitle.setForeground(new java.awt.Color(255, 255, 255));
         lbTitle.setText("Title");
 
-        lbValues.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbValues.setForeground(new java.awt.Color(0, 0, 0));
+        lbValues.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
+        lbValues.setForeground(new java.awt.Color(255, 255, 255));
         lbValues.setText("Values");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -94,9 +94,9 @@ public class Card extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lbIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbValues, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE))
+                    .addComponent(lbValues, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                    .addComponent(lbIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
