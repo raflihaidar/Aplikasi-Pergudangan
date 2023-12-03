@@ -28,9 +28,9 @@ public class Dashboard extends javax.swing.JPanel {
     public Dashboard() {
         initComponents();
         
-        card1.setData(new ModelCard(iconTotal, "Total Stock", "200000"));
+        card1.setData(new ModelCard(iconTotal, "Total Stock", "20.0000"));
         card2.setData(new ModelCard(iconStaff, "Total Profit", "Rp. 15.000.000"));
-        card3.setData(new ModelCard(iconProfit, "Staff", "150"));
+        card3.setData(new ModelCard(iconProfit, "Jumlah Staff", "150"));
         card4.setData(new ModelCard(iconDistributor, "Jumlah Distributor", "20"));
          
          

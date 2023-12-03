@@ -2,6 +2,7 @@ package Page;
 
 import Form.Dashboard;
 import Components.MenuItem;
+import Components.MyIcon;
 import Form.Barang;
 import Form.Distributor;
 import Form.Staff;
@@ -26,7 +27,7 @@ public class MainMenus extends javax.swing.JFrame {
         lbClose.setIcon(iconClose);
         listMenu.setPreferredSize(new Dimension(350, 0));
         this.setUndecorated(true);
-         this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+        this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
         sidebar.setBorder(new EmptyBorder(0, 10, 0, 0));
     }
     /**
@@ -316,21 +317,18 @@ public class MainMenus extends javax.swing.JFrame {
 
     private void execute() {
 
-        ImageIcon iconMaster = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/master.png");
-        ImageIcon iconTransaction = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/transaction.png");
-        ImageIcon iconDashboard = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/dashboard.png");
-        ImageIcon iconReport = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/report.png");
-        ImageIcon iconStaff = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/staff.png");
-        ImageIcon iconItem = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/item.png");
-        ImageIcon iconDistributor = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/distributor.png");
-        ImageIcon iconSettings = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/settings.png");
-        ImageIcon iconIncome =  new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/income.png");
-        ImageIcon iconOutbound =  new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/outbound.png");
-        ImageIcon iconOrder =  new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/order.png");
-        ImageIcon iconTransactionReport = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/transaction-report.png");
-
-
-
+        ImageIcon iconMaster =  MyIcon.getIcon("master");
+        ImageIcon iconTransaction = MyIcon.getIcon("transaction");
+        ImageIcon iconDashboard = MyIcon.getIcon("dashboard");
+        ImageIcon iconReport = MyIcon.getIcon("report");
+        ImageIcon iconStaff = MyIcon.getIcon("staff");
+        ImageIcon iconItem = MyIcon.getIcon("item");
+        ImageIcon iconDistributor = MyIcon.getIcon("distributor");
+        ImageIcon iconSettings = MyIcon.getIcon("settings");
+        ImageIcon iconIncome =  MyIcon.getIcon("income");
+        ImageIcon iconOutbound =  MyIcon.getIcon("outbound");
+        ImageIcon iconOrder =  MyIcon.getIcon("order");
+        ImageIcon iconTransactionReport = MyIcon.getIcon("transaction-report");
         
         MenuItem menuDashboard = new MenuItem(iconDashboard, false, "Dashboard", new ActionListener() {
             @Override
