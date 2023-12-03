@@ -34,7 +34,7 @@ public class MainMenus extends javax.swing.JFrame {
         // this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
     }
 
-    protected void paintComponent(Graphics g) {
+    /*protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         int w = getWidth();
         int h = getHeight();
@@ -43,7 +43,7 @@ public class MainMenus extends javax.swing.JFrame {
         GradientPaint gp = new GradientPaint(0, 0, color1, 0, h, color2);
         g2d.setPaint(gp);
         g2d.fillRect(0, 0, w, h);
-    }
+    }*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,12 +97,10 @@ public class MainMenus extends javax.swing.JFrame {
         });
 
         title.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
-        title.setForeground(new java.awt.Color(0, 0, 0));
         title.setText("SIMAG");
 
         txtUsernameMain.setBackground(new java.awt.Color(204, 204, 204));
         txtUsernameMain.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        txtUsernameMain.setForeground(new java.awt.Color(0, 0, 0));
         txtUsernameMain.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtUsernameMain.setText("Admin");
         txtUsernameMain.addAncestorListener(new javax.swing.event.AncestorListener() {
