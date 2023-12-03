@@ -4,9 +4,9 @@
  */
 package Form;
 
+import Components.MyIcon;
 import Components.ScrollBar;
-import java.awt.Color;
-import java.awt.GridLayout;
+import javax.swing.ImageIcon;
 import model.ModelCard;
 
 /**
@@ -15,17 +15,23 @@ import model.ModelCard;
  */
 public class Dashboard extends javax.swing.JPanel {
 
-    GridLayout gridLayout = new GridLayout(1, 3);
-
     /**
      * Creates new form Dashboard
      */
+    
+    ImageIcon iconStaff = MyIcon.getIcon("staff-2");
+    ImageIcon iconTotal = MyIcon.getIcon("summarize");
+    ImageIcon iconProfit = MyIcon.getIcon("profit");
+    ImageIcon iconDistributor = MyIcon.getIcon("distributor-2");
+
+
     public Dashboard() {
         initComponents();
-
-         card1.setData(new ModelCard("Stock Total", "200000"));
-         card2.setData(new ModelCard("Total Profit", "Rp. 15.000.000"));
-         card3.setData(new ModelCard("Staff", "150"));
+        
+        card1.setData(new ModelCard(iconTotal, "Total Stock", "20.0000"));
+        card2.setData(new ModelCard(iconStaff, "Total Profit", "Rp. 15.000.000"));
+        card3.setData(new ModelCard(iconProfit, "Jumlah Staff", "150"));
+        card4.setData(new ModelCard(iconDistributor, "Jumlah Distributor", "20"));
          
          
          scrollTable.setVerticalScrollBar(new ScrollBar());
@@ -67,12 +73,12 @@ public class Dashboard extends javax.swing.JPanel {
         card1.setColor2(new java.awt.Color(51, 255, 204));
         cardContainer.add(card1);
 
-        card2.setColor1(new java.awt.Color(255, 255, 0));
-        card2.setColor2(new java.awt.Color(255, 255, 102));
+        card2.setColor1(new java.awt.Color(255, 204, 102));
+        card2.setColor2(new java.awt.Color(255, 204, 0));
         cardContainer.add(card2);
 
-        card3.setColor1(new java.awt.Color(102, 255, 0));
-        card3.setColor2(new java.awt.Color(51, 255, 51));
+        card3.setColor1(new java.awt.Color(51, 204, 0));
+        card3.setColor2(new java.awt.Color(51, 255, 0));
         cardContainer.add(card3);
 
         card4.setColor1(new java.awt.Color(255, 153, 51));

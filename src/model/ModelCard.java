@@ -31,8 +31,8 @@ public class ModelCard {
         this.values = values;
     }
 
-    public ModelCard(String title, String values) {
-//        this.icon = icon;
+    public ModelCard(Icon icon, String title, String values) {
+        this.icon = icon;
         this.title = title;
         this.values = values;
     }
