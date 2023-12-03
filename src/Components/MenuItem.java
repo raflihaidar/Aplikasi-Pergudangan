@@ -44,7 +44,7 @@ public class MenuItem extends javax.swing.JPanel {
         }
         
         if(submenu){
-            this.setBorder(new EmptyBorder(0, 35, 0, 0));
+            this.setBorder(new EmptyBorder(0, 20, 0, 0));
         }
         this.setSize(new Dimension(Integer.MAX_VALUE, 45));
         this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 45));

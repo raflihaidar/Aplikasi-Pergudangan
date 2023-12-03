@@ -10,13 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JRootPane;
-import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class MainMenus extends javax.swing.JFrame {
 
@@ -31,18 +26,8 @@ public class MainMenus extends javax.swing.JFrame {
         lbClose.setIcon(iconClose);
         listMenu.setPreferredSize(new Dimension(350, 0));
         this.setUndecorated(true);
-        // this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
-    }
-
-    protected void paintComponent(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
-        int w = getWidth();
-        int h = getHeight();
-        Color color1 = Color.BLACK;
-        Color color2 = Color.GREEN;
-        GradientPaint gp = new GradientPaint(0, 0, color1, 0, h, color2);
-        g2d.setPaint(gp);
-        g2d.fillRect(0, 0, w, h);
+         this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+        sidebar.setBorder(new EmptyBorder(0, 10, 0, 0));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -149,7 +134,7 @@ public class MainMenus extends javax.swing.JFrame {
         navbarLayout.setHorizontalGroup(
             navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navbarLayout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(humbMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -216,7 +201,7 @@ public class MainMenus extends javax.swing.JFrame {
         );
         sidebarLayout.setVerticalGroup(
             sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
         );
 
         getContentPane().add(sidebar, java.awt.BorderLayout.LINE_START);
@@ -331,40 +316,23 @@ public class MainMenus extends javax.swing.JFrame {
 
     private void execute() {
 
-        ImageIcon iconMaster = new ImageIcon(getClass().getResource("/image/master.png"));
-        ImageIcon iconBarang = new ImageIcon(getClass().getResource("/image/barang.png"));
-        ImageIcon iconTransaction = new ImageIcon(System.getProperty("user-dir" + "/src/image/dashboard.png"));
+        ImageIcon iconMaster = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/master.png");
+        ImageIcon iconTransaction = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/transaction.png");
+        ImageIcon iconDashboard = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/dashboard.png");
+        ImageIcon iconReport = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/report.png");
+        ImageIcon iconStaff = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/staff.png");
+        ImageIcon iconItem = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/item.png");
+        ImageIcon iconDistributor = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/distributor.png");
+        ImageIcon iconSettings = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/settings.png");
+        ImageIcon iconIncome =  new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/income.png");
+        ImageIcon iconOutbound =  new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/outbound.png");
+        ImageIcon iconOrder =  new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/order.png");
+        ImageIcon iconTransactionReport = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/transaction-report.png");
 
-        MenuItem menuBarang = new MenuItem(iconBarang, true, "Barang", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                //content.removeAll();
-                content.add(new Barang());
-                content.repaint();
-                content.revalidate();
-            }
-        });
-        MenuItem menuBarang2 = new MenuItem(iconBarang, true, "Distributor", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                content.removeAll();
-                content.add(new Distributor());
-                content.repaint();
-                content.revalidate();
-            }
-        });
-        MenuItem menuBarang3 = new MenuItem(iconBarang, true, "Staff", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                content.removeAll();
-                content.add(new Staff());
-                content.repaint();
-                content.revalidate();
-            }
-        });
-        MenuItem menuMaster = new MenuItem(iconMaster, false, "Master", null, menuBarang, menuBarang2,
-                menuBarang3);
-        MenuItem menuDashboard = new MenuItem(iconTransaction, false, "Dashboard", new ActionListener() {
+
+
+        
+        MenuItem menuDashboard = new MenuItem(iconDashboard, false, "Dashboard", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 content.removeAll();
@@ -374,17 +342,48 @@ public class MainMenus extends javax.swing.JFrame {
             }
         });
 
-        MenuItem menuTransaction1 = new MenuItem(iconBarang, true, "Barang Masuk", null);
-        MenuItem menuTransaction2 = new MenuItem(iconBarang, true, "Barang Keluar", null);
-        MenuItem menuTransaction3 = new MenuItem(iconBarang, true, "Pemesanan", null);
-        MenuItem menuTransaction = new MenuItem(null, false, "Transaksi", null, menuTransaction1, menuTransaction2,
+        MenuItem menuBarang = new MenuItem(iconItem, true, "Barang", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                content.removeAll();
+                content.add(new Barang());
+                content.repaint();
+                content.revalidate();
+            }
+        });
+        MenuItem menuBarang2 = new MenuItem(iconDistributor, true, "Distributor", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                content.removeAll();
+                content.add(new Distributor());
+                content.repaint();
+                content.revalidate();
+            }
+        });
+        MenuItem menuBarang3 = new MenuItem(iconStaff, true, "Staff", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                content.removeAll();
+                content.add(new Staff());
+                content.repaint();
+                content.revalidate();
+            }
+        });
+        
+        MenuItem menuMaster = new MenuItem(iconMaster, false, "Master", null, menuBarang, menuBarang2,
+                menuBarang3);
+        
+
+        MenuItem menuTransaction1 = new MenuItem(iconIncome, true, "Barang Masuk", null);
+        MenuItem menuTransaction2 = new MenuItem(iconOutbound, true, "Barang Keluar", null);
+        MenuItem menuTransaction3 = new MenuItem(iconOrder, true, "Pemesanan", null);
+        MenuItem menuTransaction = new MenuItem(iconTransaction, false, "Transaksi", null, menuTransaction1, menuTransaction2,
                 menuTransaction3);
 
-        MenuItem menuReport1 = new MenuItem(iconBarang, true, "Transaksi", null);
-        MenuItem menuReport2 = new MenuItem(iconBarang, true, "Kinerja Staff", null);
-        MenuItem menuReport = new MenuItem(null, false, "Laporan", null, menuReport1, menuReport2);
+        MenuItem menuReport1 = new MenuItem(iconTransactionReport, true, "Transaksi", null);
+        MenuItem menuReport = new MenuItem(iconReport, false, "Laporan", null, menuReport1);
 
-        MenuItem menuSettings = new MenuItem(null, false, "Pengaturan", null);
+        MenuItem menuSettings = new MenuItem(iconSettings, false, "Pengaturan", null);
 
         addMenu(menuDashboard, menuMaster, menuTransaction, menuReport, menuSettings);
     }
