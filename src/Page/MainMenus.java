@@ -82,12 +82,10 @@ public class MainMenus extends javax.swing.JFrame {
         });
 
         title.setFont(new java.awt.Font("Segoe UI Semibold", 1, 24)); // NOI18N
-        title.setForeground(new java.awt.Color(0, 0, 0));
         title.setText("SIMAG");
 
         txtUsernameMain.setBackground(new java.awt.Color(204, 204, 204));
         txtUsernameMain.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        txtUsernameMain.setForeground(new java.awt.Color(0, 0, 0));
         txtUsernameMain.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtUsernameMain.setText("Admin");
         txtUsernameMain.addAncestorListener(new javax.swing.event.AncestorListener() {
