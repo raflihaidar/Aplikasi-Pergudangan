@@ -1,5 +1,6 @@
-package Page;
+package view;
 
+import controller.LoginController;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
@@ -9,6 +10,28 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        LoginController controller = new LoginController(this);
+        btnLogin.addActionListener(controller);
+    }
+    
+    public String getTxtUsername(){
+        return txtUsername.getText();
+    }
+    
+    public void setTxtUsername(String text){
+        txtUsername.setText(text);
+    }
+    
+    public String getTxtPassword(){
+        return txtPassword.getText();
+    }
+    
+    public void setTxtPassword(String text){
+        txtPassword.setText(text);
+    }
+    
+    public void setTxtWarning(String text){
+        txtWarningLog.setText(text);
     }
 
     /**
@@ -38,12 +61,10 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Username");
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Password");
 
         btnLogin.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
@@ -55,7 +76,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        btnRegister.setBackground(new java.awt.Color(255, 255, 255));
         btnRegister.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
         btnRegister.setForeground(new java.awt.Color(51, 153, 255));
         btnRegister.setText("Signup now");
@@ -71,10 +91,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        txtUsername.setBackground(new java.awt.Color(255, 255, 255));
-        txtUsername.setForeground(new java.awt.Color(0, 0, 0));
         txtUsername.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtUsername.setCaretColor(new java.awt.Color(0, 0, 0));
         txtUsername.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,14 +99,10 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        txtPassword.setBackground(new java.awt.Color(255, 255, 255));
-        txtPassword.setForeground(new java.awt.Color(0, 0, 0));
         txtPassword.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txtPassword.setCaretColor(new java.awt.Color(0, 0, 0));
 
         jLabel3.setBackground(new java.awt.Color(0, 0, 0));
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Don't have an account?");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/user.png"))); // NOI18N
@@ -201,17 +214,16 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        if (txtUsername.getText().equals(Register.username) && (txtPassword.getText().equals(Register.password))) {
-            JOptionPane.showMessageDialog(this, "Login Successful!");
-            dispose();
-            MainMenus r = new MainMenus();
-            r.setVisible(true);
-
-        } else {
-            txtWarningLog.setText("Username or Password is Invalid");
-            txtUsername.setText("");
-            txtPassword.setText("");
-        }
+//        if (txtUsername.getText().equals(Register.username) && (txtPassword.getText().equals(Register.password))) {
+//            JOptionPane.showMessageDialog(this, "Login Successful!");
+//            dispose();
+//            MainMenus r = new MainMenus();
+//            r.setVisible(true);
+//        } else {
+//            txtWarningLog.setText("Username or Password is Invalid");
+//            txtUsername.setText("");
+//            txtPassword.setText("");
+//        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void jLabel4ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel4ComponentShown
