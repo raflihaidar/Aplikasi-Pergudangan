@@ -1,4 +1,4 @@
-package Page;
+package view;
 
 import Form.Dashboard;
 import Components.MenuItem;
@@ -254,7 +254,7 @@ public class MainMenus extends javax.swing.JFrame {
 
     private void txtUsernameMainAncestorAdded(javax.swing.event.AncestorEvent evt) {// GEN-FIRST:event_txtUsernameMainAncestorAdded
         // TODO add your handling code here:
-        txtUsernameMain.setText(Register.username + "");
+//        txtUsernameMain.setText(Register.username + "");
     }// GEN-LAST:event_txtUsernameMainAncestorAdded
 
     private void humbMenuMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_humbMenuMouseClicked

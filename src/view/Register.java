@@ -1,15 +1,69 @@
-package Page;
+package view;
 
-import javax.swing.JOptionPane;
+import java.sql.Connection;
+import config.Config;
+import controller.RegisterController;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class Register extends javax.swing.JFrame {
-
-    public static String username;
-    public static String password;
-    private static String fullname;
+    
+    private RegisterController controller = new RegisterController(this);
 
     public Register() {
         initComponents();
+        selectedDataGender();
+        selectedDataJabatan();
+        btnRegisterNow.addActionListener(controller);
+    }
+    
+    
+    public String getTxtFullName(){
+        return txtFullName.getText();
+    }
+    
+    public void setTxtFullName(String text){
+        txtFullName.setText(text);
+    }
+    
+    public String getTxtWarning(){
+        return txtWarningregis.getText();
+    }
+    
+    public void setTxtWarning(String text){
+        txtWarningregis.setText(text);
+    }
+    
+    public String getTxtUserName(){
+        return txtUsernameRegis.getText();
+    }
+    
+    public void setTxtUsername(String text){
+        txtUsernameRegis.setText(text);
+    }
+    
+    public String getTxtPassword(){
+        return txtPasswordRegis.getText();
+    }
+    
+    public void setTxtPassword(String text){
+        txtPasswordRegis.setText(text);
+    }
+    
+    public String getTxtRepass(){
+        return txtRepass.getText();
+    }
+    
+    public void setTxtRepass(String text){
+        txtRepass.setText(text);
+    }
+    
+    public String getCmbGender(){
+        return (String) cbGender.getSelectedItem();
+    }
+    
+    public String getCmbRole(){
+        return (String) cbRole.getSelectedItem();
     }
 
     @SuppressWarnings("unchecked")
@@ -42,6 +96,11 @@ public class Register extends javax.swing.JFrame {
         jLabel6.setText("Don't have an account?");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -118,8 +177,12 @@ public class Register extends javax.swing.JFrame {
         cbGender.setBackground(new java.awt.Color(255, 255, 255));
         cbGender.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cbGender.setForeground(new java.awt.Color(0, 0, 0));
-        cbGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
         cbGender.setMinimumSize(new java.awt.Dimension(58, 20));
+        cbGender.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                cbGenderComponentShown(evt);
+            }
+        });
         cbGender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbGenderActionPerformed(evt);
@@ -129,7 +192,6 @@ public class Register extends javax.swing.JFrame {
         cbRole.setBackground(new java.awt.Color(255, 255, 255));
         cbRole.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         cbRole.setForeground(new java.awt.Color(0, 0, 0));
-        cbRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Staff" }));
         cbRole.setPreferredSize(new java.awt.Dimension(58, 20));
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -238,68 +300,39 @@ public class Register extends javax.swing.JFrame {
 
 
     private void btnRegisterNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterNowActionPerformed
-        // TODO add your handling code here:
-
-        try {
-            fullname = txtFullName.getText();
-            username = txtUsernameRegis.getText();
-            password = txtPasswordRegis.getText();
-
-            if (fullname.isEmpty() || username.isEmpty() || password.isEmpty()) {
-                // Tampilkan pesan kesalahan jika tidak diisi
-                JOptionPane.showMessageDialog(this, "Please fill in the whole field!", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                if (txtPasswordRegis.getText().equals(txtRepass.getText())) {
-                    validationPassword();
-                } else {
-                    txtWarningregis.setText("Password Not Match");
-                    txtPasswordRegis.setText("");
-                    txtRepass.setText("");
-
-                }
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "There is an error!", "Error", JOptionPane.ERROR_MESSAGE);
-        }
 
     }//GEN-LAST:event_btnRegisterNowActionPerformed
 
-    private void validationPassword() {
-
-        String Passvalidation = txtPasswordRegis.getText();
-
-        if (isValidPassword(Passvalidation)) {
-            txtWarningregis.setText("Password valid!");
-            JOptionPane.showMessageDialog(this, "Registration Successful!");
-            dispose();
-            Login l = new Login();
-            l.setVisible(true);
-
-        } else {
-            txtWarningregis.setText("Invalid use 8 characters and uppercase");
-            txtPasswordRegis.setText("");
-            txtRepass.setText("");
+    
+    public void selectedDataGender(){
+        Connection con = Config.connectDB();
+        try{
+            String query = "SELECT * FROM gender";
+            Statement statement = con.createStatement();
+            ResultSet result = statement.executeQuery(query);
+            while(result.next()){
+                cbGender.addItem(result.getString("nama"));
+            }
+            con.close();
+        }catch(Exception e){
+            System.out.println("Error" + e.getMessage());
         }
     }
-
-    private boolean isValidPassword(String password) {
-        // Memeriksa panjang minimal
-        if (password.length() < 8) {
-            return false;
+    
+    public void selectedDataJabatan(){
+        try{
+            Connection con = Config.connectDB();
+            String query = "SELECT * FROM jabatan";
+            Statement statement = con.createStatement();
+            ResultSet result = statement.executeQuery(query);
+            while(result.next()){
+                cbRole.addItem(result.getString("nama"));
+            }
+            con.close();
+        }catch(Exception e){
+            System.out.println("Error" + e.getMessage());
         }
-
-        // Memeriksa keberadaan angka
-        if (!password.matches(".*\\d.*")) {
-            return false;
-        }
-
-        // Memeriksa keberadaan huruf besar
-        if (!password.matches(".*[A-Z].*")) {
-            return false;
-        }
-
-        return true;
-    }
+    } 
     
     private void txtPasswordRegisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordRegisActionPerformed
         // TODO add your handling code here:
@@ -308,6 +341,14 @@ public class Register extends javax.swing.JFrame {
     private void cbGenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGenderActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbGenderActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
+
+    private void cbGenderComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_cbGenderComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbGenderComponentShown
 
     
     public static void main(String args[]) {
