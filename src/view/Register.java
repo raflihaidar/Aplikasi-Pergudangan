@@ -6,7 +6,7 @@ import controller.RegisterController;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class Register extends javax.swing.JFrame {
+public final class Register extends javax.swing.JFrame {
     
     private RegisterController controller = new RegisterController(this);
 
@@ -176,7 +176,7 @@ public class Register extends javax.swing.JFrame {
 
         cbGender.setBackground(new java.awt.Color(255, 255, 255));
         cbGender.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        cbGender.setForeground(new java.awt.Color(0, 0, 0));
+        cbGender.setForeground(new java.awt.Color(204, 51, 0));
         cbGender.setMinimumSize(new java.awt.Dimension(58, 20));
         cbGender.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -298,20 +298,19 @@ public class Register extends javax.swing.JFrame {
         l.setVisible(true);
     }//GEN-LAST:event_btnLoginbackActionPerformed
 
-
     private void btnRegisterNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterNowActionPerformed
 
     }//GEN-LAST:event_btnRegisterNowActionPerformed
 
     
-    public void selectedDataGender(){
+     public void selectedDataGender(){
         Connection con = Config.connectDB();
         try{
-            String query = "SELECT * FROM gender";
+            String query = "SELECT gender FROM gender";
             Statement statement = con.createStatement();
             ResultSet result = statement.executeQuery(query);
             while(result.next()){
-                cbGender.addItem(result.getString("nama"));
+                cbGender.addItem(result.getString("gender"));
             }
             con.close();
         }catch(Exception e){
@@ -322,7 +321,7 @@ public class Register extends javax.swing.JFrame {
     public void selectedDataJabatan(){
         try{
             Connection con = Config.connectDB();
-            String query = "SELECT * FROM jabatan";
+            String query = "SELECT nama FROM jabatan";
             Statement statement = con.createStatement();
             ResultSet result = statement.executeQuery(query);
             while(result.next()){
