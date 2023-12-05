@@ -83,12 +83,12 @@ public class Register extends javax.swing.JFrame {
         txtPasswordRegis = new javax.swing.JPasswordField();
         btnRegisterNow = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        btnLoginback = new javax.swing.JButton();
         txtWarningregis = new javax.swing.JLabel();
         txtRepass = new javax.swing.JPasswordField();
         cbGender = new javax.swing.JComboBox<>();
         cbRole = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
+        btnLoginback = new javax.swing.JLabel();
 
         jLabel6.setBackground(new java.awt.Color(0, 0, 0));
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -155,17 +155,6 @@ public class Register extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Already Have an Account?");
 
-        btnLoginback.setBackground(new java.awt.Color(255, 255, 255));
-        btnLoginback.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        btnLoginback.setForeground(new java.awt.Color(0, 204, 102));
-        btnLoginback.setText("LOGIN");
-        btnLoginback.setBorder(null);
-        btnLoginback.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginbackActionPerformed(evt);
-            }
-        });
-
         txtWarningregis.setBackground(new java.awt.Color(255, 255, 255));
         txtWarningregis.setForeground(new java.awt.Color(204, 0, 51));
 
@@ -198,6 +187,11 @@ public class Register extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Role");
 
+        btnLoginback.setBackground(new java.awt.Color(255, 255, 255));
+        btnLoginback.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        btnLoginback.setForeground(new java.awt.Color(51, 255, 0));
+        btnLoginback.setText("LOGIN");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -209,7 +203,7 @@ public class Register extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnRegisterNow)
                             .addComponent(jLabel7))
-                        .addGap(4, 4, 4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLoginback))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(130, 130, 130)
@@ -229,7 +223,7 @@ public class Register extends javax.swing.JFrame {
                                     .addComponent(cbRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addContainerGap(213, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 256, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtWarningregis, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtRepass, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,7 +235,7 @@ public class Register extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(276, Short.MAX_VALUE)
+                .addContainerGap(274, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -291,13 +285,6 @@ public class Register extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoginbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginbackActionPerformed
-        // TODO add your handling code here:
-        dispose();
-        Login l = new Login();
-        l.setVisible(true);
-    }//GEN-LAST:event_btnLoginbackActionPerformed
-
 
     private void btnRegisterNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterNowActionPerformed
 
@@ -307,16 +294,17 @@ public class Register extends javax.swing.JFrame {
     public void selectedDataGender(){
         Connection con = Config.connectDB();
         try{
-            String query = "SELECT * FROM gender";
+            String query = "SELECT gender FROM gender";
             Statement statement = con.createStatement();
             ResultSet result = statement.executeQuery(query);
             while(result.next()){
-                cbGender.addItem(result.getString("nama"));
+                cbGender.addItem(result.getString("gender"));
             }
             con.close();
         }catch(Exception e){
             System.out.println("Error" + e.getMessage());
         }
+    
     }
     
     public void selectedDataJabatan(){
@@ -384,7 +372,7 @@ public class Register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLoginback;
+    private javax.swing.JLabel btnLoginback;
     private javax.swing.JButton btnRegisterNow;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbGender;

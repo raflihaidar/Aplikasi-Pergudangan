@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -21,12 +21,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jScrollPane1" alignment="0" pref="1040" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" pref="168" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="btnAdddistrib" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" pref="168" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
-          <Component id="jScrollPane1" alignment="0" pref="1040" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -34,9 +37,11 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="34" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="32" max="32767" attributes="0"/>
+              <EmptySpace pref="73" max="32767" attributes="0"/>
+              <Component id="btnAdddistrib" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="305" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -64,31 +69,32 @@
         <Component class="Components.Table" name="table1">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="4">
-                <Column editable="true" title="ID Distributor" type="java.lang.Integer">
+              <Table columnCount="5" rowCount="4">
+                <Column editable="false" title="ID Distributor" type="java.lang.Integer">
                   <Data value="120220231"/>
                   <Data value="120220232"/>
                   <Data value="120220233"/>
                   <Data value="null"/>
                 </Column>
-                <Column editable="true" title="Nama Distributor" type="java.lang.String">
+                <Column editable="false" title="Nama Distributor" type="java.lang.String">
                   <Data value="PT.WawanSejahtera"/>
                   <Data value="CV.Harapan Ortu"/>
                   <Data value="PT.Seomoga Sukses"/>
                   <Data value="null"/>
                 </Column>
-                <Column editable="true" title="No Telepon" type="java.lang.String">
+                <Column editable="false" title="No Telepon" type="java.lang.String">
                   <Data value="082231332456"/>
                   <Data value="081234672878"/>
                   <Data value="087123346756"/>
                   <Data value="null"/>
                 </Column>
-                <Column editable="true" title="Alamat Distributor" type="java.lang.String">
+                <Column editable="false" title="Alamat Distributor" type="java.lang.String">
                   <Data value="Gedung Kreativitas Lt. 8, Jl. Cipta Karya No. 78"/>
                   <Data value="Komplek Harmoni Blok C2 No. 45"/>
                   <Data value="Jl. Inovasi Barat No. 123"/>
                   <Data value="null"/>
                 </Column>
+                <Column editable="false" title="Action" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -109,7 +115,12 @@
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title value="Alamat Distributor"/>
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
@@ -125,5 +136,19 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btnAdddistrib">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ADD DISTRIBUTOR"/>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+            <EmptyBorder/>
+          </Border>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAdddistribMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdddistribActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>
