@@ -4,6 +4,15 @@
  */
 package Form;
 
+
+import Components.TableActionCellEditor;
+import Components.TableActionCellRender;
+import Components.TableActionEvent;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author rafli
@@ -15,6 +24,29 @@ public class Distributor extends javax.swing.JPanel {
      */
     public Distributor() {
         initComponents();
+        TableActionEvent event = new TableActionEvent() {
+                        @Override
+                        public void onEdit(int row) {
+                                System.out.println("Edit row : " + row);
+                        }
+
+                        @Override
+                        public void onDelete(int row) {
+                                if (table1.isEditing()) {
+                                        table1.getCellEditor().stopCellEditing();
+                                }
+                                DefaultTableModel model = (DefaultTableModel) table1.getModel();
+                                model.removeRow(row);
+                        }
+
+                        @Override
+                        public void onView(int row) {
+                                System.out.println("View row : " + row);
+                        }
+                };
+                table1.getColumnModel().getColumn(4).setCellRenderer(new TableActionCellRender());
+                table1.getColumnModel().getColumn(4).setCellEditor(new TableActionCellEditor(event));
+        
     }
 
     /**
@@ -29,6 +61,7 @@ public class Distributor extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table1 = new Components.Table();
+        btnAdddistrib = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -39,21 +72,28 @@ public class Distributor extends javax.swing.JPanel {
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                { new Integer(120220231), "PT.WawanSejahtera", "082231332456", "Gedung Kreativitas Lt. 8, Jl. Cipta Karya No. 78"},
-                { new Integer(120220232), "CV.Harapan Ortu", "081234672878", "Komplek Harmoni Blok C2 No. 45"},
-                { new Integer(120220233), "PT.Seomoga Sukses", "087123346756", "Jl. Inovasi Barat No. 123"},
-                {null, null, null, null}
+                { new Integer(120220231), "PT.WawanSejahtera", "082231332456", "Gedung Kreativitas Lt. 8, Jl. Cipta Karya No. 78", null},
+                { new Integer(120220232), "CV.Harapan Ortu", "081234672878", "Komplek Harmoni Blok C2 No. 45", null},
+                { new Integer(120220233), "PT.Seomoga Sukses", "087123346756", "Jl. Inovasi Barat No. 123", null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID Distributor", "Nama Distributor", "No Telepon", "Alamat Distributor"
+                "ID Distributor", "Nama Distributor", "No Telepon", "Alamat Distributor", "Action"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         table1.addAncestorListener(new javax.swing.event.AncestorListener() {
@@ -66,28 +106,42 @@ public class Distributor extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(table1);
-        if (table1.getColumnModel().getColumnCount() > 0) {
-            table1.getColumnModel().getColumn(3).setHeaderValue("Alamat Distributor");
-        }
+
+        btnAdddistrib.setText("ADD DISTRIBUTOR");
+        btnAdddistrib.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnAdddistrib.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAdddistribMouseClicked(evt);
+            }
+        });
+        btnAdddistrib.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdddistribActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1040, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAdddistrib)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1040, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addComponent(btnAdddistrib)
+                .addGap(47, 47, 47)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -96,10 +150,56 @@ public class Distributor extends javax.swing.JPanel {
         
     }//GEN-LAST:event_table1AncestorAdded
 
+    private void btnAdddistribActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdddistribActionPerformed
+        // TODO add your handling code here:
+       try {
+        // Create a JDialog as the parent for the AddDistributor panel
+        JDialog dialog = new JDialog();
+        
+        // Create an instance of AddDistributor
+        AddDistributor addDistributorPanel = new AddDistributor();
+
+        // Add the AddDistributor panel to the dialog
+        dialog.getContentPane().add(addDistributorPanel);
+        
+        // Set properties for the dialog (adjust as needed)
+        dialog.setSize(465, 450);
+        dialog.setLocationRelativeTo(this); // Center the dialog relative to the Distributor panel
+
+        // Make the dialog modal, blocking input to other windows
+        dialog.setModal(true);
+
+        // Set the default close operation to dispose the dialog
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+        // Set the dialog visible
+        dialog.setVisible(true);
+
+    } catch (Exception e) {
+        e.printStackTrace(); // Log the exception for debugging
+    }
+    }//GEN-LAST:event_btnAdddistribActionPerformed
+
+    private void btnAdddistribMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdddistribMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnAdddistribMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdddistrib;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private Components.Table table1;
     // End of variables declaration//GEN-END:variables
+
+    private static class JPanel {
+
+        private static void add(AddDistributor form) {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        public JPanel() {
+        }
+    }
 }

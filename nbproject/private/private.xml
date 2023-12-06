@@ -2,6 +2,27 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/view/Register.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/model/User.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/Components/Button.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/helper/DistributorQueries.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/Components/ActionPanel.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/config/Config.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/helper/JabatanQueries.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/model/NewScrollBar.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/view/AddDistributor.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/Components/TableActionCellEditor.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/Form/Distributor.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/view/MainMenus.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/model/ModelCard.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/model/Distributor.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/controller/RegisterController.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/controller/UserController.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/Form/Dashboard.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/controller/LoginController.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/view/Login.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/controller/DistributorController.java</file>
+        </group>
     </open-files>
 </project-private>
