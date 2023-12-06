@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package Form;
 
 import Components.ActionPanel;
@@ -42,8 +38,8 @@ public class Barang extends javax.swing.JPanel {
                 System.out.println("View row : " + row);
             }
         };
-        table1.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender());
-        table1.getColumnModel().getColumn(3).setCellEditor(new TableActionCellEditor(event));
+        table1.getColumnModel().getColumn(5).setCellRenderer(new TableActionCellRender());
+        table1.getColumnModel().getColumn(5).setCellEditor(new TableActionCellEditor(event));
     }
 
     /**
@@ -72,12 +68,20 @@ public class Barang extends javax.swing.JPanel {
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Beras", "10.000", null, null}
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Nama", "Kategori", "Stock", "Satuan", "Action"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(table1);
 
         jPanel1.add(jScrollPane1, "card2");

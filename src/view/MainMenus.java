@@ -215,8 +215,6 @@ public class MainMenus extends javax.swing.JFrame {
 
     private void lbCloseAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lbCloseAncestorAdded
         // TODO add your handling code here:
-        
-        
     }//GEN-LAST:event_lbCloseAncestorAdded
 
     private void lbCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCloseMouseClicked

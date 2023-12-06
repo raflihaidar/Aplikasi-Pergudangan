@@ -39,7 +39,7 @@ public class UserController {
         }
     }
     
-    public static void deleteDataUser(JTable table, DefaultTableModel model){
+    public void deleteDataUser(JTable table, DefaultTableModel model){
         Connection con = Config.connectDB();
         try{
             int row = table.getSelectedRow();
@@ -47,13 +47,23 @@ public class UserController {
             PreparedStatement ps = con.prepareStatement(UserQueries.DELETE_USER);
             ps.setString(1, username);
             ps.executeUpdate();
-            if(row != -1){
-                model.removeRow(row);
+            if (table.isEditing()) {
+                    table.getCellEditor().stopCellEditing();
             }
+            model = (DefaultTableModel) table.getModel();
+            model.removeRow(row);
             System.out.println("delete data berhasil");
             con.close();
         }catch(Exception e){
             System.out.println("Error : " + e.getMessage());
         }
+    }
+    
+    public void addUser(){
+        
+    }
+    
+    public void updateUser(){
+        
     }
 }

@@ -6,7 +6,7 @@ import controller.RegisterController;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public final class Register extends javax.swing.JFrame {
+public class Register extends javax.swing.JFrame {
     
     private RegisterController controller = new RegisterController(this);
 
