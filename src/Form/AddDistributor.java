@@ -39,12 +39,24 @@ public class AddDistributor extends javax.swing.JPanel {
         btnSubmitDsitributor = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setForeground(new java.awt.Color(0, 0, 0));
 
+        txtTeleponDistributor.setBackground(new java.awt.Color(255, 255, 255));
+        txtTeleponDistributor.setForeground(new java.awt.Color(0, 0, 0));
+        txtTeleponDistributor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        txtAlamatDistributor.setBackground(new java.awt.Color(255, 255, 255));
+        txtAlamatDistributor.setForeground(new java.awt.Color(0, 0, 0));
+        txtAlamatDistributor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txtAlamatDistributor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAlamatDistributorActionPerformed(evt);
             }
         });
+
+        txtTanggalDistributor.setBackground(new java.awt.Color(255, 255, 255));
+        txtTanggalDistributor.setForeground(new java.awt.Color(0, 0, 0));
+        txtTanggalDistributor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -65,6 +77,10 @@ public class AddDistributor extends javax.swing.JPanel {
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Tanggal      :");
+
+        txtNamaDistributor.setBackground(new java.awt.Color(255, 255, 255));
+        txtNamaDistributor.setForeground(new java.awt.Color(0, 0, 0));
+        txtNamaDistributor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         btnSubmitDsitributor.setText("SUBMIT");
         btnSubmitDsitributor.addActionListener(new java.awt.event.ActionListener() {
@@ -124,7 +140,7 @@ public class AddDistributor extends javax.swing.JPanel {
                     .addComponent(txtTanggalDistributor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnSubmitDsitributor)
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -134,9 +150,15 @@ public class AddDistributor extends javax.swing.JPanel {
 
     private void btnSubmitDsitributorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitDsitributorActionPerformed
         // TODO add your handling code here:
+        if(txtNamaDistributor.getText().isEmpty()||txtAlamatDistributor.getText().isEmpty()||txtTanggalDistributor.getText().isEmpty() ||txtTeleponDistributor.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please fill in the whole field!", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
         JOptionPane.showMessageDialog(this, "Succecfull");
-        System.exit(0);
-        
+        txtNamaDistributor.setText("");
+        txtAlamatDistributor.setText("");
+        txtTeleponDistributor.setText("");
+        txtTanggalDistributor.setText("");
+        }
     }//GEN-LAST:event_btnSubmitDsitributorActionPerformed
 
 
