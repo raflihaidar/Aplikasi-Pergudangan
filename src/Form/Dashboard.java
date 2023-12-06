@@ -9,6 +9,7 @@ import Components.TableActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import model.ModelCard;
+import model.User;
 
 public class Dashboard extends javax.swing.JPanel {
 
@@ -19,7 +20,8 @@ public class Dashboard extends javax.swing.JPanel {
 
         public Dashboard() {
                 initComponents();
-                UserController user = new UserController(table2);
+                UserController controller = new UserController(table2);
+                User user = new User();
                 card1.setData(new ModelCard(iconTotal, "Total Stock", "20.0000"));
                 card2.setData(new ModelCard(iconStaff, "Total Profit", "Rp. 15.000.000"));
                 card3.setData(new ModelCard(iconProfit, "Jumlah Staff", "150"));
@@ -28,7 +30,7 @@ public class Dashboard extends javax.swing.JPanel {
                 scrollTable.setVerticalScrollBar(new ScrollBar());
                 scrollTable2.setVerticalScrollBar(new ScrollBar());
 
-                user.showAllData((DefaultTableModel) table2.getModel());
+                controller.showAllData((DefaultTableModel) table2.getModel());
                 TableActionEvent event = new TableActionEvent() {
                         @Override
                         public void onEdit(int row) {
@@ -37,11 +39,12 @@ public class Dashboard extends javax.swing.JPanel {
 
                         @Override
                         public void onDelete(int row) {
-                                if (table2.isEditing()) {
-                                        table2.getCellEditor().stopCellEditing();
-                                }
+                            try{
                                 DefaultTableModel model = (DefaultTableModel) table2.getModel();
-                                model.removeRow(row);
+                                controller.deleteDataUser(table2, model);
+                            }catch(Exception e){
+                                System.out.println("Error : " + e.getMessage());
+                            }
                         }
 
                         @Override

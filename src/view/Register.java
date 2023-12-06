@@ -165,7 +165,7 @@ public class Register extends javax.swing.JFrame {
 
         cbGender.setBackground(new java.awt.Color(255, 255, 255));
         cbGender.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        cbGender.setForeground(new java.awt.Color(0, 0, 0));
+        cbGender.setForeground(new java.awt.Color(204, 51, 0));
         cbGender.setMinimumSize(new java.awt.Dimension(58, 20));
         cbGender.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -284,14 +284,16 @@ public class Register extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-
-    private void btnRegisterNowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterNowActionPerformed
-
-    }//GEN-LAST:event_btnRegisterNowActionPerformed
+  
+    private void btnLoginbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginbackActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        Login l = new Login();
+        l.setVisible(true);
+    }//GEN-LAST:event_btnLoginbackActionPerformed
 
     
-    public void selectedDataGender(){
+     public void selectedDataGender(){
         Connection con = Config.connectDB();
         try{
             String query = "SELECT gender FROM gender";
@@ -310,7 +312,7 @@ public class Register extends javax.swing.JFrame {
     public void selectedDataJabatan(){
         try{
             Connection con = Config.connectDB();
-            String query = "SELECT * FROM jabatan";
+            String query = "SELECT nama FROM jabatan";
             Statement statement = con.createStatement();
             ResultSet result = statement.executeQuery(query);
             while(result.next()){

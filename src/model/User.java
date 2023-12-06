@@ -17,6 +17,9 @@ public class User {
        this.role = (String) register.getCmbRole();
     }
     
+    public User(){
+    }
+    
     public void setUsername(String username){
         this.username = username;
     }
