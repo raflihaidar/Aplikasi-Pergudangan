@@ -13,28 +13,11 @@ import helper.UserQueries;
 
 public class RegisterController implements ActionListener{
     private Register register;
+    private UserController controller;
     private User user;
     
     public RegisterController(Register register){
         this.register = register;
-    }
-    
-    public void registUser(User user){
-        Connection con = Config.connectDB();
-        PreparedStatement ps = null;
-        try{
-            ps = con.prepareStatement(UserQueries.INSERT_USER);
-            ps.setString(1, user.getFullName());
-            ps.setString(2, user.getUsername());
-            ps.setString(3, user.getPassword());
-            ps.setString(4, user.getGender());
-            ps.setString(5, user.getRole());
-            ps.execute();
-            ps.close();
-            con.close();
-        }catch(Exception e){
-            System.out.println("Error :" + e.getMessage());
-        }
     }
     
     public void validationPassword() {
@@ -44,7 +27,7 @@ public class RegisterController implements ActionListener{
         if (user.isValidPassword()) {
             register.setTxtWarning("Password valid!");
             JOptionPane.showMessageDialog(register, "Registration Successful!");
-            registUser(user);
+            controller.addUser();
             register.dispose();
             Login l = new Login();
             l.setVisible(true);
@@ -60,6 +43,7 @@ public class RegisterController implements ActionListener{
     public void actionPerformed(ActionEvent e) {
        String repass = register.getTxtRepass();
        this.user = new User(register);
+       this.controller = new UserController(user);
        if (user.getFullName().isEmpty() || user.getUsername().isEmpty() || user.getPassword().isEmpty()) {
                 // Tampilkan pesan kesalahan jika tidak diisi
                 JOptionPane.showMessageDialog(register, "Please fill in the whole field!", "Error", JOptionPane.ERROR_MESSAGE);
