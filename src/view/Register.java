@@ -3,11 +3,13 @@ package view;
 import java.sql.Connection;
 import config.Config;
 import controller.RegisterController;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Register extends javax.swing.JFrame {
-    
+
     private RegisterController controller = new RegisterController(this);
 
     public Register() {
@@ -15,59 +17,64 @@ public class Register extends javax.swing.JFrame {
         selectedDataGender();
         selectedDataJabatan();
         btnRegisterNow.addActionListener(controller);
+        btnLoginback.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent e){
+                btnLoginbackActionPerformed(e);
+            }
+        });
     }
-    
-    
-    public String getTxtFullName(){
+
+    public String getTxtFullName() {
         return txtFullName.getText();
     }
-    
-    public void setTxtFullName(String text){
+
+    public void setTxtFullName(String text) {
         txtFullName.setText(text);
     }
-    
-    public String getTxtWarning(){
+
+    public String getTxtWarning() {
         return txtWarningregis.getText();
     }
-    
-    public void setTxtWarning(String text){
+
+    public void setTxtWarning(String text) {
         txtWarningregis.setText(text);
     }
-    
-    public String getTxtUserName(){
+
+    public String getTxtUserName() {
         return txtUsernameRegis.getText();
     }
-    
-    public void setTxtUsername(String text){
+
+    public void setTxtUsername(String text) {
         txtUsernameRegis.setText(text);
     }
-    
-    public String getTxtPassword(){
+
+    public String getTxtPassword() {
         return txtPasswordRegis.getText();
     }
-    
-    public void setTxtPassword(String text){
+
+    public void setTxtPassword(String text) {
         txtPasswordRegis.setText(text);
     }
-    
-    public String getTxtRepass(){
+
+    public String getTxtRepass() {
         return txtRepass.getText();
     }
-    
-    public void setTxtRepass(String text){
+
+    public void setTxtRepass(String text) {
         txtRepass.setText(text);
     }
-    
-    public String getCmbGender(){
+
+    public String getCmbGender() {
         return (String) cbGender.getSelectedItem();
     }
-    
-    public String getCmbRole(){
+
+    public String getCmbRole() {
         return (String) cbRole.getSelectedItem();
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
@@ -147,7 +154,7 @@ public class Register extends javax.swing.JFrame {
         btnRegisterNow.setText("REGISTER");
         btnRegisterNow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterNowActionPerformed(evt);
+                // btnRegisterNowActionPerformed(evt);
             }
         });
 
@@ -195,157 +202,184 @@ public class Register extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(242, 242, 242)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnRegisterNow)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLoginback))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel2))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel8))
-                                .addGap(88, 88, 88)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbGender, 0, 206, Short.MAX_VALUE)
-                                    .addComponent(cbRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                .addContainerGap(213, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 256, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtWarningregis, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtRepass, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPasswordRegis, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtUsernameRegis, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(213, 213, 213))
-        );
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(242, 242, 242)
+                                                .addGroup(jPanel1Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(btnRegisterNow)
+                                                        .addComponent(jLabel7))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnLoginback))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(130, 130, 130)
+                                                .addGroup(jPanel1Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabel4)
+                                                        .addComponent(jLabel3)
+                                                        .addGroup(jPanel1Layout
+                                                                .createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                .addComponent(jLabel1)
+                                                                .addComponent(jLabel2))
+                                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addGroup(jPanel1Layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(jLabel5)
+                                                                        .addComponent(jLabel8))
+                                                                .addGap(88, 88, 88)
+                                                                .addGroup(jPanel1Layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING,
+                                                                        false)
+                                                                        .addComponent(cbGender, 0, 206, Short.MAX_VALUE)
+                                                                        .addComponent(cbRole, 0,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                Short.MAX_VALUE))))))
+                                .addContainerGap(213, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 256, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtWarningregis, javax.swing.GroupLayout.PREFERRED_SIZE, 206,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtRepass, javax.swing.GroupLayout.PREFERRED_SIZE, 206,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtPasswordRegis, javax.swing.GroupLayout.PREFERRED_SIZE, 206,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtUsernameRegis, javax.swing.GroupLayout.PREFERRED_SIZE, 206,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 206,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(213, 213, 213)));
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(274, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(41, 41, 41)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUsernameRegis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(41, 41, 41)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPasswordRegis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRepass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(2, 2, 2)
-                .addComponent(txtWarningregis, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(45, 45, 45)
-                .addComponent(btnRegisterNow)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(btnLoginback))
-                .addGap(39, 39, 39))
-        );
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(274, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtFullName, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel1))
+                                .addGap(41, 41, 41)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtUsernameRegis, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel2))
+                                .addGap(41, 41, 41)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtPasswordRegis, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel4))
+                                .addGap(37, 37, 37)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtRepass, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel3))
+                                .addGap(2, 2, 2)
+                                .addComponent(txtWarningregis, javax.swing.GroupLayout.PREFERRED_SIZE, 15,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(cbGender, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel5))
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(cbRole, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel8))
+                                .addGap(45, 45, 45)
+                                .addComponent(btnRegisterNow)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel7)
+                                        .addComponent(btnLoginback))
+                                .addGap(39, 39, 39)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-  
-    private void btnLoginbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginbackActionPerformed
+
+    private void btnLoginbackActionPerformed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_btnLoginbackActionPerformed
         // TODO add your handling code here:
         dispose();
         Login l = new Login();
         l.setVisible(true);
-    }//GEN-LAST:event_btnLoginbackActionPerformed
+    }// GEN-LAST:event_btnLoginbackActionPerformed
 
-    
-     public void selectedDataGender(){
+    public void selectedDataGender() {
         Connection con = Config.connectDB();
-        try{
+        try {
             String query = "SELECT gender FROM gender";
             Statement statement = con.createStatement();
             ResultSet result = statement.executeQuery(query);
-            while(result.next()){
+            while (result.next()) {
                 cbGender.addItem(result.getString("gender"));
             }
             con.close();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error" + e.getMessage());
         }
-    
+
     }
-    
-    public void selectedDataJabatan(){
-        try{
+
+    public void selectedDataJabatan() {
+        try {
             Connection con = Config.connectDB();
             String query = "SELECT nama FROM jabatan";
             Statement statement = con.createStatement();
             ResultSet result = statement.executeQuery(query);
-            while(result.next()){
+            while (result.next()) {
                 cbRole.addItem(result.getString("nama"));
             }
             con.close();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error" + e.getMessage());
         }
-    } 
-    
-    private void txtPasswordRegisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordRegisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPasswordRegisActionPerformed
+    }
 
-    private void cbGenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGenderActionPerformed
+    private void txtPasswordRegisActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtPasswordRegisActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbGenderActionPerformed
+    }// GEN-LAST:event_txtPasswordRegisActionPerformed
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+    private void cbGenderActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cbGenderActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_formWindowOpened
+    }// GEN-LAST:event_cbGenderActionPerformed
 
-    private void cbGenderComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_cbGenderComponentShown
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbGenderComponentShown
+    }// GEN-LAST:event_formWindowOpened
 
-    
+    private void cbGenderComponentShown(java.awt.event.ComponentEvent evt) {// GEN-FIRST:event_cbGenderComponentShown
+        // TODO add your handling code here:
+    }// GEN-LAST:event_cbGenderComponentShown
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+        // (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+         * look and feel.
+         * For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -363,7 +397,7 @@ public class Register extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+        // </editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

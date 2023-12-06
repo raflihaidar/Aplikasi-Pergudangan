@@ -9,16 +9,18 @@ import java.sql.PreparedStatement;
 import javax.swing.JTable;
 import config.Config;
 import javax.swing.table.DefaultTableModel;
+import model.User;
 
 public class UserController {
     private JTable table;
+    private User user;
     
     public UserController(Table table){
         this.table = table;
     }
     
-    public UserController(){
-       
+    public UserController(User user){
+       this.user = user;
     }
     
     public void showAllData(DefaultTableModel model){
@@ -60,7 +62,21 @@ public class UserController {
     }
     
     public void addUser(){
-        
+        Connection con = Config.connectDB();
+        PreparedStatement ps = null;
+        try{
+            ps = con.prepareStatement(UserQueries.INSERT_USER);
+            ps.setString(1, user.getFullName());
+            ps.setString(2, user.getUsername());
+            ps.setString(3, user.getPassword());
+            ps.setString(4, user.getGender());
+            ps.setString(5, user.getRole());
+            ps.execute();
+            ps.close();
+            con.close();
+        }catch(Exception e){
+            System.out.println("Error :" + e.getMessage());
+        }
     }
     
     public void updateUser(){
