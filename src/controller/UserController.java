@@ -1,82 +1,46 @@
 package controller;
 
 import Components.Table;
-import helper.UserQueries;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.sql.PreparedStatement;
 import javax.swing.JTable;
-import config.Config;
 import javax.swing.table.DefaultTableModel;
-import model.User;
+import model.UserModel;
 
 public class UserController {
     private JTable table;
-    private User user;
+    private UserModel user;
     
-    public UserController(Table table){
+    public UserController(Table table, UserModel user){
         this.table = table;
+        this.user = user;
     }
     
-    public UserController(User user){
+    public UserController(UserModel user){
        this.user = user;
     }
     
     public void showAllData(DefaultTableModel model){
-        Connection con = Config.connectDB();
-        try{
-            Statement statement = con.createStatement();
-            ResultSet result = statement.executeQuery(UserQueries.SELECT_ALL_USERS);
-            while(result.next()){
-                String username = result.getString("username");
-                String role = result.getString("kode_jabatan");
-                String status = result.getString("status");
-                model.addRow(new Object[]{username, role, status});
-            }
-            table.setModel(model);
-            con.close();
-        }catch(Exception e){
-            System.out.println("Error" + e.getMessage());
-        }
+        table.setModel( user.getData(model));
     }
     
-    public void deleteDataUser(JTable table, DefaultTableModel model){
-        Connection con = Config.connectDB();
+    public void deleteDataUser(){
         try{
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
             int row = table.getSelectedRow();
             String username = table.getModel().getValueAt(row, 0).toString();
-            PreparedStatement ps = con.prepareStatement(UserQueries.DELETE_USER);
-            ps.setString(1, username);
-            ps.executeUpdate();
+            user.deleteData(username);
             if (table.isEditing()) {
                     table.getCellEditor().stopCellEditing();
             }
             model = (DefaultTableModel) table.getModel();
             model.removeRow(row);
             System.out.println("delete data berhasil");
-            con.close();
         }catch(Exception e){
             System.out.println("Error : " + e.getMessage());
         }
     }
     
     public void addUser(){
-        Connection con = Config.connectDB();
-        PreparedStatement ps = null;
-        try{
-            ps = con.prepareStatement(UserQueries.INSERT_USER);
-            ps.setString(1, user.getFullName());
-            ps.setString(2, user.getUsername());
-            ps.setString(3, user.getPassword());
-            ps.setString(4, user.getGender());
-            ps.setString(5, user.getRole());
-            ps.execute();
-            ps.close();
-            con.close();
-        }catch(Exception e){
-            System.out.println("Error :" + e.getMessage());
-        }
+       user.addData(user);
     }
     
     public void updateUser(){

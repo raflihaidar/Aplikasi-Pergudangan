@@ -127,9 +127,11 @@ public class Distributor extends javax.swing.JPanel {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1040, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAdddistrib)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(btnAdddistrib)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -137,9 +139,9 @@ public class Distributor extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(btnAdddistrib)
-                .addGap(47, 47, 47)
+                .addGap(43, 43, 43)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
         );
@@ -151,33 +153,33 @@ public class Distributor extends javax.swing.JPanel {
     }//GEN-LAST:event_table1AncestorAdded
 
     private void btnAdddistribActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdddistribActionPerformed
-        // TODO add your handling code here:
-       try {
-        // Create a JDialog as the parent for the AddDistributor panel
-        JDialog dialog = new JDialog();
-        
-        // Create an instance of AddDistributor
-        AddDistributor addDistributorPanel = new AddDistributor();
+            // TODO add your handling code here:
+           try {
+            // Create a JDialog as the parent for the AddDistributor panel
+            JDialog dialog = new JDialog();
 
-        // Add the AddDistributor panel to the dialog
-        dialog.getContentPane().add(addDistributorPanel);
-        
-        // Set properties for the dialog (adjust as needed)
-        dialog.setSize(465, 450);
-        dialog.setLocationRelativeTo(this); // Center the dialog relative to the Distributor panel
+            // Create an instance of AddDistributor
+            AddDistributor addDistributorPanel = new AddDistributor();
 
-        // Make the dialog modal, blocking input to other windows
-        dialog.setModal(true);
+            // Add the AddDistributor panel to the dialog
+            dialog.getContentPane().add(addDistributorPanel);
 
-        // Set the default close operation to dispose the dialog
-        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            // Set properties for the dialog (adjust as needed)
+            dialog.setSize(465, 450);
+            dialog.setLocationRelativeTo(this); // Center the dialog relative to the Distributor panel
 
-        // Set the dialog visible
-        dialog.setVisible(true);
+            // Make the dialog modal, blocking input to other windows
+            dialog.setModal(true);
 
-    } catch (Exception e) {
-        e.printStackTrace(); // Log the exception for debugging
-    }
+            // Set the default close operation to dispose the dialog
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+            // Set the dialog visible
+            dialog.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception for debugging
+        }
     }//GEN-LAST:event_btnAdddistribActionPerformed
 
     private void btnAdddistribMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdddistribMouseClicked

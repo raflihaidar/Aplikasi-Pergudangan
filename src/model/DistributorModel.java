@@ -8,7 +8,7 @@ package model;
  *
  * @author ACER
  */
-public class Distributor {
+public class DistributorModel {
     private int ID;
     private String Nama;
     private String Telepon;

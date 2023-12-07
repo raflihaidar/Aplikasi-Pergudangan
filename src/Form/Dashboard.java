@@ -9,7 +9,7 @@ import Components.TableActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import model.ModelCard;
-import model.User;
+import model.UserModel;
 
 public class Dashboard extends javax.swing.JPanel {
 
@@ -20,8 +20,8 @@ public class Dashboard extends javax.swing.JPanel {
 
         public Dashboard() {
                 initComponents();
-                UserController controller = new UserController(table2);
-                User user = new User();
+                UserModel user = new UserModel();
+                UserController controller = new UserController(table2, user);
                 card1.setData(new ModelCard(iconTotal, "Total Stock", "20.0000"));
                 card2.setData(new ModelCard(iconStaff, "Total Profit", "Rp. 15.000.000"));
                 card3.setData(new ModelCard(iconProfit, "Jumlah Staff", "150"));
@@ -40,8 +40,7 @@ public class Dashboard extends javax.swing.JPanel {
                         @Override
                         public void onDelete(int row) {
                             try{
-                                DefaultTableModel model = (DefaultTableModel) table2.getModel();
-                                controller.deleteDataUser(table2, model);
+                                controller.deleteDataUser();
                             }catch(Exception e){
                                 System.out.println("Error : " + e.getMessage());
                             }
