@@ -12,16 +12,18 @@ public class ModalBarang extends javax.swing.JPanel {
      * Creates new form ModalBarang
      */
     private JTable table;
-            
-    public ModalBarang() {
+
+    public ModalBarang(JTable table) {
         initComponents();
         ComboBoxController controllerKategori = new ComboBoxController(cmbKategori);
         ComboBoxController controllerSatuan = new ComboBoxController(cmbSatuan);
         controllerKategori.getData(KategoriQueries.SELECT_ALL_KATEGORI);
         controllerSatuan.getData(SatuanQueries.SELECT_ALL_SATUAN);
+        this.table = table;
     }
 
     @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -83,6 +85,11 @@ public class ModalBarang extends javax.swing.JPanel {
         });
 
         jButton2.setText("Cancel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Satuan");
@@ -164,12 +171,15 @@ public class ModalBarang extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         BarangController controllerBarang = new BarangController(txtNama, txtHarga, txtStok, cmbKategori, cmbSatuan);
-        controllerBarang.addDataBarang();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+        controllerBarang.addDataBarang(table);
+    }// GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbKategori;
