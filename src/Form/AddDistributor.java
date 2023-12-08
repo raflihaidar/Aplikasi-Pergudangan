@@ -1,19 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package Form;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author ACER
- */
 public class AddDistributor extends javax.swing.JPanel {
 
-    /**
-     * Creates new form AddDistributor
-     */
+
     public AddDistributor() {
         initComponents();
     }
@@ -136,7 +126,6 @@ public class AddDistributor extends javax.swing.JPanel {
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(this, "Succecfull");
         System.exit(0);
-        
     }//GEN-LAST:event_btnSubmitDsitributorActionPerformed
 
 
