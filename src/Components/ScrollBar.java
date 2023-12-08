@@ -3,7 +3,6 @@ package Components;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JScrollBar;
-import model.NewScrollBar;
 
 public class ScrollBar extends JScrollBar {
 

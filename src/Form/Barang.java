@@ -142,11 +142,12 @@ public class Barang extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
 
+//            DefaultTableModel model = (DefaultTableModel) table1.getModel();
             // Create a JDialog as the parent for the AddDistributor panel
             JDialog dialog = new JDialog();
 
             // Create an instance of AddDistributor
-            ModalBarang modal = new ModalBarang();
+            ModalBarang modal = new ModalBarang(table1);
 
             // Add the AddDistributor panel to the dialog
             dialog.getContentPane().add(modal);

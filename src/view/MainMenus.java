@@ -3,6 +3,7 @@ package view;
 import Form.Dashboard;
 import Components.MenuItem;
 import Components.MyIcon;
+import Components.ScrollBar;
 import Form.Barang;
 import Form.Distributor;
 import Form.Staff;
@@ -29,6 +30,7 @@ public class MainMenus extends javax.swing.JFrame {
         this.setUndecorated(true);
         this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
         sidebar.setBorder(new EmptyBorder(0, 10, 0, 0));
+        jScrollPane1.setVerticalScrollBar(new ScrollBar());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -172,7 +174,7 @@ public class MainMenus extends javax.swing.JFrame {
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         listMenu.setBackground(new java.awt.Color(255, 255, 255));
         listMenu.setPreferredSize(new java.awt.Dimension(0, 200));

@@ -5,7 +5,7 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import model.ModelCard;
+import model.CardModel;
 
 /**
  *
@@ -39,7 +39,7 @@ public class Card extends javax.swing.JPanel {
         color2 = Color.WHITE;
     }
 
-    public void setData(ModelCard data) {
+    public void setData(CardModel data) {
         lbIcon.setIcon(data.getIcon());
         lbTitle.setText(data.getTitle());
         lbValues.setText(data.getValues());

@@ -8,7 +8,7 @@ import Components.TableActionCellRender;
 import Components.TableActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
-import model.ModelCard;
+import model.CardModel;
 import model.UserModel;
 
 public class Dashboard extends javax.swing.JPanel {
@@ -22,10 +22,10 @@ public class Dashboard extends javax.swing.JPanel {
                 initComponents();
                 UserModel user = new UserModel();
                 UserController controller = new UserController(table2, user);
-                card1.setData(new ModelCard(iconTotal, "Total Stock", "20.0000"));
-                card2.setData(new ModelCard(iconStaff, "Total Profit", "Rp. 15.000.000"));
-                card3.setData(new ModelCard(iconProfit, "Jumlah Staff", "150"));
-                card4.setData(new ModelCard(iconDistributor, "Jumlah Distributor", "20"));
+                card1.setData(new CardModel(iconTotal, "Total Stock", "20.0000"));
+                card2.setData(new CardModel(iconStaff, "Total Profit", "Rp. 15.000.000"));
+                card3.setData(new CardModel(iconProfit, "Jumlah Staff", "150"));
+                card4.setData(new CardModel(iconDistributor, "Jumlah Distributor", "20"));
 
                 scrollTable.setVerticalScrollBar(new ScrollBar());
                 scrollTable2.setVerticalScrollBar(new ScrollBar());
