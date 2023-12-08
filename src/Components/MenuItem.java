@@ -6,7 +6,9 @@
 package Components;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.Icon;
@@ -32,13 +34,16 @@ public class MenuItem extends javax.swing.JPanel {
     private final ArrayList<MenuItem> subMenu = new ArrayList<>();
     private ActionListener act;
     
-    private final Color normalBackgroundColor = new Color(255,255,255);
-    private final Color hoverBackgroundColor = new Color(220,220,220);
+    private final Color normalBackgroundColor = new Color(0,20,64);
+    private final Color hoverBackgroundColor = new Color(60,82,145);
 
     public MenuItem(Icon icon, boolean submenu, String menuName, ActionListener act, MenuItem... subMenu) {
         initComponents();
         lbIcon.setIcon(icon);
         lbName.setText(menuName);
+        lbName.setForeground(Color.white);
+        Font font = new Font("Poppins", Font.BOLD,12);
+        lbName.setFont(font);
         if (act != null) {
             this.act = act;
         }
@@ -62,6 +67,7 @@ public class MenuItem extends javax.swing.JPanel {
             // Menangani perubahan warna latar belakang saat mouse masuk (hover)
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 setBackground(hoverBackgroundColor);
+                setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
 
             // Menangani perubahan warna latar belakang saat mouse keluar dari menu
@@ -83,7 +89,7 @@ public class MenuItem extends javax.swing.JPanel {
         lbIcon = new javax.swing.JLabel();
         lbName = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255,255,255));
+        setBackground(new java.awt.Color(0,20,64));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 formMousePressed(evt);

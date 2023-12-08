@@ -4,6 +4,8 @@ import Components.TableActionCellEditor;
 import Components.TableActionCellRender;
 import Components.TableActionEvent;
 import controller.BarangController;
+import java.awt.Color;
+import java.awt.Font;
 import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,15 +18,28 @@ public class Barang extends javax.swing.JPanel {
     /**
      * Creates new form Barang
      */
+    Font font = new Font("Poppins", Font.BOLD,18);
     
     public Barang() {
         initComponents();
+        title.setFont(font);
         BarangController controller = new BarangController(table1);
         controller.showAllData((DefaultTableModel) table1.getModel());
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
-                System.out.println("Edit row : " + row);
+                PopUpBarang dialog = new PopUpBarang(table1, true, row);
+                controller.getSingleData(row, table1, dialog);
+                dialog.setSize(934, 573);
+                dialog.setLocationRelativeTo(Barang.this); // Center the dialog relative to the Distributor panel
+                // Make the dialog modal, blocking input to other windows
+                dialog.setModal(true);
+                //Set background color dialog
+                dialog.getContentPane().setBackground(Color.WHITE);
+                // Set the default close operation to dispose the dialog
+                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                // Set the dialog visible
+                dialog.setVisible(true);
             }
 
             @Override
@@ -55,20 +70,15 @@ public class Barang extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table1 = new Components.Table();
         btnAdd = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        title = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel1.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Master / Barang");
 
         jPanel1.setLayout(new java.awt.CardLayout());
 
@@ -99,37 +109,52 @@ public class Barang extends javax.swing.JPanel {
 
         jPanel1.add(jScrollPane1, "card2");
 
+        btnAdd.setBackground(new java.awt.Color(51, 153, 255));
+        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/add.png"))); // NOI18N
-        btnAdd.setText("add");
+        btnAdd.setText("Tambah Barang");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
+
+        title.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        title.setForeground(new java.awt.Color(0, 0, 0));
+        title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        title.setText("Barang");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnAdd)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 955, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAdd)
+                                .addGap(504, 504, 504)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 948, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addContainerGap(57, Short.MAX_VALUE)
+                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,13 +169,11 @@ public class Barang extends javax.swing.JPanel {
 
 //            DefaultTableModel model = (DefaultTableModel) table1.getModel();
             // Create a JDialog as the parent for the AddDistributor panel
-            JDialog dialog = new JDialog();
+            PopUpBarang dialog = new PopUpBarang(table1, false);
 
             // Create an instance of AddDistributor
-            ModalBarang modal = new ModalBarang(table1);
 
             // Add the AddDistributor panel to the dialog
-            dialog.getContentPane().add(modal);
 
             // Set properties for the dialog (adjust as needed)
             dialog.setSize(934, 573);
@@ -158,6 +181,7 @@ public class Barang extends javax.swing.JPanel {
 
             // Make the dialog modal, blocking input to other windows
             dialog.setModal(true);
+            dialog.getContentPane().setBackground(Color.WHITE);
 
             // Set the default close operation to dispose the dialog
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -169,10 +193,10 @@ public class Barang extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private Components.Table table1;
+    private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }

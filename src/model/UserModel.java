@@ -111,6 +111,7 @@ public class UserModel {
             ps.setString(1, username);
             ps.executeUpdate();
             con.close();
+            ps.close();
         }catch(Exception e){
             System.out.println("Error : " + e.getMessage());
         }
