@@ -14,7 +14,18 @@ public class BarangModel {
     private int harga;
     private int stok;
     private int satuan;
-    private String kategori;
+    private int kategori;
+
+    public BarangModel(String nama, int harga, int stok, int satuan, int kategori) {
+        this.nama = nama;
+        this.harga = harga;
+        this.stok = stok;
+        this.kategori = kategori;
+        this.satuan = satuan;
+    }
+
+    public BarangModel() {
+    }
 
     public void setNama(String nama) {
         this.nama = nama;
@@ -48,11 +59,11 @@ public class BarangModel {
         return satuan;
     }
 
-    public void setKategori(String kategori) {
+    public void setKategori(int kategori) {
         this.kategori = kategori;
     }
 
-    public String getKategori() {
+    public int getKategori() {
         return kategori;
     }
 
@@ -71,7 +82,7 @@ public class BarangModel {
                 model.addRow(new Object[] { kode, nama, harga, stok, kode_kategori, kode_satuan });
             }
             con.close();
-            System.out.println("berhasil");
+            statement.close();
             return model;
         } catch (Exception e) {
             System.out.println("Error" + e.getMessage());
@@ -80,15 +91,40 @@ public class BarangModel {
         }
     }
 
+    public ResultSet getSingleData(int kodeBarang) {
+        Connection con = Config.connectDB();
+        PreparedStatement ps = null;
+        ResultSet result = null;
+        try {
+            ps = con.prepareStatement(BarangQueries.SELECT_SINGLE_DATA);
+            ps.setInt(1, kodeBarang);
+            result = ps.executeQuery();
+            return result;
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+            return null;
+        }
+    }
+    
+
     public void deleteData(int kode) {
         Connection con = Config.connectDB();
+        PreparedStatement ps = null;
         try {
-            PreparedStatement ps = con.prepareStatement(BarangQueries.DELETE_BARANG);
+            ps = con.prepareStatement(BarangQueries.DELETE_BARANG);
             ps.setInt(1, kode);
             ps.executeUpdate();
-            con.close();
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
+        }
+        if (ps != null) {
+            try {
+                con.close();
+                ps.close();
+            } catch (SQLException e) {
+                /* handle exception */
+                e.printStackTrace();
+            }
         }
     }
 
@@ -110,13 +146,48 @@ public class BarangModel {
             if (generatedKeys.next()) {
                 kode = generatedKeys.getInt(1);
             }
-            ps.close();
-            con.close();
             generatedKeys.close();
             return kode;
         } catch (Exception e) {
             System.out.println("Error :" + e.getMessage());
             return 0;
+        } finally {
+            if (ps != null) {
+                try {
+                    con.close();
+                    ps.close();
+                } catch (SQLException e) {
+                    /* handle exception */
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void updateData(int kode) {
+        Connection con = Config.connectDB();
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(BarangQueries.UPDATE_BARANG);
+            ps.setString(1, nama);
+            ps.setInt(2, harga);
+            ps.setInt(3, stok);
+            ps.setInt(4, kategori);
+            ps.setInt(5, satuan);
+            ps.setInt(6, kode);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ps != null) {
+                try {
+                    con.close();
+                    ps.close();
+                } catch (SQLException e) {
+                    /* handle exception */
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

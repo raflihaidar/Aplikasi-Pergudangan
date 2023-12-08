@@ -1,6 +1,8 @@
 package Components;
 
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -37,6 +39,10 @@ public class Card extends javax.swing.JPanel {
         setOpaque(false);
         color1 = Color.BLACK;
         color2 = Color.WHITE;
+        Font font = new Font("Roboto", Font.BOLD,16);
+        Font font2 = new Font("Roboto", Font.BOLD,14);
+        lbValues.setFont(font);
+        lbTitle.setFont(font2);
     }
 
     public void setData(CardModel data) {
@@ -76,6 +82,11 @@ public class Card extends javax.swing.JPanel {
         lbValues = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 204));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                formMouseEntered(evt);
+            }
+        });
 
         lbIcon.setText("Icon");
 
@@ -111,6 +122,11 @@ public class Card extends javax.swing.JPanel {
                 .addContainerGap(32, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
+        // TODO add your handling code here:
+         setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_formMouseEntered
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lbIcon;

@@ -1,58 +1,33 @@
 package Form;
 
-import controller.UserController;
+
 import Components.MyIcon;
-import Components.ScrollBar;
-import Components.TableActionCellEditor;
-import Components.TableActionCellRender;
-import Components.TableActionEvent;
+import java.awt.Font;
 import javax.swing.ImageIcon;
-import javax.swing.table.DefaultTableModel;
 import model.CardModel;
-import model.UserModel;
 
 public class Dashboard extends javax.swing.JPanel {
 
-        ImageIcon iconStaff = MyIcon.getIcon("staff-2");
-        ImageIcon iconTotal = MyIcon.getIcon("summarize");
-        ImageIcon iconProfit = MyIcon.getIcon("profit");
+        ImageIcon iconStaff = MyIcon.getIcon("staff");
+        ImageIcon iconBarang = MyIcon.getIcon("item");
+        ImageIcon iconCategory = MyIcon.getIcon("category");
+        ImageIcon iconSatuan = MyIcon.getIcon("satuan");
+        ImageIcon iconIncome = MyIcon.getIcon("income");
+        ImageIcon iconOutbound = MyIcon.getIcon("outbound");
         ImageIcon iconDistributor = MyIcon.getIcon("distributor-2");
+        Font font = new Font("Poppins", Font.BOLD,18);
 
         public Dashboard() {
                 initComponents();
-                UserModel user = new UserModel();
-                UserController controller = new UserController(table2, user);
-                card1.setData(new CardModel(iconTotal, "Total Stock", "20.0000"));
-                card2.setData(new CardModel(iconStaff, "Total Profit", "Rp. 15.000.000"));
-                card3.setData(new CardModel(iconProfit, "Jumlah Staff", "150"));
-                card4.setData(new CardModel(iconDistributor, "Jumlah Distributor", "20"));
-
-                scrollTable.setVerticalScrollBar(new ScrollBar());
-                scrollTable2.setVerticalScrollBar(new ScrollBar());
-
-                controller.showAllData((DefaultTableModel) table2.getModel());
-                TableActionEvent event = new TableActionEvent() {
-                        @Override
-                        public void onEdit(int row) {
-                                System.out.println("Edit row : " + row);
-                        }
-
-                        @Override
-                        public void onDelete(int row) {
-                            try{
-                                controller.deleteDataUser();
-                            }catch(Exception e){
-                                System.out.println("Error : " + e.getMessage());
-                            }
-                        }
-
-                        @Override
-                        public void onView(int row) {
-                                System.out.println("View row : " + row);
-                        }
-                };
-                table2.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender());
-                table2.getColumnModel().getColumn(3).setCellEditor(new TableActionCellEditor(event));
+                card1.setData(new CardModel(iconBarang, "Barang", "20"));
+                card2.setData(new CardModel(iconCategory, "Kategori Barang", "2"));
+                card3.setData(new CardModel(iconSatuan, "Satuan Barang", "150"));
+                card4.setData(new CardModel(iconOutbound, "Barang Keluar", "20"));
+                card5.setData(new CardModel(iconIncome, "Barang Masuk", "20"));
+                card6.setData(new CardModel(iconStaff, "Staff", "20"));
+                card7.setData(new CardModel(iconDistributor, "Distributor", "5"));
+                card8.setData(new CardModel(iconDistributor, "Tanggal", "20"));
+                title.setFont(font);
         }
 
         /**
@@ -63,176 +38,96 @@ public class Dashboard extends javax.swing.JPanel {
         @SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated
         // <editor-fold defaultstate="collapsed" desc="Generated
-        // Code">//GEN-BEGIN:initComponents
-        private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-                jLabel1 = new javax.swing.JLabel();
-                cardContainer = new javax.swing.JLayeredPane();
-                card1 = new Components.Card();
-                card2 = new Components.Card();
-                card3 = new Components.Card();
-                card4 = new Components.Card();
-                tableContainer = new javax.swing.JPanel();
-                scrollTable = new javax.swing.JScrollPane();
-                table2 = new Components.Table();
-                scrollTable2 = new javax.swing.JScrollPane();
-                table1 = new Components.Table();
+        title = new javax.swing.JLabel();
+        cardContainer = new javax.swing.JLayeredPane();
+        card1 = new Components.Card();
+        card2 = new Components.Card();
+        card3 = new Components.Card();
+        card5 = new Components.Card();
+        card4 = new Components.Card();
+        card7 = new Components.Card();
+        card6 = new Components.Card();
+        card8 = new Components.Card();
 
-                setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(255, 255, 255));
 
-                jLabel1.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
-                jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-                jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                jLabel1.setText("Dashboard");
+        title.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        title.setForeground(new java.awt.Color(0, 0, 0));
+        title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        title.setText("Dashboard");
 
-                cardContainer.setLayout(new java.awt.GridLayout(1, 3, 15, 0));
+        cardContainer.setLayout(new java.awt.GridLayout(2, 4, 15, 20));
 
-                card1.setColor1(new java.awt.Color(0, 204, 204));
-                card1.setColor2(new java.awt.Color(51, 255, 204));
-                cardContainer.add(card1);
+        card1.setColor1(new java.awt.Color(0, 204, 204));
+        card1.setColor2(new java.awt.Color(51, 255, 204));
+        cardContainer.add(card1);
 
-                card2.setColor1(new java.awt.Color(255, 204, 102));
-                card2.setColor2(new java.awt.Color(255, 204, 0));
-                cardContainer.add(card2);
+        card2.setColor1(new java.awt.Color(255, 204, 102));
+        card2.setColor2(new java.awt.Color(255, 204, 0));
+        cardContainer.add(card2);
 
-                card3.setColor1(new java.awt.Color(51, 204, 0));
-                card3.setColor2(new java.awt.Color(51, 255, 0));
-                cardContainer.add(card3);
+        card3.setColor1(new java.awt.Color(51, 204, 0));
+        card3.setColor2(new java.awt.Color(51, 255, 0));
+        cardContainer.add(card3);
 
-                card4.setColor1(new java.awt.Color(255, 153, 51));
-                card4.setColor2(new java.awt.Color(255, 153, 51));
-                cardContainer.add(card4);
+        card5.setColor1(new java.awt.Color(153, 0, 153));
+        card5.setColor2(new java.awt.Color(102, 0, 102));
+        cardContainer.add(card5);
 
-                tableContainer.setBackground(new java.awt.Color(255, 255, 255));
-                tableContainer.setLayout(new java.awt.CardLayout());
+        card4.setColor1(new java.awt.Color(255, 153, 51));
+        card4.setColor2(new java.awt.Color(255, 153, 51));
+        cardContainer.add(card4);
 
-                scrollTable.setBorder(null);
-                scrollTable.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        card7.setColor1(new java.awt.Color(204, 204, 0));
+        card7.setColor2(new java.awt.Color(204, 204, 0));
+        cardContainer.add(card7);
 
-                table2.setModel(new javax.swing.table.DefaultTableModel(
-                                new Object[][] {
+        card6.setColor1(new java.awt.Color(255, 0, 0));
+        card6.setColor2(new java.awt.Color(204, 0, 51));
+        cardContainer.add(card6);
 
-                                },
-                                new String[] {
-                                                "Username", "Jabatan", "Status", "Action"
-                                }));
-                table2.addKeyListener(new java.awt.event.KeyAdapter() {
-                        public void keyReleased(java.awt.event.KeyEvent evt) {
-                                table2KeyReleased(evt);
-                        }
-                });
-                scrollTable.setViewportView(table2);
+        card8.setColor2(new java.awt.Color(0, 0, 0));
+        cardContainer.add(card8);
 
-                tableContainer.add(scrollTable, "card2");
-
-                scrollTable2.setBackground(new java.awt.Color(255, 255, 255));
-                scrollTable2.setBorder(null);
-                scrollTable2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-                scrollTable2.setOpaque(false);
-
-                table1.setModel(new javax.swing.table.DefaultTableModel(
-                                new Object[][] {
-                                                { null },
-                                                { null },
-                                                { null },
-                                                { null }
-                                },
-                                new String[] {
-                                                "Aktifitas Pengguna"
-                                }));
-                scrollTable2.setViewportView(table1);
-
-                javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-                this.setLayout(layout);
-                layout.setHorizontalGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(layout.createSequentialGroup()
-                                                                .addGroup(layout.createParallelGroup(
-                                                                                javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                                .addGroup(layout.createSequentialGroup()
-                                                                                                .addContainerGap()
-                                                                                                .addComponent(scrollTable2,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                337,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING,
-                                                                                                layout
-                                                                                                                .createSequentialGroup()
-                                                                                                                .addGap(30, 30, 30)
-                                                                                                                .addGroup(layout
-                                                                                                                                .createParallelGroup(
-                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                                                                .addComponent(jLabel1,
-                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                94,
-                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                                                .addComponent(cardContainer,
-                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                991,
-                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                                                .addContainerGap(19, Short.MAX_VALUE))
-                                                .addGroup(layout.createParallelGroup(
-                                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                                layout.createSequentialGroup()
-                                                                                                .addContainerGap(30,
-                                                                                                                Short.MAX_VALUE)
-                                                                                                .addComponent(tableContainer,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                637,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                .addContainerGap(373,
-                                                                                                                Short.MAX_VALUE))));
-                layout.setVerticalGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(layout.createSequentialGroup()
-                                                                .addGap(40, 40, 40)
-                                                                .addComponent(jLabel1,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                34,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(
-                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                .addComponent(cardContainer,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                125,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(
-                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                                .addComponent(scrollTable2,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                317,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addContainerGap(21, Short.MAX_VALUE))
-                                                .addGroup(layout.createParallelGroup(
-                                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                                layout.createSequentialGroup()
-                                                                                                .addContainerGap(225,
-                                                                                                                Short.MAX_VALUE)
-                                                                                                .addComponent(tableContainer,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                317,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                .addContainerGap(19,
-                                                                                                                Short.MAX_VALUE))));
-        }// </editor-fold>//GEN-END:initComponents
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cardContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 956, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(cardContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(136, Short.MAX_VALUE))
+        );
+    }// </editor-fold>//GEN-END:initComponents
 
         private void table2KeyReleased(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_table2KeyReleased
                 // TODO add your handling code here:
         }// GEN-LAST:event_table2KeyReleased
 
-        // Variables declaration - do not modify//GEN-BEGIN:variables
-        private Components.Card card1;
-        private Components.Card card2;
-        private Components.Card card3;
-        private Components.Card card4;
-        private javax.swing.JLayeredPane cardContainer;
-        private javax.swing.JLabel jLabel1;
-        private javax.swing.JScrollPane scrollTable;
-        private javax.swing.JScrollPane scrollTable2;
-        private Components.Table table1;
-        private Components.Table table2;
-        private javax.swing.JPanel tableContainer;
-        // End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Components.Card card1;
+    private Components.Card card2;
+    private Components.Card card3;
+    private Components.Card card4;
+    private Components.Card card5;
+    private Components.Card card6;
+    private Components.Card card7;
+    private Components.Card card8;
+    private javax.swing.JLayeredPane cardContainer;
+    private javax.swing.JLabel title;
+    // End of variables declaration//GEN-END:variables
 }
