@@ -2,6 +2,7 @@ package Form;
 
 
 import Components.MyIcon;
+import controller.BarangController;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import model.CardModel;
@@ -19,7 +20,18 @@ public class Dashboard extends javax.swing.JPanel {
 
         public Dashboard() {
                 initComponents();
-                card1.setData(new CardModel(iconBarang, "Barang", "20"));
+                
+                BarangController controller = new BarangController();
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                card1.setData(new CardModel(iconBarang, "Barang", controller.getTotalBarang()));
                 card2.setData(new CardModel(iconCategory, "Kategori Barang", "2"));
                 card3.setData(new CardModel(iconSatuan, "Satuan Barang", "150"));
                 card4.setData(new CardModel(iconOutbound, "Barang Keluar", "20"));

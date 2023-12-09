@@ -144,15 +144,11 @@ public class AddDistributor extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please fill in the whole field!", "Error", JOptionPane.ERROR_MESSAGE);
         }else{
         JOptionPane.showMessageDialog(this, "Succecfull");
-<<<<<<< HEAD
-        System.exit(0);
-=======
         txtNamaDistributor.setText("");
         txtAlamatDistributor.setText("");
         txtTeleponDistributor.setText("");
         txtTanggalDistributor.setText("");
         }
->>>>>>> 5b1b1e6023662780266cad20f7188268c0e558ab
     }//GEN-LAST:event_btnSubmitDsitributorActionPerformed
 
 

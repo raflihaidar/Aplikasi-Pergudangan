@@ -2,71 +2,74 @@ package model;
 
 import config.Config;
 import helper.UserQueries;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 import view.Register;
 
 public class UserModel {
+
     private String username;
     private String password;
     private String fullName;
     private String gender;
     private String role;
-    
-    public UserModel(Register register){
-       this.fullName = register.getTxtFullName();
-       this.username = register.getTxtUserName();
-       this.password = register.getTxtPassword();
-       this.gender = (String) register.getCmbGender();
-       this.role = (String) register.getCmbRole();
+
+    public UserModel(Register register) {
+        this.fullName = register.getTxtFullName();
+        this.username = register.getTxtUserName();
+        this.password = register.getTxtPassword();
+        this.gender = (String) register.getCmbGender();
+        this.role = (String) register.getCmbRole();
+    }
+
+    public UserModel() {
     }
     
-    public UserModel(){
-    }
-    
-    public void setUsername(String username){
+    public UserModel(String username, String password) {
         this.username = username;
-    }
-    public String getUsername(){
-        return username;
-    }
-    
-    public void setPassword(String username){
         this.password = password;
     }
-    
-    public String getPassword(){
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setPassword(String username) {
+        this.password = password;
+    }
+
+    public String getPassword() {
         return password;
     }
-     
-    public void setFullName(String fullName){
+
+    public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-    
-    public String getFullName(){
+
+    public String getFullName() {
         return fullName;
     }
-     
-    public void setGender(String gender){
+
+    public void setGender(String gender) {
         this.gender = gender;
     }
-    
-    public String getGender(){
+
+    public String getGender() {
         return gender;
     }
-    
-    public void setRole(String role){
+
+    public void setRole(String role) {
         this.role = role;
     }
-    
-    public String getRole(){
+
+    public String getRole() {
         return role;
     }
-    
-        
+
     public boolean isValidPassword() {
         // Memeriksa panjang minimal
         if (this.password.length() < 8) {
@@ -84,13 +87,13 @@ public class UserModel {
         }
         return true;
     }
-    
-    public DefaultTableModel getData(DefaultTableModel model){
-         Connection con = Config.connectDB();
-        try{
+
+    public DefaultTableModel getData(DefaultTableModel model) {
+        Connection con = Config.connectDB();
+        try {
             Statement statement = con.createStatement();
             ResultSet result = statement.executeQuery(UserQueries.SELECT_ALL_USERS);
-            while(result.next()){
+            while (result.next()) {
                 String username = result.getString("username");
                 String role = result.getString("kode_jabatan");
                 String status = result.getString("status");
@@ -98,29 +101,29 @@ public class UserModel {
             }
             con.close();
             return model;
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error" + e.getMessage());
             return null;
         }
     }
-    
-    public void deleteData(String username){
+
+    public void deleteData(String username) {
         Connection con = Config.connectDB();
-        try{
+        try {
             PreparedStatement ps = con.prepareStatement(UserQueries.DELETE_USER);
             ps.setString(1, username);
             ps.executeUpdate();
             con.close();
             ps.close();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
         }
     }
-    
-    public void addData(UserModel user){
-         Connection con = Config.connectDB();
+
+    public void addData(UserModel user) {
+        Connection con = Config.connectDB();
         PreparedStatement ps = null;
-        try{
+        try {
             ps = con.prepareStatement(UserQueries.INSERT_USER);
             ps.setString(1, getFullName());
             ps.setString(2, getUsername());
@@ -130,8 +133,44 @@ public class UserModel {
             ps.execute();
             ps.close();
             con.close();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error :" + e.getMessage());
+        }
+    }
+    
+    public void updateStatus(int bool, String username){
+        Connection con = Config.connectDB();
+        PreparedStatement ps = null;
+        try{
+           ps = con.prepareStatement(UserQueries.IS_AUTHENTICATED);
+           ps.setInt(1, bool);
+           ps.setString(2, username);
+           ps.executeUpdate();
+            System.out.println("Berhasil");
+           ps.close();
+           con.close();
+        }catch(Exception e){
+           System.out.println("Error :" + e.getMessage());
+        }
+    }
+
+    public boolean authentication(){
+        ResultSet rs = null;
+        try (Connection con = Config.connectDB(); PreparedStatement ps = con.prepareStatement(UserQueries.SEARCH_USER)) {
+            System.out.println("dari model" + username);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                rs.close();
+                return true;
+            } else {
+                updateStatus(0, username);
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error : " + e.getMessage());
+            return false;
         }
     }
 }

@@ -79,15 +79,7 @@ public class User extends javax.swing.JPanel {
             new String [] {
                 "Username", "Jabatan", "Status", "Active"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane2.setViewportView(table2);
 
         jPanel1.add(jScrollPane2, "card2");

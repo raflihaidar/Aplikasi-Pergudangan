@@ -10,7 +10,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        LoginController controller = new LoginController(this);
+        LoginController controller = new LoginController(Login.this);
         btnLogin.addActionListener(controller);
     }
     
@@ -23,7 +23,8 @@ public class Login extends javax.swing.JFrame {
     }
     
     public String getTxtPassword(){
-        return txtPassword.getText();
+        String pwd = new String(txtPassword.getPassword());
+        return pwd;
     }
     
     public void setTxtPassword(String text){
@@ -70,6 +71,11 @@ public class Login extends javax.swing.JFrame {
         btnLogin.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         btnLogin.setText("SIGN IN");
         btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLoginMouseClicked(evt);
+            }
+        });
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -229,6 +235,10 @@ public class Login extends javax.swing.JFrame {
     private void jLabel4ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel4ComponentShown
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel4ComponentShown
+
+    private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLoginMouseClicked
 
     /**
      * @param args the command line arguments

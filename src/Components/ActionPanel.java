@@ -41,13 +41,13 @@ public class ActionPanel extends javax.swing.JPanel {
 
         cmdEdit = new Button();
         cmdDelete = new Button();
-        
+
         ImageIcon iconEdit = MyIcon.getIcon("edit");
         ImageIcon iconDelete = MyIcon.getIcon("delete");
-        
+
         cmdEdit.setIcon(iconEdit);
         cmdDelete.setIcon(iconDelete);
-        
+
         cmdEdit.setBackground(new Color(42, 199, 80));
         cmdDelete.setBackground(new Color(245, 78, 43));
         this.setBackground(Color.WHITE);
