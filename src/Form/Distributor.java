@@ -12,6 +12,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import helper.DistributorQueries;
+import controller.DistributorController;
 
 /**
  *
@@ -24,6 +26,8 @@ public class Distributor extends javax.swing.JPanel {
      */
     public Distributor() {
         initComponents();
+        DistributorController controller = new DistributorController(table1);
+        controller.getData((DefaultTableModel) table1.getModel());
         TableActionEvent event = new TableActionEvent() {
                         @Override
                         public void onEdit(int row) {
@@ -72,20 +76,17 @@ public class Distributor extends javax.swing.JPanel {
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                { new Integer(120220231), "PT.WawanSejahtera", "082231332456", "Gedung Kreativitas Lt. 8, Jl. Cipta Karya No. 78", null},
-                { new Integer(120220232), "CV.Harapan Ortu", "081234672878", "Komplek Harmoni Blok C2 No. 45", null},
-                { new Integer(120220233), "PT.Seomoga Sukses", "087123346756", "Jl. Inovasi Barat No. 123", null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "ID Distributor", "Nama Distributor", "No Telepon", "Alamat Distributor", "Action"
+                "ID Distributor", "Nama Distributor", "No Telepon", "Alamat Distributor", "Tanggal Daftar", "Action"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {

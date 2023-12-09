@@ -72,36 +72,22 @@
         <Component class="Components.Table" name="table1">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="4">
-                <Column editable="false" title="ID Distributor" type="java.lang.Integer">
-                  <Data value="120220231"/>
-                  <Data value="120220232"/>
-                  <Data value="120220233"/>
-                  <Data value="null"/>
-                </Column>
-                <Column editable="false" title="Nama Distributor" type="java.lang.String">
-                  <Data value="PT.WawanSejahtera"/>
-                  <Data value="CV.Harapan Ortu"/>
-                  <Data value="PT.Seomoga Sukses"/>
-                  <Data value="null"/>
-                </Column>
-                <Column editable="false" title="No Telepon" type="java.lang.String">
-                  <Data value="082231332456"/>
-                  <Data value="081234672878"/>
-                  <Data value="087123346756"/>
-                  <Data value="null"/>
-                </Column>
-                <Column editable="false" title="Alamat Distributor" type="java.lang.String">
-                  <Data value="Gedung Kreativitas Lt. 8, Jl. Cipta Karya No. 78"/>
-                  <Data value="Komplek Harmoni Blok C2 No. 45"/>
-                  <Data value="Jl. Inovasi Barat No. 123"/>
-                  <Data value="null"/>
-                </Column>
-                <Column editable="false" title="Action" type="java.lang.Object"/>
+              <Table columnCount="6" rowCount="0">
+                <Column editable="false" title="ID Distributor" type="java.lang.Integer"/>
+                <Column editable="false" title="Nama Distributor" type="java.lang.String"/>
+                <Column editable="false" title="No Telepon" type="java.lang.String"/>
+                <Column editable="false" title="Alamat Distributor" type="java.lang.String"/>
+                <Column editable="false" title="Tanggal Daftar" type="java.lang.String"/>
+                <Column editable="true" title="Action" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
