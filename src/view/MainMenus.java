@@ -23,12 +23,22 @@ public class MainMenus extends javax.swing.JFrame {
     /**
      * Creates new form MainMenus
      */
+    
 
+    public MainMenus(String username) {
+        initComponents();
+        execute();
+        listMenu.setPreferredSize(new Dimension(350, 0));
+        this.setUndecorated(true);
+        this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+        sidebar.setBorder(new EmptyBorder(0, 10, 0, 0));
+        jScrollPane1.setVerticalScrollBar(new ScrollBar());
+        txtUsernameMain.setText(username);
+    }
+    
     public MainMenus() {
         initComponents();
         execute();
-        ImageIcon iconClose = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/close_FILL0_wght400_GRAD0_opsz24.png");
-        lbClose.setIcon(iconClose);
         listMenu.setPreferredSize(new Dimension(350, 0));
         this.setUndecorated(true);
         this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
@@ -53,7 +63,7 @@ public class MainMenus extends javax.swing.JFrame {
         title = new javax.swing.JLabel();
         txtUsernameMain = new javax.swing.JLabel();
         profileImage = new javax.swing.JLabel();
-        lbClose = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         sidebar = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listMenu = new javax.swing.JPanel();
@@ -107,18 +117,18 @@ public class MainMenus extends javax.swing.JFrame {
         profileImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/profile.png"))); // NOI18N
         profileImage.setPreferredSize(new java.awt.Dimension(35, 35));
 
-        lbClose.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                lbCloseAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+        jButton1.setBackground(new java.awt.Color(204, 0, 0));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/close.png"))); // NOI18N
+        jButton1.setBorder(null);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
             }
         });
-        lbClose.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbCloseMouseClicked(evt);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -126,7 +136,7 @@ public class MainMenus extends javax.swing.JFrame {
         navbar.setLayout(navbarLayout);
         navbarLayout.setHorizontalGroup(
             navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(navbarLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, navbarLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(title)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 795, Short.MAX_VALUE)
@@ -136,18 +146,18 @@ public class MainMenus extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, navbarLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lbClose, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         navbarLayout.setVerticalGroup(
             navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, navbarLayout.createSequentialGroup()
-                .addComponent(lbClose)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(profileImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtUsernameMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         getContentPane().add(navbar, java.awt.BorderLayout.PAGE_START);
@@ -186,7 +196,7 @@ public class MainMenus extends javax.swing.JFrame {
         );
         sidebarLayout.setVerticalGroup(
             sidebarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 552, Short.MAX_VALUE)
         );
 
         getContentPane().add(sidebar, java.awt.BorderLayout.LINE_START);
@@ -199,19 +209,19 @@ public class MainMenus extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lbCloseAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lbCloseAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lbCloseAncestorAdded
-
-    private void lbCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCloseMouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_lbCloseMouseClicked
-
     private void navbarAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_navbarAncestorAdded
         // TODO add your handling code here:
         
     }//GEN-LAST:event_navbarAncestorAdded
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton1MouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
@@ -240,10 +250,6 @@ public class MainMenus extends javax.swing.JFrame {
         // TODO add your handling code here:
 //        txtUsernameMain.setText(Register.username + "");
     }// GEN-LAST:event_txtUsernameMainAncestorAdded
-
-    private void humbMenuMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_humbMenuMouseClicked
-        // TODO add your handling code here:
-    }// GEN-LAST:event_humbMenuMouseClicked
 
     /**
      * @param args the command line arguments
@@ -286,8 +292,8 @@ public class MainMenus extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel content;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbClose;
     private javax.swing.JPanel listMenu;
     private javax.swing.JPanel navbar;
     private javax.swing.JLabel profileImage;
@@ -395,7 +401,16 @@ public class MainMenus extends javax.swing.JFrame {
             }
         });
         MenuItem menuSettings2 = new MenuItem(iconHakAkses, true, "Hak Akses", null);
-        MenuItem menuSettings = new MenuItem(iconSettings, false, "Pengaturan", null, menuSettings1, menuSettings2);
+        MenuItem menuSettings3 = new MenuItem(iconHakAkses, true, "Log Out", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+//                content.removeAll();
+//                content.add(new User());
+//                content.repaint();
+//                content.revalidate();
+            }
+        });
+        MenuItem menuSettings = new MenuItem(iconSettings, false, "Pengaturan", null, menuSettings1, menuSettings2, menuSettings3);
 
         addMenu(menuDashboard, menuMaster, menuStaff, menuDistributor, menuTransaction, menuReport, menuSettings);
     }

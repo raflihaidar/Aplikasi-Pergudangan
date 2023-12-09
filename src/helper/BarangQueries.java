@@ -16,6 +16,7 @@ public class BarangQueries {
                                                     "JOIN satuan AS s ON s.kode = b.kode_satuan " + 
                                                     "WHERE b.kode = ?";
     public final static String UPDATE_BARANG = "UPDATE barang SET nama = ?, harga = ?, stok = ?, kode_kategori = ?, kode_satuan = ? WHERE kode = ?";
+    public final static String GET_TOTAL_BARANG = "SELECT COUNT(*) FROM barang";
 
 
 }

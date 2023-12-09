@@ -7,9 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.table.DefaultTableModel;
 
 public class BarangModel {
+
     private String nama;
     private int harga;
     private int stok;
@@ -67,24 +67,15 @@ public class BarangModel {
         return kategori;
     }
 
-    public DefaultTableModel getData(DefaultTableModel model) {
+    public ResultSet getData() {
         Connection con = Config.connectDB();
+        Statement statement = null;
+        ResultSet result = null;
         try {
-            Statement statement = con.createStatement();
-            ResultSet result = statement.executeQuery(BarangQueries.SELECT_ALL_DATA);
-            while (result.next()) {
-                int kode = result.getInt("kode");
-                String nama = result.getString("nama");
-                int harga = result.getInt("harga");
-                int stok = result.getInt("stok");
-                String kode_kategori = result.getString("kategori");
-                String kode_satuan = result.getString("satuan");
-                model.addRow(new Object[] { kode, nama, harga, stok, kode_kategori, kode_satuan });
-            }
-            con.close();
-            statement.close();
-            return model;
-        } catch (Exception e) {
+            statement = con.createStatement();
+            result = statement.executeQuery(BarangQueries.SELECT_ALL_DATA);
+            return result;
+        } catch (SQLException e) {
             System.out.println("Error" + e.getMessage());
             e.printStackTrace();
             return null;
@@ -105,7 +96,6 @@ public class BarangModel {
             return null;
         }
     }
-    
 
     public void deleteData(int kode) {
         Connection con = Config.connectDB();
@@ -157,7 +147,6 @@ public class BarangModel {
                     con.close();
                     ps.close();
                 } catch (SQLException e) {
-                    /* handle exception */
                     e.printStackTrace();
                 }
             }
@@ -184,10 +173,24 @@ public class BarangModel {
                     con.close();
                     ps.close();
                 } catch (SQLException e) {
-                    /* handle exception */
                     e.printStackTrace();
                 }
             }
+        }
+    }
+    
+    public ResultSet getTotalData(){
+       Connection con = Config.connectDB();
+        Statement statement = null;
+        ResultSet result = null;
+        try {
+            statement = con.createStatement();
+            result = statement.executeQuery(BarangQueries.GET_TOTAL_BARANG);
+            return result;
+        } catch (SQLException e) {
+            System.out.println("Error" + e.getMessage());
+            e.printStackTrace();
+            return null;
         }
     }
 }
