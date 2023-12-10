@@ -33,6 +33,7 @@ public class DistributorController {
                 String nama = result.getString("nama");
                 String alamat = result.getString("alamat");
                 String tgl_daftar = result.getString("tgl_daftar");
+                String no_hp = result.getString("no_hp");
                 System.out.println("nama" + result.getString("nama"));
                 model.addRow(new Object[]{kode, nama, no_hp, alamat, tgl_daftar});
             }
