@@ -1,7 +1,6 @@
 package model;
 
 import config.Config;
-import helper.KategoriQueries;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -134,6 +133,21 @@ public class KlasifikasiModel {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+    
+    public ResultSet getTotalData(String query){
+       Connection con = Config.connectDB();
+        Statement statement = null;
+        ResultSet result = null;
+        try {
+            statement = con.createStatement();
+            result = statement.executeQuery(query);
+            return result;
+        } catch (SQLException e) {
+            System.out.println("Error" + e.getMessage());
+            e.printStackTrace();
+            return null;
         }
     }
 }

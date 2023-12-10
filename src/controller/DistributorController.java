@@ -4,6 +4,7 @@
  */
 package controller;
 
+import javax.swing.JTable;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -31,10 +32,9 @@ public class DistributorController {
                 int kode = result.getInt("id");
                 String nama = result.getString("nama");
                 String alamat = result.getString("alamat");
-                String no_hp = result.getString("no_hp");
-                int tgl_daftar = result.getInt("tgl_daftar");
+                String tgl_daftar = result.getString("tgl_daftar");
                 System.out.println("nama" + result.getString("nama"));
-                model.addRow(new Object[]{kode, nama, alamat, no_hp, tgl_daftar});
+                model.addRow(new Object[]{kode, nama, no_hp, alamat, tgl_daftar});
             }
             
             table.setModel(model);
