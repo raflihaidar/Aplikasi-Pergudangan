@@ -1,6 +1,13 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package controller;
 
 import javax.swing.JTable;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 import model.DistributorModel;
@@ -25,7 +32,6 @@ public class DistributorController {
                 int kode = result.getInt("id");
                 String nama = result.getString("nama");
                 String alamat = result.getString("alamat");
-                String no_hp = result.getString("no_hp");
                 String tgl_daftar = result.getString("tgl_daftar");
                 System.out.println("nama" + result.getString("nama"));
                 model.addRow(new Object[]{kode, nama, no_hp, alamat, tgl_daftar});

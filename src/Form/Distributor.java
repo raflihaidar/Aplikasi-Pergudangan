@@ -5,6 +5,7 @@ import Components.TableActionCellRender;
 import Components.TableActionEvent;
 import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
+import helper.DistributorQueries;
 import controller.DistributorController;
 
 /**
