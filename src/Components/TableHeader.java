@@ -9,7 +9,7 @@ import javax.swing.border.EmptyBorder;
 public class TableHeader extends JLabel {
 
     public TableHeader(String text) {
-        super(text, null, CENTER);
+        super(text, null, LEADING);
         setOpaque(true);
         setBackground(Color.WHITE);
         setFont(new Font("Poppins", 1, 12));

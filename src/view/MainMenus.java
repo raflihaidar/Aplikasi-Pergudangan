@@ -10,6 +10,7 @@ import Form.Kategori;
 import Form.Satuan;
 import Form.Staff;
 import Form.User;
+import controller.UserController;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JRootPane;
 import javax.swing.border.EmptyBorder;
+import model.UserModel;
 
 public class MainMenus extends javax.swing.JFrame {
 
@@ -24,10 +26,11 @@ public class MainMenus extends javax.swing.JFrame {
      * Creates new form MainMenus
      */
     
-
+    UserController controller;
     public MainMenus(String username) {
         initComponents();
         execute();
+        controller = new UserController(MainMenus.this, new UserModel(username));
         listMenu.setPreferredSize(new Dimension(350, 0));
         this.setUndecorated(true);
         this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
@@ -404,10 +407,7 @@ public class MainMenus extends javax.swing.JFrame {
         MenuItem menuSettings3 = new MenuItem(iconHakAkses, true, "Log Out", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-//                content.removeAll();
-//                content.add(new User());
-//                content.repaint();
-//                content.revalidate();
+                controller.logOutConfirm();
             }
         });
         MenuItem menuSettings = new MenuItem(iconSettings, false, "Pengaturan", null, menuSettings1, menuSettings2, menuSettings3);
