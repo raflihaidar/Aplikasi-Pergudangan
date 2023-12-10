@@ -1,6 +1,7 @@
 package model;
 
 import config.Config;
+import helper.BarangQueries;
 import helper.UserQueries;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
@@ -11,6 +12,7 @@ public class UserModel {
     private String username;
     private String password;
     private String fullName;
+    private boolean status;
     private String gender;
     private String role;
 
@@ -24,10 +26,14 @@ public class UserModel {
 
     public UserModel() {
     }
-    
+
     public UserModel(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public UserModel(String username) {
+        this.username = username;
     }
 
     public void setUsername(String username) {
@@ -107,6 +113,21 @@ public class UserModel {
         }
     }
 
+    public ResultSet getSingleData(int id) {
+        Connection con = Config.connectDB();
+        PreparedStatement ps = null;
+        ResultSet result = null;
+        try {
+            ps = con.prepareStatement(UserQueries.SELECT_SINGLE_USER);
+            ps.setInt(1, id);
+            result = ps.executeQuery();
+            return result;
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+            return null;
+        }
+    }
+
     public void deleteData(String username) {
         Connection con = Config.connectDB();
         try {
@@ -137,27 +158,25 @@ public class UserModel {
             System.out.println("Error :" + e.getMessage());
         }
     }
-    
-    public void updateStatus(int bool, String username){
+
+    public void updateAuthentication(int bool, String username) {
         Connection con = Config.connectDB();
         PreparedStatement ps = null;
-        try{
-           ps = con.prepareStatement(UserQueries.IS_AUTHENTICATED);
-           ps.setInt(1, bool);
-           ps.setString(2, username);
-           ps.executeUpdate();
-            System.out.println("Berhasil");
-           ps.close();
-           con.close();
-        }catch(Exception e){
-           System.out.println("Error :" + e.getMessage());
+        try {
+            ps = con.prepareStatement(UserQueries.IS_AUTHENTICATED);
+            ps.setInt(1, bool);
+            ps.setString(2, username);
+            ps.executeUpdate();
+            ps.close();
+            con.close();
+        } catch (Exception e) {
+            System.out.println("Error :" + e.getMessage());
         }
     }
 
-    public boolean authentication(){
+    public boolean authentication() {
         ResultSet rs = null;
         try (Connection con = Config.connectDB(); PreparedStatement ps = con.prepareStatement(UserQueries.SEARCH_USER)) {
-            System.out.println("dari model" + username);
             ps.setString(1, username);
             ps.setString(2, password);
             rs = ps.executeQuery();
@@ -165,12 +184,35 @@ public class UserModel {
                 rs.close();
                 return true;
             } else {
-                updateStatus(0, username);
+                updateAuthentication(0, username);
                 return false;
             }
         } catch (SQLException e) {
             System.out.println("Error : " + e.getMessage());
             return false;
+        }
+    }
+
+    public void updateData(int id) {
+        Connection con = Config.connectDB();
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(UserQueries.UPDATE_USER);
+            ps.setBoolean(1, status);
+            ps.setString(2, role);
+            ps.setInt(3, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ps != null) {
+                try {
+                    con.close();
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }
