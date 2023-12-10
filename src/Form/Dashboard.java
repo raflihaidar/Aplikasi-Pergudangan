@@ -3,6 +3,9 @@ package Form;
 
 import Components.MyIcon;
 import controller.BarangController;
+import controller.KlasifikasiController;
+import helper.KategoriQueries;
+import helper.SatuanQueries;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import model.CardModel;
@@ -21,19 +24,14 @@ public class Dashboard extends javax.swing.JPanel {
         public Dashboard() {
                 initComponents();
                 
-                BarangController controller = new BarangController();
+                BarangController barangController = new BarangController();
+                KlasifikasiController satuanController = new KlasifikasiController();
+                KlasifikasiController kategoriController = new KlasifikasiController();
                 
                 
-                
-                
-                
-                
-                
-                
-                
-                card1.setData(new CardModel(iconBarang, "Barang", controller.getTotalBarang()));
-                card2.setData(new CardModel(iconCategory, "Kategori Barang", "2"));
-                card3.setData(new CardModel(iconSatuan, "Satuan Barang", "150"));
+                card1.setData(new CardModel(iconBarang, "Barang", barangController.getTotalBarang()));
+                card2.setData(new CardModel(iconCategory, "Kategori Barang", kategoriController.getTotalData(KategoriQueries.SELECT_ALL_KATEGORI)));
+                card3.setData(new CardModel(iconSatuan, "Satuan Barang", satuanController.getTotalData(SatuanQueries.GET_TOTAL_SATUAN)));
                 card4.setData(new CardModel(iconOutbound, "Barang Keluar", "20"));
                 card5.setData(new CardModel(iconIncome, "Barang Masuk", "20"));
                 card6.setData(new CardModel(iconStaff, "Staff", "20"));

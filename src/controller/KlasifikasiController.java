@@ -1,7 +1,6 @@
 package controller;
 
 import Form.PopUpKlasifikasi;
-import helper.KategoriQueries;
 import java.sql.*;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +19,10 @@ public class KlasifikasiController {
     public KlasifikasiController(JTable table, String nama) {
         this.table = table;
         data = new KlasifikasiModel(nama);
+    }
+    
+    public KlasifikasiController() {
+        data = new KlasifikasiModel();
     }
 
     public void getData(DefaultTableModel model, String query) {
@@ -81,5 +84,20 @@ public class KlasifikasiController {
         data.updateData(kode, updateQuery);
         model.setRowCount(0);
         getData(model, loadQuery);
+    }
+    
+    public String getTotalData(String query) {
+        ResultSet result = data.getData(query);
+        int total = 0;
+        try {
+            while (result.next()) {
+                total = result.getInt(1);
+            }
+            result.close();
+            return String.valueOf(total);
+        } catch (SQLException e) {
+            e.printStackTrace();
+             return String.valueOf(total);
+        }
     }
 }
