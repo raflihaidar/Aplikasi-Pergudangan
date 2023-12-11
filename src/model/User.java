@@ -3,24 +3,133 @@ package model;
 import config.Config;
 import helper.UserQueries;
 import java.sql.*;
-import javax.swing.table.DefaultTableModel;
-import view.Register;
 
 public class User {
 
+    private int id;
     private String username;
     private String password;
     private String fullName;
-    private boolean status;
+    private String status;
+    private String email;
+    private String noHp;
+    private String tglLahir;
+    private String alamat;
+    private String tglAktif;
     private String gender;
-    private String role;
+    private String jabatan;
+    private boolean isAuthenticated;
 
-    public User(Register register) {
-        this.fullName = register.getTxtFullName();
-        this.username = register.getTxtUserName();
-        this.password = register.getTxtPassword();
-        this.gender = (String) register.getCmbGender();
-        this.role = (String) register.getCmbRole();
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNoHp() {
+        return noHp;
+    }
+
+    public void setNoHp(String noHp) {
+        this.noHp = noHp;
+    }
+
+    public String getTglLahir() {
+        return tglLahir;
+    }
+
+    public void setTglLahir(String tglLahir) {
+        this.tglLahir = tglLahir;
+    }
+
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
+    }
+
+    public String getTglAktif() {
+        return tglAktif;
+    }
+
+    public void setTglAktif(String tglAktif) {
+        this.tglAktif = tglAktif;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getRole() {
+        return jabatan;
+    }
+
+    public void setRole(String jabatan) {
+        this.jabatan = jabatan;
+    }
+
+    public boolean isIsAuthenticated() {
+        return isAuthenticated;
+    }
+
+    public void setIsAuthenticated(boolean isAuthenticated) {
+        this.isAuthenticated = isAuthenticated;
+    }
+
+    public User(String fullname, String username, String password, String gender, String jabatan) {
+        this.fullName = fullname;
+        this.username = username;
+        this.password = password;
+        this.gender = gender;
+        this.jabatan = jabatan;
     }
 
     public User() {
@@ -29,50 +138,11 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+        System.out.println(username);
     }
 
     public User(String username) {
         this.username = username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setPassword(String username) {
-        this.password = password;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getRole() {
-        return role;
     }
 
     public boolean isValidPassword() {
@@ -91,127 +161,5 @@ public class User {
             return false;
         }
         return true;
-    }
-
-    public DefaultTableModel getData(DefaultTableModel model) {
-        Connection con = Config.connectDB();
-        try {
-            Statement statement = con.createStatement();
-            ResultSet result = statement.executeQuery(UserQueries.SELECT_ALL_USERS);
-            while (result.next()) {
-                String username = result.getString("username");
-                String role = result.getString("kode_jabatan");
-                String status = result.getString("status");
-                model.addRow(new Object[]{username, role, status});
-            }
-            con.close();
-            return model;
-        } catch (Exception e) {
-            System.out.println("Error" + e.getMessage());
-            return null;
-        }
-    }
-
-    public ResultSet getSingleData(int id) {
-        Connection con = Config.connectDB();
-        PreparedStatement ps = null;
-        ResultSet result = null;
-        try {
-            ps = con.prepareStatement(UserQueries.SELECT_SINGLE_USER);
-            ps.setInt(1, id);
-            result = ps.executeQuery();
-            return result;
-        } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
-            return null;
-        }
-    }
-
-    public void deleteData(String username) {
-        Connection con = Config.connectDB();
-        try {
-            PreparedStatement ps = con.prepareStatement(UserQueries.DELETE_USER);
-            ps.setString(1, username);
-            ps.executeUpdate();
-            con.close();
-            ps.close();
-        } catch (Exception e) {
-            System.out.println("Error : " + e.getMessage());
-        }
-    }
-
-    public void addData(User user) {
-        Connection con = Config.connectDB();
-        PreparedStatement ps = null;
-        try {
-            ps = con.prepareStatement(UserQueries.INSERT_USER);
-            ps.setString(1, getFullName());
-            ps.setString(2, getUsername());
-            ps.setString(3, getPassword());
-            ps.setString(4, getGender());
-            ps.setString(5, getRole());
-            ps.execute();
-            ps.close();
-            con.close();
-        } catch (Exception e) {
-            System.out.println("Error :" + e.getMessage());
-        }
-    }
-
-    public void updateAuthentication(int bool, String username) {
-        Connection con = Config.connectDB();
-        PreparedStatement ps = null;
-        try {
-            ps = con.prepareStatement(UserQueries.IS_AUTHENTICATED);
-            ps.setInt(1, bool);
-            ps.setString(2, username);
-            ps.executeUpdate();
-            ps.close();
-            con.close();
-        } catch (Exception e) {
-            System.out.println("Error :" + e.getMessage());
-        }
-    }
-
-    public boolean authentication() {
-        ResultSet rs = null;
-        try (Connection con = Config.connectDB(); PreparedStatement ps = con.prepareStatement(UserQueries.SEARCH_USER)) {
-            ps.setString(1, username);
-            ps.setString(2, password);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                rs.close();
-                return true;
-            } else {
-                updateAuthentication(0, username);
-                return false;
-            }
-        } catch (SQLException e) {
-            System.out.println("Error : " + e.getMessage());
-            return false;
-        }
-    }
-
-    public void updateData(int id) {
-        Connection con = Config.connectDB();
-        PreparedStatement ps = null;
-        try {
-            ps = con.prepareStatement(UserQueries.UPDATE_USER);
-            ps.setBoolean(1, status);
-            ps.setString(2, role);
-            ps.setInt(3, id);
-            ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (ps != null) {
-                try {
-                    con.close();
-                    ps.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 }

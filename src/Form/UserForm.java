@@ -20,12 +20,13 @@ public class UserForm extends javax.swing.JPanel {
     public UserForm() {
         initComponents();
         model.User user = new model.User();
-        UserController controller = new UserController(table2, user);
+        UserController controller = new UserController(table2);
         controller.showAllData((DefaultTableModel) table2.getModel());
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
                 PopUpUser dialog = new PopUpUser();
+                controller.getSingleData(row, table2, dialog);
 //                dialog.setSize(934, 573);
                 dialog.setLocationRelativeTo(UserForm.this); // Center the dialog relative to the Distributor panel
                 // Make the dialog modal, blocking input to other windows

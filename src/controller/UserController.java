@@ -1,8 +1,9 @@
 package controller;
 
 import Components.Table;
-import Form.PopUpBarang;
-import java.sql.ResultSet;
+import Form.PopUpUser;
+import dao.UserDao;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -14,10 +15,13 @@ public class UserController {
     private JTable table;
     private JFrame frame;
     private User user;
+    private List<User> data;
+    private UserDao userDao;
 
-    public UserController(Table table, User user) {
+    public UserController(Table table) {
         this.table = table;
-        this.user = user;
+        this.userDao = new UserDao();
+        this.data = userDao.getAllData();
     }
 
     public UserController(User user) {
@@ -30,24 +34,28 @@ public class UserController {
     }
 
     public void showAllData(DefaultTableModel model) {
-        table.setModel(user.getData(model));
+        data = userDao.getAllData();
+
+        for (User user : data) {
+            String username = user.getUsername();
+            String role = user.getRole();
+            String status = user.getStatus();
+            model.addRow(new Object[]{username, role, status});
+        }
+        table.setModel(model);
     }
-    
-    public void getSingleData(int row, JTable table, PopUpBarang modal) {
+
+    public void getSingleData(int row, JTable table, PopUpUser modal) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        int username = (int) model.getValueAt(row, 0);
-        ResultSet rs = user.getSingleData(username);
-        try {
-            if (rs.next()) {
-                modal.setName(rs.getString("username"));
-                modal.setHarga(String.valueOf(rs.getInt("nama")));
-                modal.setStok(String.valueOf(rs.getInt("email")));
-                modal.setKategori(rs.getString("kategori"));
-                modal.setSatuan(rs.getString("satuan"));
-            }
-            rs.close();
-        } catch (Exception e) {
-            System.out.println("Error : " + e.getMessage());
+        String username = model.getValueAt(row, 0).toString();
+        data = userDao.getSingleData(username);
+        for (User user : data) {
+                modal.setTxtId(String.valueOf(user.getId()));
+                modal.setTxtNama(user.getFullName());
+                modal.setTxtUsername(user.getUsername());
+                modal.setTxtEmail(user.getEmail());
+                modal.setTxtNoHp(user.getNoHp());
+                modal.setTxtAlamat(user.getAlamat());
         }
     }
 
@@ -56,7 +64,7 @@ public class UserController {
             DefaultTableModel model = (DefaultTableModel) table.getModel();
             int row = table.getSelectedRow();
             String username = table.getModel().getValueAt(row, 0).toString();
-            user.deleteData(username);
+            userDao.deleteData(username);
             if (table.isEditing()) {
                 table.getCellEditor().stopCellEditing();
             }
@@ -68,16 +76,12 @@ public class UserController {
         }
     }
 
-    public void addUser() {
-        user.addData(user);
-    }
-
     public void updateUser() {
 
     }
 
     public void logOutConfirm() {
-        user.updateAuthentication(0, user.getUsername());
+        userDao.updateAuthentication(0);
         this.frame.dispose();
         Login login = new Login();
         login.setVisible(true);
