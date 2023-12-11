@@ -8,7 +8,7 @@ import helper.KategoriQueries;
 import helper.SatuanQueries;
 import java.awt.Font;
 import javax.swing.ImageIcon;
-import model.CardModel;
+import model.Card;
 
 public class Dashboard extends javax.swing.JPanel {
 
@@ -29,14 +29,14 @@ public class Dashboard extends javax.swing.JPanel {
                 KlasifikasiController kategoriController = new KlasifikasiController();
                 
                 
-                card1.setData(new CardModel(iconBarang, "Barang", barangController.getTotalBarang()));
-                card2.setData(new CardModel(iconCategory, "Kategori Barang", kategoriController.getTotalData(KategoriQueries.SELECT_ALL_KATEGORI)));
-                card3.setData(new CardModel(iconSatuan, "Satuan Barang", satuanController.getTotalData(SatuanQueries.GET_TOTAL_SATUAN)));
-                card4.setData(new CardModel(iconOutbound, "Barang Keluar", "20"));
-                card5.setData(new CardModel(iconIncome, "Barang Masuk", "20"));
-                card6.setData(new CardModel(iconStaff, "Staff", "20"));
-                card7.setData(new CardModel(iconDistributor, "Distributor", "5"));
-                card8.setData(new CardModel(iconDistributor, "Tanggal", "20"));
+                card1.setData(new Card(iconBarang, "Barang", barangController.getTotalBarang()));
+                card2.setData(new Card(iconCategory, "Kategori Barang", kategoriController.getTotalData(KategoriQueries.SELECT_ALL_KATEGORI)));
+                card3.setData(new Card(iconSatuan, "Satuan Barang", satuanController.getTotalData(SatuanQueries.GET_TOTAL_SATUAN)));
+                card4.setData(new Card(iconOutbound, "Barang Keluar", "20"));
+                card5.setData(new Card(iconIncome, "Barang Masuk", "20"));
+                card6.setData(new Card(iconStaff, "Staff", "20"));
+                card7.setData(new Card(iconDistributor, "Distributor", "5"));
+                card8.setData(new Card(iconDistributor, "Tanggal", "20"));
                 title.setFont(font);
         }
 

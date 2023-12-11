@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class BarangModel {
+public class Barang {
 
     private String nama;
     private int harga;
@@ -16,7 +16,7 @@ public class BarangModel {
     private int satuan;
     private int kategori;
 
-    public BarangModel(String nama, int harga, int stok, int satuan, int kategori) {
+    public Barang(String nama, int harga, int stok, int satuan, int kategori) {
         this.nama = nama;
         this.harga = harga;
         this.stok = stok;
@@ -24,7 +24,7 @@ public class BarangModel {
         this.satuan = satuan;
     }
 
-    public BarangModel() {
+    public Barang() {
     }
 
     public void setNama(String nama) {

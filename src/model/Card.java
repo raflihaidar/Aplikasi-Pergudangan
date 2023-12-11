@@ -6,7 +6,7 @@ import javax.swing.Icon;
  *
  * @author rafli
  */
-public class CardModel {
+public class Card {
     public Icon getIcon() {
         return icon;
     }
@@ -31,13 +31,13 @@ public class CardModel {
         this.values = values;
     }
 
-    public CardModel(Icon icon, String title, String values) {
+    public Card(Icon icon, String title, String values) {
         this.icon = icon;
         this.title = title;
         this.values = values;
     }
 
-    public CardModel() {
+    public Card() {
     }
 
     private Icon icon;

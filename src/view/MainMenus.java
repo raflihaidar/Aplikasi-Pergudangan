@@ -5,11 +5,14 @@ import Components.MenuItem;
 import Components.MyIcon;
 import Components.ScrollBar;
 import Form.Barang;
+import Form.BarangKeluar;
+import Form.BarangMasuk;
 import Form.Distributor;
 import Form.Kategori;
+import Form.Pemesanan;
 import Form.Satuan;
 import Form.Staff;
-import Form.User;
+import Form.UserForm;
 import controller.UserController;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -18,7 +21,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JRootPane;
 import javax.swing.border.EmptyBorder;
-import model.UserModel;
+import model.User;
 
 public class MainMenus extends javax.swing.JFrame {
 
@@ -30,7 +33,7 @@ public class MainMenus extends javax.swing.JFrame {
     public MainMenus(String username) {
         initComponents();
         execute();
-        controller = new UserController(MainMenus.this, new UserModel(username));
+        controller = new UserController(MainMenus.this, new User(username));
         listMenu.setPreferredSize(new Dimension(350, 0));
         this.setUndecorated(true);
         this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
@@ -385,9 +388,33 @@ public class MainMenus extends javax.swing.JFrame {
         
         
 
-        MenuItem menuTransaction1 = new MenuItem(iconIncome, true, "Barang Masuk", null);
-        MenuItem menuTransaction2 = new MenuItem(iconOutbound, true, "Barang Keluar", null);
-        MenuItem menuTransaction3 = new MenuItem(iconOrder, true, "Pemesanan", null);
+        MenuItem menuTransaction1 = new MenuItem(iconIncome, true, "Barang Masuk", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                content.removeAll();
+                content.add(new BarangMasuk());
+                content.repaint();
+                content.revalidate();
+            }
+        });
+        MenuItem menuTransaction2 = new MenuItem(iconOutbound, true, "Barang Keluar", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                content.removeAll();
+                content.add(new BarangKeluar());
+                content.repaint();
+                content.revalidate();
+            }
+        });
+        MenuItem menuTransaction3 = new MenuItem(iconOrder, true, "Pemesanan", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                content.removeAll();
+                content.add(new Pemesanan());
+                content.repaint();
+                content.revalidate();
+            }
+        });
         MenuItem menuTransaction = new MenuItem(iconTransaction, false, "Transaksi", null, menuTransaction1, menuTransaction2,
                 menuTransaction3);
 
@@ -398,7 +425,7 @@ public class MainMenus extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 content.removeAll();
-                content.add(new User());
+                content.add(new UserForm());
                 content.repaint();
                 content.revalidate();
             }

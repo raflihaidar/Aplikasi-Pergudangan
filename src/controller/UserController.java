@@ -6,25 +6,25 @@ import java.sql.ResultSet;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import model.UserModel;
+import model.User;
 import view.Login;
 
 public class UserController {
 
     private JTable table;
     private JFrame frame;
-    private UserModel user;
+    private User user;
 
-    public UserController(Table table, UserModel user) {
+    public UserController(Table table, User user) {
         this.table = table;
         this.user = user;
     }
 
-    public UserController(UserModel user) {
+    public UserController(User user) {
         this.user = user;
     }
 
-    public UserController(JFrame frame, UserModel user) {
+    public UserController(JFrame frame, User user) {
         this.frame = frame;
         this.user = user;
     }
@@ -33,23 +33,23 @@ public class UserController {
         table.setModel(user.getData(model));
     }
     
-//    public void getSingleData(int row, JTable table, PopUpBarang modal) {
-//        DefaultTableModel model = (DefaultTableModel) table.getModel();
-//        int username = (int) model.getValueAt(row, 0);
-//        ResultSet rs = user.getSingleData(username);
-//        try {
-//            if (rs.next()) {
-//                modal.setName(rs.getString("username"));
-//                modal.setHarga(String.valueOf(rs.getInt("nama")));
-//                modal.setStok(String.valueOf(rs.getInt("email")));
-//                modal.setKategori(rs.getString("kategori"));
-//                modal.setSatuan(rs.getString("satuan"));
-//            }
-//            rs.close();
-//        } catch (Exception e) {
-//            System.out.println("Error : " + e.getMessage());
-//        }
-//    }
+    public void getSingleData(int row, JTable table, PopUpBarang modal) {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int username = (int) model.getValueAt(row, 0);
+        ResultSet rs = user.getSingleData(username);
+        try {
+            if (rs.next()) {
+                modal.setName(rs.getString("username"));
+                modal.setHarga(String.valueOf(rs.getInt("nama")));
+                modal.setStok(String.valueOf(rs.getInt("email")));
+                modal.setKategori(rs.getString("kategori"));
+                modal.setSatuan(rs.getString("satuan"));
+            }
+            rs.close();
+        } catch (Exception e) {
+            System.out.println("Error : " + e.getMessage());
+        }
+    }
 
     public void deleteDataUser() {
         try {

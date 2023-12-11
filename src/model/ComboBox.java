@@ -4,7 +4,7 @@ import config.Config;
 import java.sql.*;
 import javax.swing.DefaultComboBoxModel;
 
-public class ComboBoxModel {
+public class ComboBox {
     private int kode;
     private String nama;
 

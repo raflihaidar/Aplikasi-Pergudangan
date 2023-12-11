@@ -1,15 +1,15 @@
 package controller;
 
 import javax.swing.JComboBox;
-import model.ComboBoxModel;
+import model.ComboBox;
 
 public class ComboBoxController {
     private JComboBox<String> cmb;
-    private ComboBoxModel cmbModel;
+    private ComboBox cmbModel;
     
     public ComboBoxController(JComboBox<String> cmb){
         this.cmb = cmb;
-        this.cmbModel = new ComboBoxModel();
+        this.cmbModel = new ComboBox();
     }
     
     public void getData(String query){

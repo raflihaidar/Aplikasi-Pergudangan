@@ -1,13 +1,12 @@
 package model;
 
 import config.Config;
-import helper.BarangQueries;
 import helper.UserQueries;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 import view.Register;
 
-public class UserModel {
+public class User {
 
     private String username;
     private String password;
@@ -16,7 +15,7 @@ public class UserModel {
     private String gender;
     private String role;
 
-    public UserModel(Register register) {
+    public User(Register register) {
         this.fullName = register.getTxtFullName();
         this.username = register.getTxtUserName();
         this.password = register.getTxtPassword();
@@ -24,15 +23,15 @@ public class UserModel {
         this.role = (String) register.getCmbRole();
     }
 
-    public UserModel() {
+    public User() {
     }
 
-    public UserModel(String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public UserModel(String username) {
+    public User(String username) {
         this.username = username;
     }
 
@@ -141,7 +140,7 @@ public class UserModel {
         }
     }
 
-    public void addData(UserModel user) {
+    public void addData(User user) {
         Connection con = Config.connectDB();
         PreparedStatement ps = null;
         try {
