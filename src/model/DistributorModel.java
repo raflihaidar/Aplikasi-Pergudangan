@@ -14,27 +14,37 @@ import helper.DistributorQueries;
 
 public class DistributorModel {
     private int ID;
-    private String Nama;
-    private String Telepon;
-    private String Alamat;
+    private String nama;
+    private String no_tlp;
+    private String alamat;
+    
+    public DistributorModel(String nama,String alamat,String no_tlp){
+        this.nama = nama;
+        this.alamat = alamat;
+        this.no_tlp = no_tlp;
+    }
+
+  public DistributorModel() {
+
+    }
     
     public String getNama(){
-        return Nama;    
+        return nama;    
     }
     public String getTelepon(){
-        return Telepon;    
+        return no_tlp;    
     }
     public String getAlamat(){
-        return Alamat;    
+        return alamat;    
     }
     public void setNama(String Nama){
-        this.Nama = Nama ;    
+        this.nama = Nama ;    
     }
     public void setTelepon(String Telepon){
-        this.Telepon = Telepon ;    
+        this.no_tlp = Telepon ;    
     }
     public void setAlamat(String Alamat){
-        this.Alamat = Alamat ;    
+        this.alamat = Alamat ;    
     }
     
     public ResultSet getData() {
@@ -53,23 +63,22 @@ public class DistributorModel {
     }
     
     
+    public ResultSet getSingleData(int ID) {
+        Connection con = Config.connectDB();
+        PreparedStatement ps = null;
+        ResultSet result = null;
+        try {
+            ps = con.prepareStatement(BarangQueries.SELECT_SINGLE_DATA);
+            ps.setInt(1, ID);
+            result = ps.executeQuery();
+            return result;
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+            return null;
+        }
+    }
     
-//    public ResultSet getSingleData(int kodeBarang) {
-//        Connection con = Config.connectDB();
-//        PreparedStatement ps = null;
-//        ResultSet result = null;
-//        try {
-//            ps = con.prepareStatement(BarangQueries.SELECT_SINGLE_DATA);
-//            ps.setInt(1, kodeBarang);
-//            result = ps.executeQuery();
-//            return result;
-//        } catch (SQLException e) {
-//            System.out.println("Error: " + e.getMessage());
-//            return null;
-//        }
-//    }
-//    
-//
+
 //    public void deleteData(int kode) {
 //        Connection con = Config.connectDB();
 //        PreparedStatement ps = null;
@@ -90,43 +99,42 @@ public class DistributorModel {
 //            }
 //        }
 //    }
-//
-//    public int addData(String nama, int harga, int stok, int kategori, int satuan) {
-//        Connection con = Config.connectDB();
-//        PreparedStatement ps = null;
-//        ResultSet generatedKeys = null;
-//        int kode = -1;
-//        try {
-//            ps = con.prepareStatement(BarangQueries.INSERT_BARANG);
-//            ps.setString(1, nama);
-//            ps.setInt(2, harga);
-//            ps.setInt(3, stok);
-//            ps.setInt(4, kategori);
-//            ps.setInt(5, satuan);
-//            ps.execute();
-//
-//            generatedKeys = ps.getGeneratedKeys();
-//            if (generatedKeys.next()) {
-//                kode = generatedKeys.getInt(1);
-//            }
-//            generatedKeys.close();
-//            return kode;
-//        } catch (Exception e) {
-//            System.out.println("Error :" + e.getMessage());
-//            return 0;
-//        } finally {
-//            if (ps != null) {
-//                try {
-//                    con.close();
-//                    ps.close();
-//                } catch (SQLException e) {
-//                    /* handle exception */
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//    }
-//
+
+    public int addData() {
+        Connection con = Config.connectDB();
+        PreparedStatement ps = null;
+        ResultSet generatedKeys = null;
+        int kode = -1;
+        try {
+            ps = con.prepareStatement(BarangQueries.INSERT_BARANG);
+            ps.setString(1, this.nama);
+            ps.setString(2, this.alamat);
+            ps.setString(3, this.no_tlp);
+            
+            ps.execute();
+
+            generatedKeys = ps.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                kode = generatedKeys.getInt(1);
+            }
+            generatedKeys.close();
+            return kode;
+        } catch (Exception e) {
+            System.out.println("Error :" + e.getMessage());
+            return 0;
+        } finally {
+            if (ps != null) {
+                try {
+                    con.close();
+                    ps.close();
+                } catch (SQLException e) {
+                    /* handle exception */
+                    e.printStackTrace();
+                }
+            }
+        }
+    }}
+
 //    public void updateData(int kode) {
 //        Connection con = Config.connectDB();
 //        PreparedStatement ps = null;
@@ -153,4 +161,4 @@ public class DistributorModel {
 //            }
 //        }
 //    }
-}
+//}

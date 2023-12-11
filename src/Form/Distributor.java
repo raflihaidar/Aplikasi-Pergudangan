@@ -156,7 +156,7 @@ public class Distributor extends javax.swing.JPanel {
             JDialog dialog = new JDialog();
 
             // Create an instance of AddDistributor
-            AddDistributor addDistributorPanel = new AddDistributor();
+            AddDistributor addDistributorPanel = new AddDistributor(table1);
 
             // Add the AddDistributor panel to the dialog
             dialog.getContentPane().add(addDistributorPanel);
@@ -191,14 +191,4 @@ public class Distributor extends javax.swing.JPanel {
     private Components.Table table1;
     // End of variables declaration//GEN-END:variables
 
-    private static class JPanel {
-
-        private static void add(AddDistributor form) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                           // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        }
-
-        public JPanel() {
-        }
-    }
 }
