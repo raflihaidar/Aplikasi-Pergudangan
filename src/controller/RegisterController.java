@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
-import model.UserModel;
+import model.User;
 import view.Login;
 import view.Register;
 import helper.UserQueries;
@@ -14,7 +14,7 @@ import helper.UserQueries;
 public class RegisterController implements ActionListener{
     private Register register;
     private UserController controller;
-    private UserModel user;
+    private User user;
     
     public RegisterController(Register register){
         this.register = register;
@@ -42,7 +42,7 @@ public class RegisterController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
        String repass = register.getTxtRepass();
-       this.user = new UserModel(register);
+       this.user = new User(register);
        this.controller = new UserController(user);
        if (user.getFullName().isEmpty() || user.getUsername().isEmpty() || user.getPassword().isEmpty()) {
                 // Tampilkan pesan kesalahan jika tidak diisi

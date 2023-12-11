@@ -7,8 +7,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
-import model.BarangModel;
-import model.ComboBoxModel;
+import model.Barang;
+import model.ComboBox;
 
 public class BarangController {
 
@@ -18,29 +18,29 @@ public class BarangController {
     private JTextField stokBarang;
     private JComboBox<String> kategoriBarang;
     private JComboBox<String> satuanBarang;
-    private BarangModel barang;
+    private Barang barang;
 
     public BarangController() {
-        barang = new BarangModel();
+        barang = new Barang();
     }
 
     public BarangController(JTable table) {
         this.table = table;
-        barang = new BarangModel();
+        barang = new Barang();
     }
 
     public BarangController(JTextField namaBarang, JTextField hargaBarang, JTextField stokBarang,
-            JComboBox<String> kategoriBarang, JComboBox<String> satuanBarang, JTable table) {
+        JComboBox<String> kategoriBarang, JComboBox<String> satuanBarang, JTable table) {
         this.namaBarang = namaBarang;
         this.hargaBarang = hargaBarang;
         this.stokBarang = stokBarang;
         this.kategoriBarang = kategoriBarang;
         this.satuanBarang = satuanBarang;
-        barang = new BarangModel(namaBarang.getText(),
-                Integer.parseInt(hargaBarang.getText()),
-                Integer.parseInt(stokBarang.getText()),
-                satuanBarang.getSelectedIndex() + 1,
-                kategoriBarang.getSelectedIndex() + 1);
+        barang = new Barang(namaBarang.getText(),
+                        Integer.parseInt(hargaBarang.getText()),
+                        Integer.parseInt(stokBarang.getText()),
+                        satuanBarang.getSelectedIndex() + 1,
+                        kategoriBarang.getSelectedIndex() + 1);
         this.table = table;
     }
 
@@ -88,8 +88,8 @@ public class BarangController {
         int kode_satuan = satuanBarang.getSelectedIndex() + 1;
         int kodeBarang = barang.addData(namaBarang, hargaBarang, stokBarang, kode_kategori, kode_satuan);
 
-        String kategori = ComboBoxModel.getRefrence("kategori", "nama", kode_kategori);
-        String satuan = ComboBoxModel.getRefrence("satuan", "nama", kode_satuan);
+        String kategori = ComboBox.getRefrence("kategori", "nama", kode_kategori);
+        String satuan = ComboBox.getRefrence("satuan", "nama", kode_satuan);
         model.addRow(new Object[]{kodeBarang, namaBarang, hargaBarang, stokBarang, kategori, satuan});
         table.setModel(model);
     }

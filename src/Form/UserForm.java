@@ -4,27 +4,38 @@ import Components.TableActionCellEditor;
 import Components.TableActionCellRender;
 import Components.TableActionEvent;
 import controller.UserController;
+import java.awt.Color;
+import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
-import model.UserModel;
 
 /**
  *
  * @author rafli
  */
-public class User extends javax.swing.JPanel {
+public class UserForm extends javax.swing.JPanel {
 
     /**
      * Creates new form User
      */
-    public User() {
+    public UserForm() {
         initComponents();
-        UserModel user = new UserModel();
+        model.User user = new model.User();
         UserController controller = new UserController(table2, user);
         controller.showAllData((DefaultTableModel) table2.getModel());
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
-                 System.out.println("Edit row : " + row);
+                PopUpUser dialog = new PopUpUser();
+//                dialog.setSize(934, 573);
+                dialog.setLocationRelativeTo(UserForm.this); // Center the dialog relative to the Distributor panel
+                // Make the dialog modal, blocking input to other windows
+                dialog.setModal(true);
+                //Set background color dialog
+                dialog.getContentPane().setBackground(Color.WHITE);
+                // Set the default close operation to dispose the dialog
+                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                // Set the dialog visible
+                dialog.setVisible(true);
             }
 
             @Override

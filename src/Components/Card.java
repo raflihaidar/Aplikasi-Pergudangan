@@ -7,7 +7,6 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import model.CardModel;
 
 /**
  *
@@ -45,7 +44,7 @@ public class Card extends javax.swing.JPanel {
         lbTitle.setFont(font2);
     }
 
-    public void setData(CardModel data) {
+    public void setData(model.Card data) {
         lbIcon.setIcon(data.getIcon());
         lbTitle.setText(data.getTitle());
         lbValues.setText(data.getValues());

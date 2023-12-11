@@ -9,7 +9,6 @@ public class Config {
         try {
             Class.forName("org.sqlite.JDBC");
             con = DriverManager.getConnection("jdbc:sqlite:D://Belajar Java//Aplikasi-Pergudangan//src//config/SIMAG.db");
-            System.out.println("Berhasil Connect");
             return con;
         } catch(Exception e) {
             System.out.println("Connection Failed " + e.getMessage());

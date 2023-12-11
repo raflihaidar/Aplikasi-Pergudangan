@@ -3,13 +3,13 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import model.UserModel;
+import model.User;
 import view.Login;
 import view.MainMenus;
 
 public class LoginController implements ActionListener{
     private Login login;
-    private UserModel user;
+    private User user;
     
     public LoginController(Login login){
         this.login = login;
@@ -23,7 +23,7 @@ public class LoginController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         String username = login.getTxtUsername();
-        user = new UserModel(login.getTxtUsername(), login.getTxtPassword());
+        user = new User(login.getTxtUsername(), login.getTxtPassword());
         if(!loginUser()){
             login.setTxtWarning("Username or Password is Invalid");
             login.setTxtUsername("");;
