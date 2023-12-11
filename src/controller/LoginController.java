@@ -28,11 +28,11 @@ public class LoginController implements ActionListener{
             login.setTxtWarning("Username or Password is Invalid");
             login.setTxtUsername("");;
             login.setTxtPassword("");
-            user.updateStatus(0, user.getUsername());
+            user.updateAuthentication(0, user.getUsername());
         }else{
             JOptionPane.showMessageDialog(login, "Login Successful!");
             login.dispose();
-            user.updateStatus(1, user.getUsername());
+            user.updateAuthentication(1, user.getUsername());
             MainMenus r = new MainMenus(username);
             r.setVisible(true);
         }
