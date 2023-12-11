@@ -1,11 +1,16 @@
 package Form;
 import javax.swing.JOptionPane;
+import controller.DistributorController;
+import javax.swing.JTable;
+
 
 public class AddDistributor extends javax.swing.JPanel {
+    private JTable table;
+    
 
-
-    public AddDistributor() {
+    public AddDistributor(JTable table) {
         initComponents();
+        this.table =table;
     }
 
     /**
@@ -140,6 +145,9 @@ public class AddDistributor extends javax.swing.JPanel {
 
     private void btnSubmitDsitributorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitDsitributorActionPerformed
         // TODO add your handling code here:
+        DistributorController distrib = new DistributorController(txtNamaDistributor,txtAlamatDistributor, txtTeleponDistributor,table);
+        distrib.addDataDistributor();
+        
         if(txtNamaDistributor.getText().isEmpty()||txtAlamatDistributor.getText().isEmpty()||txtTanggalDistributor.getText().isEmpty() ||txtTeleponDistributor.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "Please fill in the whole field!", "Error", JOptionPane.ERROR_MESSAGE);
         }else{
