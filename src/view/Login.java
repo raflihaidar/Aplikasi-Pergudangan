@@ -57,7 +57,7 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 51, 102));
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -82,7 +82,7 @@ public class Login extends javax.swing.JFrame {
         });
 
         btnRegister.setFont(new java.awt.Font("Arial", 0, 13)); // NOI18N
-        btnRegister.setForeground(new java.awt.Color(51, 153, 255));
+        btnRegister.setForeground(new java.awt.Color(153, 153, 153));
         btnRegister.setText("Signup now");
         btnRegister.setAlignmentY(0.0F);
         btnRegister.setBorder(null);
@@ -218,17 +218,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
-//        if (txtUsername.getText().equals(Register.username) && (txtPassword.getText().equals(Register.password))) {
-//            JOptionPane.showMessageDialog(this, "Login Successful!");
-//            dispose();
-//            MainMenus r = new MainMenus();
-//            r.setVisible(true);
-//        } else {
-//            txtWarningLog.setText("Username or Password is Invalid");
-//            txtUsername.setText("");
-//            txtPassword.setText("");
-//        }
+       
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void jLabel4ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel4ComponentShown
