@@ -128,8 +128,6 @@ public void updateData(User user) {
     }
 }
 
-
-
     @Override
     public void deleteData(String username) {
         try {
