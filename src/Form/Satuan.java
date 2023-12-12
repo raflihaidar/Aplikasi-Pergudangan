@@ -21,12 +21,12 @@ public class Satuan extends javax.swing.JPanel {
         initComponents();
         title.setFont(font);
         KlasifikasiController controller = new KlasifikasiController(tblSatuan);
-        controller.getData((DefaultTableModel) tblSatuan.getModel(), SatuanQueries.SELECT_ALL_SATUAN);
+        controller.getData((DefaultTableModel) tblSatuan.getModel(), SatuanQueries.SELECT_ALL_SATUAN, "satuan");
                 TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
                 PopUpKlasifikasi dialog = new PopUpKlasifikasi(tblSatuan, true, row, "satuan");
-                controller.getSingleData(row, tblSatuan, dialog, SatuanQueries.SELECT_SINGLE_DATA);
+                controller.getSingleData(row, tblSatuan, dialog, SatuanQueries.SELECT_SINGLE_DATA, "satuan");
                 dialog.setSize(657, 278);
                 dialog.setLocationRelativeTo(Satuan.this);
                 dialog.setModal(true);

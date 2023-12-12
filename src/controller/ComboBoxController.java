@@ -12,7 +12,7 @@ public class ComboBoxController {
         this.cmbModel = new ComboBox();
     }
     
-    public void getData(String query){
-       cmb.setModel(cmbModel.getData(query));
+    public void getData(String query, String nama){
+       cmb.setModel(cmbModel.getData(query, nama));
     }
 }

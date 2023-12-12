@@ -1,23 +1,19 @@
 package model;
 
-import config.Config;
-import helper.UserQueries;
-import java.sql.*;
-
 public class User {
 
     private int id;
     private String username;
     private String password;
     private String fullName;
-    private String status;
     private String email;
     private String noHp;
     private String tglLahir;
     private String alamat;
     private String tglAktif;
-    private String gender;
-    private String jabatan;
+    private Jabatan jabatan = new Jabatan();
+    private Gender gender = new Gender();
+    private Status status = new Status();
     private boolean isAuthenticated;
 
     public int getId() {
@@ -53,11 +49,19 @@ public class User {
     }
 
     public String getStatus() {
-        return status;
+        return status.getStatus();
+    }
+
+    public int getKodeStatus() {
+        return status.getKode();
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        this.status.setStatus(status);
+    }
+    
+    public void setKodeStatus(int kode) {
+        this.status.setKode(kode);
     }
 
     public String getEmail() {
@@ -101,19 +105,35 @@ public class User {
     }
 
     public String getGender() {
-        return gender;
+        return gender.getGender();
+    }
+
+    public int getKodeGender() {
+        return gender.getKode();
     }
 
     public void setGender(String gender) {
-        this.gender = gender;
+        this.gender.setGender(gender);
     }
 
-    public String getRole() {
-        return jabatan;
+    public void setGender(int gender) {
+        this.gender.setKode(gender);
     }
 
-    public void setRole(String jabatan) {
-        this.jabatan = jabatan;
+    public String getJabatan() {
+        return jabatan.getJabatan();
+    }
+
+    public int getKodeJabatan() {
+        return jabatan.getKode();
+    }
+
+    public void setJabatan(String jabatan) {
+        this.jabatan.setJabatan(jabatan);
+    }
+
+    public void setKodeJabatan(int jabatan) {
+        this.jabatan.setKode(jabatan);
     }
 
     public boolean isIsAuthenticated() {
@@ -124,12 +144,23 @@ public class User {
         this.isAuthenticated = isAuthenticated;
     }
 
-    public User(String fullname, String username, String password, String gender, String jabatan) {
+    public User(String fullname, String username, String password, int kode_gender, int kode_jabatan) {
         this.fullName = fullname;
         this.username = username;
         this.password = password;
-        this.gender = gender;
-        this.jabatan = jabatan;
+        this.gender.setKode(kode_gender);
+        this.jabatan.setKode(kode_jabatan);
+    }
+
+    public User(int id, String fullname, String username, String email, String noHp, String alamat, int kode_jabatan, int kode_status) {
+        this.id = id;
+        this.fullName = fullname;
+        this.username = username;
+        this.email = email;
+        this.noHp = noHp;
+        this.alamat = alamat;
+        this.status.setKode(kode_status);
+        this.jabatan.setKode(kode_jabatan);
     }
 
     public User() {

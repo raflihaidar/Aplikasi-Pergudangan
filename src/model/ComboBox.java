@@ -16,7 +16,7 @@ public class ComboBox {
         return nama;
     }
 
-    public DefaultComboBoxModel<String> getData(String query) {
+    public DefaultComboBoxModel<String> getData(String query, String nama) {
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
         Connection con = Config.connectDB();
         try {
@@ -24,7 +24,7 @@ public class ComboBox {
             ResultSet result = statement.executeQuery(query);
 
             while (result.next()) {
-                model.addElement(result.getString("nama"));
+                model.addElement(result.getString(nama));
             }
 
             con.close();

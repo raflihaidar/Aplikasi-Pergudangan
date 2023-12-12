@@ -1,13 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-/**
- *
- * @author rafli
- */
 public class Gender {
-    
+
+    private int kode;
+    private String gender;
+
+    public int getKode() {
+        return kode;
+    }
+
+    public void setKode(int kode) {
+        this.kode = kode;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
 }

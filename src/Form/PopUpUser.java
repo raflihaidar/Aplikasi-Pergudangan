@@ -1,21 +1,39 @@
 package Form;
 
-import javax.swing.JComboBox;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import helper.StatusQueries;
+import controller.ComboBoxController;
+import controller.UserController;
+import helper.JabatanQueries;
+import javax.swing.JTable;
 
 public class PopUpUser extends javax.swing.JDialog {
 
     /**
      * Creates new form PopUpUser
      */
+    
+    private JTable table;
+    UserController userController;
+    private int row;
+    
     public PopUpUser(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        ComboBoxController controllerJabatan = new ComboBoxController(cmbJabatan);
+        ComboBoxController controllerStatus = new ComboBoxController(cmbStatus);
+        controllerJabatan.getData(JabatanQueries.SELECT_ALL_JABATAN, "jabatan");
+        controllerStatus.getData(StatusQueries.SELECT_ALL_STATUS, "status");
+        this.table = table;
     }
-    
-    public PopUpUser() {
+
+    public PopUpUser(JTable table, int row) {
         initComponents();
+        ComboBoxController controllerJabatan = new ComboBoxController(cmbJabatan);
+        ComboBoxController controllerStatus = new ComboBoxController(cmbStatus);
+        controllerJabatan.getData(JabatanQueries.SELECT_ALL_JABATAN, "jabatan");
+        controllerStatus.getData(StatusQueries.SELECT_ALL_STATUS, "status");
+        this.table = table;
+        this.row = row;
     }
 
     /**
@@ -53,6 +71,7 @@ public class PopUpUser extends javax.swing.JDialog {
 
         jLabel2.setText("Username");
 
+        txtId.setEnabled(false);
         txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdActionPerformed(evt);
@@ -77,7 +96,10 @@ public class PopUpUser extends javax.swing.JDialog {
 
         txtAlamat.setColumns(20);
         txtAlamat.setRows(5);
+        txtAlamat.setText("Tidak Tersedia");
         jScrollPane1.setViewportView(txtAlamat);
+
+        txtNoHp.setText("Tidak Tersedia");
 
         cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -92,9 +114,16 @@ public class PopUpUser extends javax.swing.JDialog {
 
         jLabel6.setText("No Hp");
 
+        txtEmail.setText("Tidak Tersedia");
+
         jButton1.setText("Batal");
 
         jButton2.setText("Simpan");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -194,6 +223,13 @@ public class PopUpUser extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsernameActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        userController = new UserController(PopUpUser.this, table);
+        userController.updateUser(row);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -220,64 +256,64 @@ public class PopUpUser extends javax.swing.JDialog {
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
-//    public JComboBox<String> getCmbJabatan() {
-//        return cmbJabatan;
-//    }
-//
-//    public void setCmbJabatan(JComboBox<String> cmbJabatan) {
-//        this.cmbJabatan;
-//    }
-//
-//    public JComboBox<String> getCmbStatus() {
-//        return cmbStatus;
-//    }
-//
-//    public void setCmbStatus(JComboBox<String> cmbStatus) {
-//        this.cmbStatus = cmbStatus;
-//    }
+    public int getCmbJabatan() {
+        return cmbJabatan.getSelectedIndex() + 1;
+    }
 
-    public JTextArea getTxtAlamat() {
-        return txtAlamat;
+    public void setCmbJabatan(int index) {
+        this.cmbJabatan.setSelectedIndex(index);
+    }
+
+    public int getCmbStatus() {
+        return cmbStatus.getSelectedIndex() + 1;
+    }
+
+    public void setCmbStatus(int index) {
+        this.cmbStatus.setSelectedIndex(index);
+    }
+
+    public String getTxtAlamat() {
+        return txtAlamat.getText();
     }
 
     public void setTxtAlamat(String txtAlamat) {
         this.txtAlamat.setText(txtAlamat);
     }
 
-    public JTextField getTxtEmail() {
-        return txtEmail;
+    public String getTxtEmail() {
+        return txtEmail.getText();
     }
 
     public void setTxtEmail(String txtEmail) {
         this.txtEmail.setText(txtEmail);
     }
 
-    public JTextField getTxtId() {
-        return txtId;
+    public int getTxtId() {
+        return Integer.parseInt(txtId.getText());
     }
 
     public void setTxtId(String txtId) {
         this.txtId.setText(txtId);
     }
 
-    public JTextField getTxtNama() {
-        return txtNama;
+    public String getTxtNama() {
+        return txtNama.getText();
     }
 
     public void setTxtNama(String txtNama) {
         this.txtNama.setText(txtNama);
     }
 
-    public JTextField getTxtNoHp() {
-        return txtNoHp;
+    public String getTxtNoHp() {
+        return txtNoHp.getText();
     }
 
     public void setTxtNoHp(String txtNoHp) {
         this.txtNoHp.setText(txtNoHp);
     }
 
-    public JTextField getTxtUsername() {
-        return txtUsername;
+    public String getTxtUsername() {
+        return txtUsername.getText();
     }
 
     public void setTxtUsername(String txtUsername) {
