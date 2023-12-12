@@ -2,9 +2,11 @@ package controller;
 
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import java.sql.ResultSet;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 import model.DistributorModel;
+import Form.AddDistributor;
 
 /**
  *
@@ -13,9 +15,10 @@ import model.DistributorModel;
 public class DistributorController {
     private JTable table;
     private DistributorModel distrib;
-    private JTextField nama;
-    private JTextField alamat;
-    private JTextField no_tlp;
+    private JTextField namaDistrib;
+    private JTextField alamatDistrib;
+    private JTextField no_tlpDistrib;
+    
     
     
     public DistributorController (JTable table){
@@ -24,10 +27,12 @@ public class DistributorController {
     }
     
     public DistributorController(JTextField nama,JTextField alamat,JTextField no_tlp,JTable table){
-        this.nama = nama;
-        this.alamat = alamat;
-        this.no_tlp = no_tlp;
-        distrib = new DistributorModel(nama.getText(),alamat.getText(),no_tlp.getText());
+        this.namaDistrib = nama;
+        this.alamatDistrib = alamat;
+        this.no_tlpDistrib = no_tlp;
+        
+        distrib = new DistributorModel(nama.getText(),
+                alamat.getText(),no_tlp.getText());
         this.table = table;
     }
     
@@ -50,11 +55,29 @@ public class DistributorController {
             e.printStackTrace();
         }
     }
-    public void addDataDistributor() {
+    public void addDataDistributor(JTable table) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         int id = distrib.addData();
+        String nama = (this.namaDistrib.getText());
+        String alamat = (this.alamatDistrib.getText());
+        String no_tlp = (this.no_tlpDistrib.getText());
         
         model.addRow(new Object[]{id, nama, alamat, no_tlp});
         table.setModel(model);
     }
+//    public void getSingleData(int row, JTable table, AddDistributor agen) {
+//        DefaultTableModel model = (DefaultTableModel) table.getModel();
+//        int ID = (int) model.getValueAt(row, 0);
+//        ResultSet rs = distrib.getSingleData(ID);
+//        try {
+//            if (rs.next()) {
+//                agen.setName(rs.getString("nama"));
+//                agen.setAlamat(rs.getString("nama"));
+//                
+//            }
+//            rs.close();
+//        } catch (Exception e) {
+//            System.out.println("Error : " + e.getMessage());
+//        }
+//   }
 }

@@ -33,7 +33,7 @@ public class Splash extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setPreferredSize(new java.awt.Dimension(675, 600));
 
         jLabel1.setFont(new java.awt.Font("Maiandra GD", 1, 42)); // NOI18N
