@@ -1,4 +1,4 @@
 /build/
 /dist/
 /nbproject/private/
-/Config
+/src/config/Config.java/
