@@ -21,12 +21,12 @@ public class Kategori extends javax.swing.JPanel {
         initComponents();
         title.setFont(font);
         KlasifikasiController controller = new KlasifikasiController(tblKategori);
-        controller.getData((DefaultTableModel) tblKategori.getModel(), KategoriQueries.SELECT_ALL_KATEGORI);
+        controller.getData((DefaultTableModel) tblKategori.getModel(), KategoriQueries.SELECT_ALL_KATEGORI, "kategori");
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
                 PopUpKlasifikasi dialog = new PopUpKlasifikasi(tblKategori, true, row, "kategori");
-                controller.getSingleData(row, tblKategori, dialog, KategoriQueries.SELECT_SINGLE_DATA);
+                controller.getSingleData(row, tblKategori, dialog, KategoriQueries.SELECT_SINGLE_DATA, "kategori");
                 dialog.setSize(657, 278);
                 dialog.setLocationRelativeTo(Kategori.this);
                 dialog.setModal(true);

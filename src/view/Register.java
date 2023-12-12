@@ -64,12 +64,12 @@ public class Register extends javax.swing.JFrame {
         txtRepass.setText(text);
     }
 
-    public String getCmbGender() {
-        return (String) cbGender.getSelectedItem();
+    public int getCmbGender() {
+        return cbGender.getSelectedIndex() + 1;
     }
 
-    public String getCmbRole() {
-        return (String) cbRole.getSelectedItem();
+    public int getCmbRole() {
+        return cbRole.getSelectedIndex() + 1;
     }
 
     @SuppressWarnings("unchecked")
@@ -343,11 +343,11 @@ public class Register extends javax.swing.JFrame {
     public void selectedDataJabatan() {
         try {
             Connection con = Config.connectDB();
-            String query = "SELECT nama FROM jabatan";
+            String query = "SELECT jabatan FROM jabatan";
             Statement statement = con.createStatement();
             ResultSet result = statement.executeQuery(query);
             while (result.next()) {
-                cbRole.addItem(result.getString("nama"));
+                cbRole.addItem(result.getString("jabatan"));
             }
             con.close();
         } catch (Exception e) {

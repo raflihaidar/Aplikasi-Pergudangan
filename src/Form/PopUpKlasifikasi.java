@@ -135,8 +135,8 @@ public class PopUpKlasifikasi extends javax.swing.JDialog {
         // TODO add your handling code here:
         KlasifikasiController controller = new KlasifikasiController(table, getName());
         if(isEdit){
-            if(this.name.equals("kategori")) controller.updateData(row, KategoriQueries.SELECT_ALL_KATEGORI, KategoriQueries.UPDATE_KATEGORI);
-            else  controller.updateData(row, SatuanQueries.SELECT_ALL_SATUAN, SatuanQueries.UPDATE_SATUAN);
+            if(this.name.equals("kategori")) controller.updateData(row, KategoriQueries.SELECT_ALL_KATEGORI, KategoriQueries.UPDATE_KATEGORI, "kategori");
+            else  controller.updateData(row, SatuanQueries.SELECT_ALL_SATUAN, SatuanQueries.UPDATE_SATUAN, "satuan");
         }else{
             if(this.name.equals("kategori")) controller.addData(table, KategoriQueries.INSERT_KATEGORI);
             else  controller.addData(table, SatuanQueries.INSERT_SATUAN);

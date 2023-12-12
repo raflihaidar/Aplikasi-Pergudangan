@@ -22,9 +22,9 @@ public class RegisterController implements ActionListener {
         String fullName = register.getTxtFullName();
         String userName = register.getTxtUserName();
         String password = register.getTxtPassword();
-        String gender = register.getCmbGender();
-        String jabatan = register.getCmbRole();
-        this.user = new User(fullName, userName, password, gender, jabatan);
+        int kode_gender = register.getCmbGender();
+        int kode_jabatan = register.getCmbRole();
+        this.user = new User(fullName, userName, password, kode_gender, kode_jabatan);
         userDao.addData(user);
     }
 
@@ -53,9 +53,9 @@ public class RegisterController implements ActionListener {
         String fullName = register.getTxtFullName();
         String userName = register.getTxtUserName();
         String password = register.getTxtPassword();
-        String gender = register.getCmbGender();
-        String jabatan = register.getCmbRole();
-        this.user = new User(fullName, userName, password, gender, jabatan);
+        int kode_gender = register.getCmbGender();
+        int kode_jabatan = register.getCmbRole();
+        this.user = new User(fullName, userName, password, kode_gender, kode_jabatan);
         this.userDao = new UserDao(password);
         if (user.getFullName().isEmpty() || user.getUsername().isEmpty() || user.getPassword().isEmpty()) {
             // Tampilkan pesan kesalahan jika tidak diisi

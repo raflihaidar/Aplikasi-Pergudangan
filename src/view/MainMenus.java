@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JRootPane;
 import javax.swing.border.EmptyBorder;
-import model.User;
 
 public class MainMenus extends javax.swing.JFrame {
 
@@ -33,7 +32,7 @@ public class MainMenus extends javax.swing.JFrame {
     public MainMenus(String username) {
         initComponents();
         execute();
-        controller = new UserController(MainMenus.this, new User(username));
+        controller = new UserController(MainMenus.this, username);
         listMenu.setPreferredSize(new Dimension(350, 0));
         this.setUndecorated(true);
         this.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
@@ -326,6 +325,7 @@ public class MainMenus extends javax.swing.JFrame {
         ImageIcon iconSatuan = MyIcon.getIcon("satuan");
         ImageIcon iconUser = MyIcon.getIcon("manage-user");
         ImageIcon iconHakAkses = MyIcon.getIcon("hak-akses");
+        ImageIcon iconLogout = MyIcon.getIcon("logout");
         
         MenuItem menuDashboard = new MenuItem(iconDashboard, false, "Dashboard", new ActionListener() {
             @Override
@@ -431,7 +431,7 @@ public class MainMenus extends javax.swing.JFrame {
             }
         });
         MenuItem menuSettings2 = new MenuItem(iconHakAkses, true, "Hak Akses", null);
-        MenuItem menuSettings3 = new MenuItem(iconHakAkses, true, "Log Out", new ActionListener() {
+        MenuItem menuSettings3 = new MenuItem(iconLogout, true, "Log Out", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 controller.logOutConfirm();

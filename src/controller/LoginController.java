@@ -4,13 +4,11 @@ import dao.UserDao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import model.User;
 import view.Login;
 import view.MainMenus;
 
 public class LoginController implements ActionListener{
     private Login login;
-    private User user;
     private UserDao userDao;
     
     public LoginController(Login login){

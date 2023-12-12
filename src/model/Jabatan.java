@@ -1,13 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-/**
- *
- * @author rafli
- */
 public class Jabatan {
-    
+
+    private int kode;
+    private String jabatan;
+
+    public int getKode() {
+        return kode;
+    }
+
+    public void setKode(int kode) {
+        this.kode = kode;
+    }
+
+    public String getJabatan() {
+        return jabatan;
+    }
+
+    public void setJabatan(String jabatan) {
+        this.jabatan = jabatan;
+    }
 }

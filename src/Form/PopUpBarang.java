@@ -52,8 +52,8 @@ public class PopUpBarang extends javax.swing.JDialog {
         initComponents();
         ComboBoxController controllerKategori = new ComboBoxController(cmbKategori);
         ComboBoxController controllerSatuan = new ComboBoxController(cmbSatuan);
-        controllerKategori.getData(KategoriQueries.SELECT_ALL_KATEGORI);
-        controllerSatuan.getData(SatuanQueries.SELECT_ALL_SATUAN);
+        controllerKategori.getData(KategoriQueries.SELECT_ALL_KATEGORI, "kategori");
+        controllerSatuan.getData(SatuanQueries.SELECT_ALL_SATUAN, "satuan");
         this.table = table;
         this.isEdit = isEdit;
     }
@@ -62,8 +62,8 @@ public class PopUpBarang extends javax.swing.JDialog {
         initComponents();
         ComboBoxController controllerKategori = new ComboBoxController(cmbKategori);
         ComboBoxController controllerSatuan = new ComboBoxController(cmbSatuan);
-        controllerKategori.getData(KategoriQueries.SELECT_ALL_KATEGORI);
-        controllerSatuan.getData(SatuanQueries.SELECT_ALL_SATUAN);
+        controllerKategori.getData(KategoriQueries.SELECT_ALL_KATEGORI, "kategori");
+        controllerSatuan.getData(SatuanQueries.SELECT_ALL_SATUAN, "satuan");
         this.table = table;
         this.isEdit = isEdit;
         this.row = row;

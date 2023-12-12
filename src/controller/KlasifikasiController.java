@@ -25,12 +25,12 @@ public class KlasifikasiController {
         data = new KlasifikasiModel();
     }
 
-    public void getData(DefaultTableModel model, String query) {
+    public void getData(DefaultTableModel model, String query, String column) {
         ResultSet result = data.getData(query);
         try {
             while (result.next()) {
                 int kode = result.getInt("kode");
-                String nama = result.getString("nama");
+                String nama = result.getString(column);
                 model.addRow(new Object[]{kode, nama});
             }
             table.setModel(model);
@@ -40,13 +40,13 @@ public class KlasifikasiController {
         }
     }
 
-    public void getSingleData(int row, JTable table, PopUpKlasifikasi modal, String query) {
+    public void getSingleData(int row, JTable table, PopUpKlasifikasi modal, String query, String column) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         int kode = (int) model.getValueAt(row, 0);
         ResultSet rs = data.getSingleData(kode, query);
         try {
             if (rs.next()) {
-                modal.setName(rs.getString("nama"));
+                modal.setName(rs.getString(column));
             }
             rs.close();
         } catch (Exception e) {
@@ -78,12 +78,12 @@ public class KlasifikasiController {
         }
     }
 
-    public void updateData(int row, String loadQuery, String updateQuery) {
+    public void updateData(int row, String loadQuery, String updateQuery, String column) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         int kode = (int) table.getValueAt(row, 0);
         data.updateData(kode, updateQuery);
         model.setRowCount(0);
-        getData(model, loadQuery);
+        getData(model, loadQuery, column);
     }
     
     public String getTotalData(String query) {

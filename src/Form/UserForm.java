@@ -20,13 +20,13 @@ public class UserForm extends javax.swing.JPanel {
     public UserForm() {
         initComponents();
         model.User user = new model.User();
-        UserController controller = new UserController(table2);
-        controller.showAllData((DefaultTableModel) table2.getModel());
+        UserController controller = new UserController(tblUser);
+        controller.showAllData((DefaultTableModel) tblUser.getModel());
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
-                PopUpUser dialog = new PopUpUser();
-                controller.getSingleData(row, table2, dialog);
+                PopUpUser dialog = new PopUpUser(tblUser, row);
+                controller.getSingleData(row, tblUser, dialog);
 //                dialog.setSize(934, 573);
                 dialog.setLocationRelativeTo(UserForm.this); // Center the dialog relative to the Distributor panel
                 // Make the dialog modal, blocking input to other windows
@@ -54,8 +54,8 @@ public class UserForm extends javax.swing.JPanel {
             }
         };
         
-        table2.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender());
-        table2.getColumnModel().getColumn(3).setCellEditor(new TableActionCellEditor(event));
+        tblUser.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender());
+        tblUser.getColumnModel().getColumn(3).setCellEditor(new TableActionCellEditor(event));
     }
 
     /**
@@ -70,7 +70,7 @@ public class UserForm extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        table2 = new Components.Table();
+        tblUser = new Components.Table();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         table3 = new Components.Table();
@@ -84,7 +84,7 @@ public class UserForm extends javax.swing.JPanel {
 
         jPanel1.setLayout(new java.awt.CardLayout());
 
-        table2.setModel(new javax.swing.table.DefaultTableModel(
+        tblUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -92,7 +92,7 @@ public class UserForm extends javax.swing.JPanel {
                 "Username", "Jabatan", "Status", "Active"
             }
         ));
-        jScrollPane2.setViewportView(table2);
+        jScrollPane2.setViewportView(tblUser);
 
         jPanel1.add(jScrollPane2, "card2");
 
@@ -144,7 +144,7 @@ public class UserForm extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private Components.Table table2;
     private Components.Table table3;
+    private Components.Table tblUser;
     // End of variables declaration//GEN-END:variables
 }

@@ -76,7 +76,7 @@ public class Barang {
             result = statement.executeQuery(BarangQueries.SELECT_ALL_DATA);
             return result;
         } catch (SQLException e) {
-            System.out.println("Error" + e.getMessage());
+            System.out.println("Error disini" + e.getMessage());
             e.printStackTrace();
             return null;
         }

@@ -24,7 +24,7 @@ public class UserDao implements User_Service, Login_Service, Register_Service {
         con = Config.connectDB();
         user = new User(username, password);
     }
-    
+
     public UserDao(String password) {
         con = Config.connectDB();
         user = new User(password);
@@ -38,7 +38,7 @@ public class UserDao implements User_Service, Login_Service, Register_Service {
             while (result.next()) {
 //                User user = new User();
                 user.setUsername(result.getString("username"));
-                user.setRole(result.getString("kode_jabatan"));
+                user.setJabatan(result.getString("jabatan"));
                 user.setStatus(result.getString("status"));
                 data.add(user);
             }
@@ -63,12 +63,12 @@ public class UserDao implements User_Service, Login_Service, Register_Service {
                 user.setEmail(String.valueOf(result.getString("email")));
                 user.setAlamat(result.getString("alamat"));
                 user.setTglAktif(result.getString("tgl_aktif"));
-//                user.setRole(result.getString("jabatan"));
-//                user.setGender(result.getString("gender"));
+                user.setKodeJabatan(result.getInt("kode_jabatan"));
+                user.setKodeStatus(result.getInt("status_kode"));
                 data.add(user);
             }
         } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error getSingle: " + e.getMessage());
         }
 
         return data;
@@ -80,31 +80,55 @@ public class UserDao implements User_Service, Login_Service, Register_Service {
             ps.setString(1, user.getFullName());
             ps.setString(2, user.getUsername());
             ps.setString(3, user.getPassword());
-            ps.setString(4, user.getGender());
-            ps.setString(5, user.getRole());
+            ps.setInt(4, user.getKodeGender());
+            ps.setInt(5, user.getKodeJabatan());
+            ps.setInt(6, 1);
             ps.execute();
-            con.close();
         } catch (Exception e) {
-            System.out.println("Error :" + e.getMessage());
+            System.out.println("Error add ?:" + e.getMessage());
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    @Override
-    public void updateData(User user) {
-        try (PreparedStatement ps = con.prepareStatement(UserQueries.UPDATE_USER);) {
-            ps.setString(1, user.getFullName());
-            ps.setString(2, user.getUsername());
-            ps.setString(3, user.getEmail());
-            ps.setString(4, user.getNoHp());
-            ps.setString(5, user.getAlamat());
-//            ps.setInt(6, user.getStatus());
-//            ps.setInt(7, user.getRole());
-            ps.executeUpdate();
-            con.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+@Override
+public void updateData(User user) {
+    PreparedStatement ps = null;
+    try {
+        ps = con.prepareStatement(UserQueries.UPDATE_USER);
+        ps.setString(1, user.getFullName());
+        ps.setString(2, user.getUsername());
+        ps.setString(3, user.getEmail());
+        ps.setString(4, user.getNoHp());
+        ps.setString(5, user.getAlamat());
+        ps.setInt(6, user.getKodeStatus());
+        ps.setInt(7, user.getKodeJabatan());
+        ps.setInt(8, user.getId());
+
+        int rowsUpdated = ps.executeUpdate();
+        if (rowsUpdated > 0) {
+            System.out.println("Update successful!");
+        } else {
+            System.out.println("No rows updated.");
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        if (ps != null) {
+            try {
+                ps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
+}
+
+
 
     @Override
     public void deleteData(String username) {
@@ -115,7 +139,7 @@ public class UserDao implements User_Service, Login_Service, Register_Service {
             con.close();
             ps.close();
         } catch (Exception e) {
-            System.out.println("Error : " + e.getMessage());
+            System.out.println("Error delete : " + e.getMessage());
         }
     }
 
@@ -128,7 +152,7 @@ public class UserDao implements User_Service, Login_Service, Register_Service {
             ps.setString(2, user.getUsername());
             ps.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("Error di sana :" + e.getMessage());
+            System.out.println("Error updateAuh:" + e.getMessage());
         } finally {
             if (ps != null) {
                 try {
