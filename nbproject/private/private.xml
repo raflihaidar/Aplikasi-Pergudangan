@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/view/Register.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/model/Kategori.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/controller/RegisterController.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/config/Config.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/controller/LoginController.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/view/Login.java</file>
+            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/services/Login_Service.java</file>
+        </group>
     </open-files>
 </project-private>
