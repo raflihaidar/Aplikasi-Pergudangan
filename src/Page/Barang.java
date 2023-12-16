@@ -1,5 +1,6 @@
-package Form;
+package Page;
 
+import Form.PopUpBarang;
 import Components.TableActionCellEditor;
 import Components.TableActionCellRender;
 import Components.TableActionEvent;
@@ -31,14 +32,10 @@ public class Barang extends javax.swing.JPanel {
                 PopUpBarang dialog = new PopUpBarang(table1, true, row);
                 controller.getSingleData(row, table1, dialog);
                 dialog.setSize(934, 573);
-                dialog.setLocationRelativeTo(Barang.this); // Center the dialog relative to the Distributor panel
-                // Make the dialog modal, blocking input to other windows
+                dialog.setLocationRelativeTo(Barang.this);
                 dialog.setModal(true);
-                //Set background color dialog
                 dialog.getContentPane().setBackground(Color.WHITE);
-                // Set the default close operation to dispose the dialog
                 dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-                // Set the dialog visible
                 dialog.setVisible(true);
             }
 
@@ -52,7 +49,7 @@ public class Barang extends javax.swing.JPanel {
             }
 
             @Override
-            public void onView(int row) {
+            public void onAdd(int row) {
                 System.out.println("View row : " + row);
             }
         };
@@ -94,7 +91,7 @@ public class Barang extends javax.swing.JPanel {
                 java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, false, true
+                false, false, false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -168,26 +165,12 @@ public class Barang extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
 
-//            DefaultTableModel model = (DefaultTableModel) table1.getModel();
-            // Create a JDialog as the parent for the AddDistributor panel
             PopUpBarang dialog = new PopUpBarang(table1, false);
-
-            // Create an instance of AddDistributor
-
-            // Add the AddDistributor panel to the dialog
-
-            // Set properties for the dialog (adjust as needed)
             dialog.setSize(934, 573);
-            dialog.setLocationRelativeTo(this); // Center the dialog relative to the Distributor panel
-
-            // Make the dialog modal, blocking input to other windows
+            dialog.setLocationRelativeTo(this);
             dialog.setModal(true);
             dialog.getContentPane().setBackground(Color.WHITE);
-
-            // Set the default close operation to dispose the dialog
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-
-            // Set the dialog visible
             dialog.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
 

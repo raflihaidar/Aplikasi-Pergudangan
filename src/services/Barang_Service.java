@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package services;
 
-/**
- *
- * @author rafli
- */
+import model.Barang;
+import java.util.List;
+
 public interface Barang_Service {
-    
+    public List<Barang> getSingleData(String username);
+    public int addData(Barang barang);
+    public void updateData(Barang barang);
+    public void deleteData(int kode);
 }

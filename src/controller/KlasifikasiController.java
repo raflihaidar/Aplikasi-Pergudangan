@@ -4,25 +4,25 @@ import Form.PopUpKlasifikasi;
 import java.sql.*;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import model.KlasifikasiModel;
+import model.Klasifikasi;
 
 public class KlasifikasiController {
 
     private JTable table;
-    private KlasifikasiModel data;
+    private Klasifikasi data;
 
     public KlasifikasiController(JTable table) {
         this.table = table;
-        data = new KlasifikasiModel();
+        data = new Klasifikasi();
     }
 
     public KlasifikasiController(JTable table, String nama) {
         this.table = table;
-        data = new KlasifikasiModel(nama);
+        data = new Klasifikasi(nama);
     }
     
     public KlasifikasiController() {
-        data = new KlasifikasiModel();
+        data = new Klasifikasi();
     }
 
     public void getData(DefaultTableModel model, String query, String column) {

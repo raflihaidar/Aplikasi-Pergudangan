@@ -60,7 +60,7 @@
           <Color blue="0" green="0" red="0" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Settings / Manage User"/>
+        <Property name="text" type="java.lang.String" value="Manage User"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">

@@ -1,20 +1,48 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
-package Form;
+package Page;
 
-/**
- *
- * @author rafli
- */
-public class Pemesanan extends javax.swing.JPanel {
+import Components.TableActionCellEditor;
+import Components.TableActionCellRender;
+import Components.TableActionEvent;
+import Form.PopUpBarang;
+import controller.PemesananController;
+import java.awt.Color;
+import javax.swing.JDialog;
+import javax.swing.table.DefaultTableModel;
+import view.MainMenus;
+
+public class DaftarPemesanan extends javax.swing.JPanel {
 
     /**
      * Creates new form Pemesanan
      */
-    public Pemesanan() {
+    private PemesananController controller;
+    public DaftarPemesanan(MainMenus mainMenu) {
         initComponents();
+        controller = new PemesananController(table1, this, mainMenu);
+        controller.getData((DefaultTableModel) table1.getModel());
+        
+         TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void onEdit(int row) {
+                controller.changePage(new DetailPemesanan());
+            }
+
+            @Override
+            public void onDelete(int row) {
+                try{
+                    controller.deleteBarang();
+                }catch(Exception e){
+                    System.out.println("Error : " + e.getMessage());
+                }
+            }
+
+            @Override
+            public void onAdd(int row) {
+                System.out.println("View row : " + row);
+            }
+        };
+        table1.getColumnModel().getColumn(6).setCellRenderer(new TableActionCellRender());
+        table1.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(event));
     }
 
     /**
@@ -43,7 +71,7 @@ public class Pemesanan extends javax.swing.JPanel {
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/add.png"))); // NOI18N
-        btnAdd.setText("Tambah Pemesanan");
+        btnAdd.setText("Buat Pemesanan");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -54,17 +82,14 @@ public class Pemesanan extends javax.swing.JPanel {
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "Id Pesanan", "Tanggal", "Total", "Id Distributor", "Id User", "Action"
+                "Id Pesanan", "Id Distributor", "Id User", "Tanggal", "Total", "Status", "Action"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, false
+                false, false, false, false, true, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -140,28 +165,9 @@ public class Pemesanan extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-//
-//        //            DefaultTableModel model = (DefaultTableModel) table1.getModel();
-//        // Create a JDialog as the parent for the AddDistributor panel
-//        PopUpBarang dialog = new PopUpBarang(table1, false);
-//
-//        // Create an instance of AddDistributor
-//
-//        // Add the AddDistributor panel to the dialog
-//
-//        // Set properties for the dialog (adjust as needed)
-//        dialog.setSize(934, 573);
-//        dialog.setLocationRelativeTo(this); // Center the dialog relative to the Distributor panel
-//
-//        // Make the dialog modal, blocking input to other windows
-//        dialog.setModal(true);
-//        dialog.getContentPane().setBackground(Color.WHITE);
-//
-//        // Set the default close operation to dispose the dialog
-//        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//
-//        // Set the dialog visible
-//        dialog.setVisible(true);
+
+        controller.addDataPemesanan();
+        controller.changePage(new Pemesanan_Page());
     }//GEN-LAST:event_btnAddActionPerformed
 
 

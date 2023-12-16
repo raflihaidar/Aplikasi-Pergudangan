@@ -1,6 +1,6 @@
 package controller;
 
-import dao.UserDao;
+import dao.User_Dao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -12,7 +12,7 @@ public class RegisterController implements ActionListener {
 
     private Register register;
     private User user;
-    private UserDao userDao;
+    private User_Dao userDao;
 
     public RegisterController(Register register) {
         this.register = register;
@@ -56,7 +56,7 @@ public class RegisterController implements ActionListener {
         int kode_gender = register.getCmbGender();
         int kode_jabatan = register.getCmbRole();
         this.user = new User(fullName, userName, password, kode_gender, kode_jabatan);
-        this.userDao = new UserDao(password);
+        this.userDao = new User_Dao(password);
         if (user.getFullName().isEmpty() || user.getUsername().isEmpty() || user.getPassword().isEmpty()) {
             // Tampilkan pesan kesalahan jika tidak diisi
             JOptionPane.showMessageDialog(register, "Please fill in the whole field!", "Error", JOptionPane.ERROR_MESSAGE);

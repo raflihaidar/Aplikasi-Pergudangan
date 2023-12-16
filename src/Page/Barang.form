@@ -88,7 +88,7 @@
                   <Table columnCount="7" rowCount="0">
                     <Column editable="false" title="Kode Barang" type="java.lang.Integer"/>
                     <Column editable="false" title="Nama" type="java.lang.String"/>
-                    <Column editable="true" title="Harga" type="java.lang.Integer"/>
+                    <Column editable="false" title="Harga" type="java.lang.Integer"/>
                     <Column editable="false" title="Stok" type="java.lang.Integer"/>
                     <Column editable="false" title="Kategori" type="java.lang.String"/>
                     <Column editable="false" title="Satuan" type="java.lang.String"/>
