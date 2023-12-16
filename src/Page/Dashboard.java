@@ -30,7 +30,6 @@ public class Dashboard extends javax.swing.JPanel {
                 KlasifikasiController kategoriController = new KlasifikasiController();
                 DistributorController distributorController = new DistributorController();
                 
-                
                 card1.setData(new Card(iconBarang, "Barang", barangController.getTotalBarang()));
                 card2.setData(new Card(iconCategory, "Kategori Barang", kategoriController.getTotalData(KategoriQueries.SELECT_ALL_KATEGORI)));
                 card3.setData(new Card(iconSatuan, "Satuan Barang", satuanController.getTotalData(SatuanQueries.GET_TOTAL_SATUAN)));
