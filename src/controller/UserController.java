@@ -1,13 +1,15 @@
 package controller;
 
-import Components.Table;
 import Form.PopUpUser;
-import dao.UserDao;
-import java.util.List;
+import dao.Getter_Dao;
+import dao.User_Dao;
+import helper.UserQueries;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.sql.*;
+import java.util.List;
+import javax.swing.JOptionPane;
 import model.User;
 import view.Login;
 
@@ -18,12 +20,14 @@ public class UserController {
     private PopUpUser popUp;
     private User user;
     private List<User> data;
-    private UserDao userDao;
+    private User_Dao userDao;
+    private Getter_Dao dao;
 
-    public UserController(Table table) {
+    public UserController(JTable table) {
         this.table = table;
-        this.userDao = new UserDao();
-        this.data = userDao.getAllData();
+        this.userDao = new User_Dao();
+        this.dao = new Getter_Dao();
+        this.user = new User();
     }
 
     public UserController(User user) {
@@ -32,28 +36,33 @@ public class UserController {
 
     public UserController(JFrame frame, String username) {
         this.frame = frame;
-        this.userDao = new UserDao(username);
+        this.userDao = new User_Dao(username);
     }
 
     public UserController(PopUpUser popUp, JTable table) {
         this.table = table;
         this.popUp = popUp;
-        this.userDao = new UserDao();
+        this.userDao = new User_Dao();
+        this.dao = new Getter_Dao();
     }
 
-    public void showAllData(DefaultTableModel model) {
-        data = userDao.getAllData();
-
-        for (User user : data) {
-            String username = user.getUsername();
-            String role = user.getJabatan();
-            String status = user.getStatus();
-            model.addRow(new Object[]{username, role, status});
+    public void getData(DefaultTableModel model) {
+         ResultSet result = dao.getData(UserQueries.SELECT_ALL_USERS);
+        try {
+            while (result.next()) {
+                user.setUsername(result.getString("username"));
+                user.setJabatan(result.getString("jabatan"));
+                user.setStatus(result.getString("status"));
+                model.addRow(new Object[]{user.getUsername(), user.getJabatan(), user.getStatus()});
+            }
+            table.setModel(model);
+            result.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        table.setModel(model);
     }
 
-    public void getSingleData(int row, JTable table, PopUpUser modal) {
+      public void getSingleData(int row, JTable table, PopUpUser modal) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         String username = model.getValueAt(row, 0).toString();
         data = userDao.getSingleData(username);
@@ -92,7 +101,7 @@ public class UserController {
         userDao.updateData(user);
         JOptionPane.showMessageDialog(frame, "Berhasil Update Data");
         model.setRowCount(0);
-        showAllData(model);
+        getData(model);
     }
 
     public void logOutConfirm() {

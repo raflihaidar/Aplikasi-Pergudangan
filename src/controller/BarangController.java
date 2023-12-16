@@ -1,60 +1,58 @@
 package controller;
 
 import Form.PopUpBarang;
+import dao.Barang_Dao;
+import dao.Getter_Dao;
+import helper.BarangQueries;
 import java.sql.ResultSet;
-import javax.swing.JComboBox;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
+import java.util.List;
+import javax.swing.JOptionPane;
 import model.Barang;
-import model.ComboBox;
 
 public class BarangController {
 
     private JTable table;
-    private JTextField namaBarang;
-    private JTextField hargaBarang;
-    private JTextField stokBarang;
-    private JComboBox<String> kategoriBarang;
-    private JComboBox<String> satuanBarang;
+    private PopUpBarang popUp;
     private Barang barang;
+    private List<Barang> data;
+    private Barang_Dao barangDao;
+    private Getter_Dao getterDao;
 
     public BarangController() {
         barang = new Barang();
+        getterDao = new Getter_Dao();
     }
 
     public BarangController(JTable table) {
         this.table = table;
         barang = new Barang();
+        barangDao = new Barang_Dao();
+        getterDao = new Getter_Dao();
     }
 
-    public BarangController(JTextField namaBarang, JTextField hargaBarang, JTextField stokBarang,
-        JComboBox<String> kategoriBarang, JComboBox<String> satuanBarang, JTable table) {
-        this.namaBarang = namaBarang;
-        this.hargaBarang = hargaBarang;
-        this.stokBarang = stokBarang;
-        this.kategoriBarang = kategoriBarang;
-        this.satuanBarang = satuanBarang;
-        barang = new Barang(namaBarang.getText(),
-                        Integer.parseInt(hargaBarang.getText()),
-                        Integer.parseInt(stokBarang.getText()),
-                        satuanBarang.getSelectedIndex() + 1,
-                        kategoriBarang.getSelectedIndex() + 1);
+    public BarangController(PopUpBarang popUp, JTable table) {
+        this.popUp = popUp;
         this.table = table;
+        barang = new Barang();
+        barangDao = new Barang_Dao();
+        getterDao = new Getter_Dao();
     }
 
     public void getData(DefaultTableModel model) {
-        ResultSet result = barang.getData();
+        ResultSet result = getterDao.getData(BarangQueries.SELECT_ALL_DATA);
         try {
             while (result.next()) {
-                int kode = result.getInt("kode");
-                String nama = result.getString("nama");
-                int harga = result.getInt("harga");
-                int stok = result.getInt("stok");
-                String kode_kategori = result.getString("kategori");
-                String kode_satuan = result.getString("satuan");
-                model.addRow(new Object[]{kode, nama, harga, stok, kode_kategori, kode_satuan});
+                Barang barang = new Barang();
+                barang.setKode(result.getInt("kode"));
+                barang.setNama(result.getString("nama"));
+                barang.setHarga(result.getInt("harga"));
+                barang.setStok(result.getInt("stok"));
+                barang.setKategori(result.getString("kategori"));
+                barang.setSatuan(result.getString("satuan"));
+                model.addRow(new Object[]{barang.getKode(), barang.getNama(), barang.getHarga(), barang.getStok(), barang.getKategori(), barang.getSatuan()});
             }
             table.setModel(model);
             result.close();
@@ -68,60 +66,62 @@ public class BarangController {
             DefaultTableModel model = (DefaultTableModel) table.getModel();
             int row = table.getSelectedRow();
             int kode = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
-            barang.deleteData(kode);
+            barangDao.deleteData(kode);
             if (table.isEditing()) {
                 table.getCellEditor().stopCellEditing();
             }
             model = (DefaultTableModel) table.getModel();
             model.removeRow(row);
+            System.out.println("delete data berhasil");
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
         }
     }
 
     public void addDataBarang(JTable table) {
+        int kode = popUp.getKode();
+        String nama = popUp.getName();
+        int harga = popUp.getHarga();
+        int stok = popUp.getStok();
+        int kode_kategori = popUp.getKodeKategori();
+        int kode_satuan = popUp.getKodeSatuan();
+        String kategori = popUp.getKategori();
+        String satuan = popUp.getSatuan();
+        System.out.println(harga);
+        System.out.println(stok);
+        this.barang = new Barang(kode, nama, harga, stok, kode_kategori, kode_satuan);
+        int kodeBarang = barangDao.addData(barang);
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        String namaBarang = this.namaBarang.getText();
-        int hargaBarang = Integer.parseInt(this.hargaBarang.getText());
-        int stokBarang = Integer.parseInt(this.stokBarang.getText());
-        int kode_kategori = kategoriBarang.getSelectedIndex() + 1;
-        int kode_satuan = satuanBarang.getSelectedIndex() + 1;
-        int kodeBarang = barang.addData(namaBarang, hargaBarang, stokBarang, kode_kategori, kode_satuan);
-
-        String kategori = ComboBox.getRefrence("kategori", "nama", kode_kategori);
-        String satuan = ComboBox.getRefrence("satuan", "nama", kode_satuan);
-        model.addRow(new Object[]{kodeBarang, namaBarang, hargaBarang, stokBarang, kategori, satuan});
+        model.addRow(new Object[]{kodeBarang, nama, harga, stok, kategori, satuan});
         table.setModel(model);
     }
 
-    public void getSingleData(int row, JTable table, PopUpBarang modal) {
+    public void getSingleData(int row, JTable table, PopUpBarang popUp) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        int kodeBarang = (int) model.getValueAt(row, 0);
-        ResultSet rs = barang.getSingleData(kodeBarang);
-        try {
-            if (rs.next()) {
-                modal.setName(rs.getString("nama"));
-                modal.setHarga(String.valueOf(rs.getInt("harga")));
-                modal.setStok(String.valueOf(rs.getInt("stok")));
-                modal.setKategori(rs.getString("kategori"));
-                modal.setSatuan(rs.getString("satuan"));
-            }
-            rs.close();
-        } catch (Exception e) {
-            System.out.println("Error : " + e.getMessage());
+        String username = model.getValueAt(row, 0).toString();
+        data = barangDao.getSingleData(username);
+        for (Barang barang : data) {
+            popUp.setKode(String.valueOf(barang.getKode()));
+            popUp.setName(barang.getNama());
+            popUp.setHarga(String.valueOf(barang.getHarga()));
+            popUp.setStok(String.valueOf(barang.getStok()));
+            popUp.setKategori(barang.getKodeKategori() - 1);
+            popUp.setSatuan(barang.getKodeSatuan() - 1);
         }
     }
 
     public void updateDataBarang(int row) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        int kodeBarang = (int) table.getValueAt(row, 0);
-        barang.updateData(kodeBarang);
+        barang = new Barang(popUp.getKode(), popUp.getName(), popUp.getHarga(), popUp.getStok(), popUp.getKodeKategori(), popUp.getKodeSatuan());
+        System.out.println(popUp.getStok());
+        barangDao.updateData(barang);
+        JOptionPane.showMessageDialog(null, "Berhasil Update Data");
         model.setRowCount(0);
         getData(model);
     }
 
     public String getTotalBarang() {
-        ResultSet result = barang.getData();
+        ResultSet result = getterDao.getData(BarangQueries.GET_TOTAL_BARANG);
         int total = 0;
         try {
             while (result.next()) {
@@ -131,7 +131,7 @@ public class BarangController {
             return String.valueOf(total);
         } catch (SQLException e) {
             e.printStackTrace();
-             return String.valueOf(total);
+            return String.valueOf(total);
         }
     }
 }

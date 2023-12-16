@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package Form;
+package Page;
 
 /**
  *
@@ -27,7 +27,6 @@ public class BarangMasuk extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnAdd = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         tblPesanan = new javax.swing.JScrollPane();
         table1 = new Components.Table();
@@ -36,17 +35,6 @@ public class BarangMasuk extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        btnAdd.setBackground(new java.awt.Color(51, 153, 255));
-        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
-        btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/add.png"))); // NOI18N
-        btnAdd.setText("Tambah Barang Masuk");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
 
         jPanel2.setLayout(new java.awt.CardLayout());
 
@@ -89,10 +77,8 @@ public class BarangMasuk extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnAdd)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -110,8 +96,7 @@ public class BarangMasuk extends javax.swing.JPanel {
                 .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAdd)
-                        .addGap(15, 15, 15)
+                        .addGap(46, 46, 46)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,34 +122,8 @@ public class BarangMasuk extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        //
-        //        //            DefaultTableModel model = (DefaultTableModel) table1.getModel();
-        //        // Create a JDialog as the parent for the AddDistributor panel
-        //        PopUpBarang dialog = new PopUpBarang(table1, false);
-        //
-        //        // Create an instance of AddDistributor
-        //
-        //        // Add the AddDistributor panel to the dialog
-        //
-        //        // Set properties for the dialog (adjust as needed)
-        //        dialog.setSize(934, 573);
-        //        dialog.setLocationRelativeTo(this); // Center the dialog relative to the Distributor panel
-        //
-        //        // Make the dialog modal, blocking input to other windows
-        //        dialog.setModal(true);
-        //        dialog.getContentPane().setBackground(Color.WHITE);
-        //
-        //        // Set the default close operation to dispose the dialog
-        //        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        //
-        //        // Set the dialog visible
-        //        dialog.setVisible(true);
-    }//GEN-LAST:event_btnAddActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

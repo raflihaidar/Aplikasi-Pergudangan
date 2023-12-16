@@ -1,5 +1,6 @@
-package Form;
+package Page;
 
+import Form.PopUpKlasifikasi;
 import Components.TableActionCellEditor;
 import Components.TableActionCellRender;
 import Components.TableActionEvent;
@@ -45,7 +46,7 @@ public class Kategori extends javax.swing.JPanel {
             }
 
             @Override
-            public void onView(int row) {
+            public void onAdd(int row) {
                 System.out.println("View row : " + row);
             }
         };

@@ -1,5 +1,6 @@
-package Form;
+package Page;
 
+import Form.PopUpUser;
 import Components.TableActionCellEditor;
 import Components.TableActionCellRender;
 import Components.TableActionEvent;
@@ -12,30 +13,24 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author rafli
  */
-public class UserForm extends javax.swing.JPanel {
+public class User extends javax.swing.JPanel {
 
     /**
      * Creates new form User
      */
-    public UserForm() {
+    public User() {
         initComponents();
-        model.User user = new model.User();
         UserController controller = new UserController(tblUser);
-        controller.showAllData((DefaultTableModel) tblUser.getModel());
+        controller.getData((DefaultTableModel) tblUser.getModel());
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
                 PopUpUser dialog = new PopUpUser(tblUser, row);
                 controller.getSingleData(row, tblUser, dialog);
-//                dialog.setSize(934, 573);
-                dialog.setLocationRelativeTo(UserForm.this); // Center the dialog relative to the Distributor panel
-                // Make the dialog modal, blocking input to other windows
+                dialog.setLocationRelativeTo(User.this);
                 dialog.setModal(true);
-                //Set background color dialog
                 dialog.getContentPane().setBackground(Color.WHITE);
-                // Set the default close operation to dispose the dialog
                 dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-                // Set the dialog visible
                 dialog.setVisible(true);
             }
 
@@ -49,7 +44,7 @@ public class UserForm extends javax.swing.JPanel {
             }
 
             @Override
-            public void onView(int row) {
+            public void onAdd(int row) {
                     System.out.println("View row : " + row);
             }
         };
@@ -80,7 +75,7 @@ public class UserForm extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Settings / Manage User");
+        jLabel1.setText("Manage User");
 
         jPanel1.setLayout(new java.awt.CardLayout());
 

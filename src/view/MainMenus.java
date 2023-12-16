@@ -1,24 +1,26 @@
 package view;
 
-import Form.Dashboard;
+import Page.Dashboard;
 import Components.MenuItem;
 import Components.MyIcon;
 import Components.ScrollBar;
-import Form.Barang;
-import Form.BarangKeluar;
-import Form.BarangMasuk;
-import Form.Distributor;
-import Form.Kategori;
-import Form.Pemesanan;
-import Form.Satuan;
-import Form.Staff;
-import Form.UserForm;
+import Page.Barang;
+import Page.BarangKeluar;
+import Page.BarangMasuk;
+import Page.Distributor;
+import Page.Kategori;
+import Page.DaftarPemesanan;
+import Page.Satuan;
+import Page.Staff;
+import Page.User;
 import controller.UserController;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.border.EmptyBorder;
 
@@ -27,8 +29,8 @@ public class MainMenus extends javax.swing.JFrame {
     /**
      * Creates new form MainMenus
      */
-    
     UserController controller;
+
     public MainMenus(String username) {
         initComponents();
         execute();
@@ -40,7 +42,7 @@ public class MainMenus extends javax.swing.JFrame {
         jScrollPane1.setVerticalScrollBar(new ScrollBar());
         txtUsernameMain.setText(username);
     }
-    
+
     public MainMenus() {
         initComponents();
         execute();
@@ -50,6 +52,7 @@ public class MainMenus extends javax.swing.JFrame {
         sidebar.setBorder(new EmptyBorder(0, 10, 0, 0));
         jScrollPane1.setVerticalScrollBar(new ScrollBar());
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -216,7 +219,7 @@ public class MainMenus extends javax.swing.JFrame {
 
     private void navbarAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_navbarAncestorAdded
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_navbarAncestorAdded
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -295,6 +298,14 @@ public class MainMenus extends javax.swing.JFrame {
         });
     }
 
+    public JPanel getContent() {
+        return content;
+    }
+
+    public void setContent(Component c) {
+        this.content.add(c);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel content;
     private javax.swing.JButton jButton1;
@@ -309,7 +320,7 @@ public class MainMenus extends javax.swing.JFrame {
 
     private void execute() {
 
-        ImageIcon iconMaster =  MyIcon.getIcon("master");
+        ImageIcon iconMaster = MyIcon.getIcon("master");
         ImageIcon iconTransaction = MyIcon.getIcon("transaction");
         ImageIcon iconDashboard = MyIcon.getIcon("dashboard");
         ImageIcon iconReport = MyIcon.getIcon("report");
@@ -317,16 +328,16 @@ public class MainMenus extends javax.swing.JFrame {
         ImageIcon iconItem = MyIcon.getIcon("item");
         ImageIcon iconDistributor = MyIcon.getIcon("distributor-2");
         ImageIcon iconSettings = MyIcon.getIcon("settings");
-        ImageIcon iconIncome =  MyIcon.getIcon("income");
-        ImageIcon iconOutbound =  MyIcon.getIcon("outbound");
-        ImageIcon iconOrder =  MyIcon.getIcon("order");
+        ImageIcon iconIncome = MyIcon.getIcon("income");
+        ImageIcon iconOutbound = MyIcon.getIcon("outbound");
+        ImageIcon iconOrder = MyIcon.getIcon("order");
         ImageIcon iconTransactionReport = MyIcon.getIcon("transaction-report");
         ImageIcon iconCategory = MyIcon.getIcon("category");
         ImageIcon iconSatuan = MyIcon.getIcon("satuan");
         ImageIcon iconUser = MyIcon.getIcon("manage-user");
         ImageIcon iconHakAkses = MyIcon.getIcon("hak-akses");
         ImageIcon iconLogout = MyIcon.getIcon("logout");
-        
+
         MenuItem menuDashboard = new MenuItem(iconDashboard, false, "Dashboard", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -336,7 +347,7 @@ public class MainMenus extends javax.swing.JFrame {
                 content.revalidate();
             }
         });
-        
+
         MenuItem menuDistributor = new MenuItem(iconDistributor, false, "Distributor", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -346,7 +357,7 @@ public class MainMenus extends javax.swing.JFrame {
                 content.revalidate();
             }
         });
-        
+
         MenuItem menuStaff = new MenuItem(iconStaff, false, "Staff", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -356,7 +367,7 @@ public class MainMenus extends javax.swing.JFrame {
                 content.revalidate();
             }
         });
-        
+
         MenuItem menuBarang = new MenuItem(iconItem, true, "Barang", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -384,9 +395,8 @@ public class MainMenus extends javax.swing.JFrame {
                 content.revalidate();
             }
         });
+        
         MenuItem menuMaster = new MenuItem(iconMaster, false, "Master barang", null, menuBarang, menuBarang2, menuBarang3);
-        
-        
 
         MenuItem menuTransaction1 = new MenuItem(iconIncome, true, "Barang Masuk", new ActionListener() {
             @Override
@@ -397,6 +407,7 @@ public class MainMenus extends javax.swing.JFrame {
                 content.revalidate();
             }
         });
+        
         MenuItem menuTransaction2 = new MenuItem(iconOutbound, true, "Barang Keluar", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -406,11 +417,12 @@ public class MainMenus extends javax.swing.JFrame {
                 content.revalidate();
             }
         });
+        
         MenuItem menuTransaction3 = new MenuItem(iconOrder, true, "Pemesanan", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 content.removeAll();
-                content.add(new Pemesanan());
+                content.add(new DaftarPemesanan(MainMenus.this));
                 content.repaint();
                 content.revalidate();
             }
@@ -425,7 +437,7 @@ public class MainMenus extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 content.removeAll();
-                content.add(new UserForm());
+                content.add(new User());
                 content.repaint();
                 content.revalidate();
             }

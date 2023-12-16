@@ -13,6 +13,7 @@ public class UserQueries {
                                                + "JOIN status AS s ON s.kode = u.status "
                                                + "JOIN gender AS g ON g.kode = u.gender "
                                                + "WHERE u.username = ?";
+    public static final String SELECT_DATA_BY_STATUS = "SELECT id FROM user WHERE isAuthenticated = 1";
     public static final String INSERT_USER = "INSERT INTO user(nama, username, password, gender, kode_jabatan, status) VALUES (?,?,?,?,?,?)";
     public static final String SEARCH_USER = "SELECT * FROM user WHERE username = ? AND password = ?";
     public static final String DELETE_USER = "DELETE FROM user WHERE username = ?";
