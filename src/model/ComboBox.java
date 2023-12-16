@@ -36,11 +36,10 @@ public class ComboBox {
     }
     
     // Fungsi untuk mendapatkan nama referensi (kategori atau satuan) sesuai ID
-    public static String getRefrence(String tabelReferensi, String kolomNama, int id) {
+    public static String getRefrence(String query, String kolomNama, int id) {
         Connection con = Config.connectDB();
         String namaReferensi = "";
         try {
-            String query = "SELECT nama" + " FROM " + tabelReferensi + " WHERE kode"+ " = ?";
             PreparedStatement preparedStatement = con.prepareStatement(query);
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();

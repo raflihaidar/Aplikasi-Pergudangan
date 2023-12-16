@@ -19,19 +19,19 @@ public class PopUpUser extends javax.swing.JDialog {
     public PopUpUser(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        ComboBoxController controllerJabatan = new ComboBoxController(cmbJabatan);
-        ComboBoxController controllerStatus = new ComboBoxController(cmbStatus);
-        controllerJabatan.getData(JabatanQueries.SELECT_ALL_JABATAN, "jabatan");
-        controllerStatus.getData(StatusQueries.SELECT_ALL_STATUS, "status");
+        ComboBoxController controllerJabatan = new ComboBoxController(cmbJabatan, JabatanQueries.SELECT_ALL_JABATAN);
+        ComboBoxController controllerStatus = new ComboBoxController(cmbStatus, StatusQueries.SELECT_ALL_STATUS);
+        controllerJabatan.getData("jabatan");
+        controllerStatus.getData("status");
         this.table = table;
     }
 
     public PopUpUser(JTable table, int row) {
         initComponents();
-        ComboBoxController controllerJabatan = new ComboBoxController(cmbJabatan);
-        ComboBoxController controllerStatus = new ComboBoxController(cmbStatus);
-        controllerJabatan.getData(JabatanQueries.SELECT_ALL_JABATAN, "jabatan");
-        controllerStatus.getData(StatusQueries.SELECT_ALL_STATUS, "status");
+        ComboBoxController controllerJabatan = new ComboBoxController(cmbJabatan, JabatanQueries.SELECT_ALL_JABATAN);
+        ComboBoxController controllerStatus = new ComboBoxController(cmbStatus, StatusQueries.SELECT_ALL_STATUS);
+        controllerJabatan.getData("jabatan");
+        controllerStatus.getData("status");
         this.table = table;
         this.row = row;
     }
@@ -117,6 +117,11 @@ public class PopUpUser extends javax.swing.JDialog {
         txtEmail.setText("Tidak Tersedia");
 
         jButton1.setText("Batal");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Simpan");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -229,6 +234,11 @@ public class PopUpUser extends javax.swing.JDialog {
         userController.updateUser(row);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -2,19 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/view/MainMenus.java</file>
-            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/model/TransaksiMasuk.java</file>
-            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/controller/BarangController.java</file>
-            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/Form/Barang.java</file>
-            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/model/DistributorModel.java</file>
-            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/helper/DistributorQueries.java</file>
-            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/Form/PopUpBarang.java</file>
-            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/view/Splash.java</file>
-            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/controller/DistributorController.java</file>
-            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/view/Login.java</file>
-            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/Form/AddDistributor.java</file>
-            <file>file:/C:/Users/ACER/Documents/NetBeansProjects/Aplikasi-Pergudangan/src/Form/Distributor.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

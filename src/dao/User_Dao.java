@@ -10,42 +10,24 @@ import services.Login_Service;
 import services.Register_Service;
 import services.User_Service;
 
-public class UserDao implements User_Service, Login_Service, Register_Service {
+public class User_Dao implements User_Service, Login_Service, Register_Service {
 
     private Connection con;
     private User user;
 
-    public UserDao() {
+    public User_Dao() {
         con = Config.connectDB();
         user = new User();
     }
 
-    public UserDao(String username, String password) {
+    public User_Dao(String username, String password) {
         con = Config.connectDB();
         user = new User(username, password);
     }
 
-    public UserDao(String password) {
+    public User_Dao(String password) {
         con = Config.connectDB();
         user = new User(password);
-    }
-
-    @Override
-    public List<User> getAllData() {
-        List<User> data = new ArrayList<>();
-        try (Statement statement = con.createStatement()) {
-            ResultSet result = statement.executeQuery(UserQueries.SELECT_ALL_USERS);
-            while (result.next()) {
-//                User user = new User();
-                user.setUsername(result.getString("username"));
-                user.setJabatan(result.getString("jabatan"));
-                user.setStatus(result.getString("status"));
-                data.add(user);
-            }
-        } catch (Exception e) {
-            System.out.println("Error" + e.getMessage());
-        }
-        return data;
     }
 
     @Override
@@ -95,38 +77,30 @@ public class UserDao implements User_Service, Login_Service, Register_Service {
         }
     }
 
-@Override
-public void updateData(User user) {
-    PreparedStatement ps = null;
-    try {
-        ps = con.prepareStatement(UserQueries.UPDATE_USER);
-        ps.setString(1, user.getFullName());
-        ps.setString(2, user.getUsername());
-        ps.setString(3, user.getEmail());
-        ps.setString(4, user.getNoHp());
-        ps.setString(5, user.getAlamat());
-        ps.setInt(6, user.getKodeStatus());
-        ps.setInt(7, user.getKodeJabatan());
-        ps.setInt(8, user.getId());
+    @Override
+    public void updateData(User user) {
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(UserQueries.UPDATE_USER);
+            ps.setString(1, user.getFullName());
+            ps.setString(2, user.getUsername());
+            ps.setString(3, user.getEmail());
+            ps.setString(4, user.getNoHp());
+            ps.setString(5, user.getAlamat());
+            ps.setInt(6, user.getKodeStatus());
+            ps.setInt(7, user.getKodeJabatan());
+            ps.setInt(8, user.getId());
 
-        int rowsUpdated = ps.executeUpdate();
-        if (rowsUpdated > 0) {
-            System.out.println("Update successful!");
-        } else {
-            System.out.println("No rows updated.");
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally {
-        if (ps != null) {
-            try {
-                ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+            int rowsUpdated = ps.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Update successful!");
+            } else {
+                System.out.println("No rows updated.");
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-}
 
     @Override
     public void deleteData(String username) {
@@ -202,5 +176,20 @@ public void updateData(User user) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int getIdByStatus() {
+        ResultSet result = null;
+        int id = 0;
+        try (PreparedStatement ps = con.prepareStatement(UserQueries.SELECT_DATA_BY_STATUS)) {
+            result = ps.executeQuery();
+            while(result.next()){
+                id = result.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return id;
     }
 }

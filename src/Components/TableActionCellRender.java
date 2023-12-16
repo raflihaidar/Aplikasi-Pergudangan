@@ -10,7 +10,6 @@ import javax.swing.table.DefaultTableCellRenderer;
  * @author rafli
  */
 public class TableActionCellRender extends DefaultTableCellRenderer {
-
     @Override
     public Component getTableCellRendererComponent(JTable jtable, Object o, boolean isSeleted, boolean bln1, int row,
             int column) {

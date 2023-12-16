@@ -7,16 +7,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class KlasifikasiModel {
+public class Klasifikasi {
 
     private int kode;
     private String nama;
 
-    public KlasifikasiModel(String nama) {
+    public Klasifikasi(String nama) {
         this.nama = nama;
     }
 
-    public KlasifikasiModel() {
+    public Klasifikasi() {
     }
 
     public String getNama() {

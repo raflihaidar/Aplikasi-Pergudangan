@@ -1,8 +1,9 @@
-package Form;
+package Page;
 
 
 import Components.MyIcon;
 import controller.BarangController;
+import controller.DistributorController;
 import controller.KlasifikasiController;
 import helper.KategoriQueries;
 import helper.SatuanQueries;
@@ -27,6 +28,7 @@ public class Dashboard extends javax.swing.JPanel {
                 BarangController barangController = new BarangController();
                 KlasifikasiController satuanController = new KlasifikasiController();
                 KlasifikasiController kategoriController = new KlasifikasiController();
+                DistributorController distributorController = new DistributorController();
                 
                 
                 card1.setData(new Card(iconBarang, "Barang", barangController.getTotalBarang()));
@@ -35,7 +37,7 @@ public class Dashboard extends javax.swing.JPanel {
                 card4.setData(new Card(iconOutbound, "Barang Keluar", "20"));
                 card5.setData(new Card(iconIncome, "Barang Masuk", "20"));
                 card6.setData(new Card(iconStaff, "Staff", "20"));
-                card7.setData(new Card(iconDistributor, "Distributor", "5"));
+                card7.setData(new Card(iconDistributor, "Distributor", distributorController.getTotalDistributor()));
                 card8.setData(new Card(iconDistributor, "Tanggal", "20"));
                 title.setFont(font);
         }

@@ -21,6 +21,7 @@ public class ActionPanel extends javax.swing.JPanel {
                 event.onEdit(row);
             }
         });
+
         cmdDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -50,6 +51,7 @@ public class ActionPanel extends javax.swing.JPanel {
 
         cmdEdit.setBackground(new Color(42, 199, 80));
         cmdDelete.setBackground(new Color(245, 78, 43));
+
         this.setBackground(Color.WHITE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

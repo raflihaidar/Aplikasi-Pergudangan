@@ -1,30 +1,32 @@
 package model;
 
-import config.Config;
-import helper.BarangQueries;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 public class Barang {
 
+    private int kode;
     private String nama;
     private int harga;
     private int stok;
-    private int satuan;
-    private int kategori;
+    private Satuan satuan = new Satuan();
+    private Kategori kategori = new Kategori();
 
-    public Barang(String nama, int harga, int stok, int satuan, int kategori) {
+    public Barang(int kode, String nama, int harga, int stok, int kategori, int satuan) {
+        this.kode = kode;
         this.nama = nama;
         this.harga = harga;
         this.stok = stok;
-        this.kategori = kategori;
-        this.satuan = satuan;
+        this.kategori.setKode(kategori);
+        this.satuan.setKode(satuan);
     }
 
     public Barang() {
+    }
+
+    public int getKode() {
+        return kode;
+    }
+
+    public void setKode(int kode) {
+        this.kode = kode;
     }
 
     public void setNama(String nama) {
@@ -51,146 +53,35 @@ public class Barang {
         return stok;
     }
 
-    public void setSatuan(int satuan) {
-        this.satuan = satuan;
+    public String getSatuan() {
+        return satuan.getSatuan();
     }
 
-    public int getSatuan() {
-        return satuan;
+    public int getKodeSatuan() {
+        return satuan.getKode();
     }
 
-    public void setKategori(int kategori) {
-        this.kategori = kategori;
+    public void setSatuan(String satuan) {
+        this.satuan.setSatuan(satuan);
     }
 
-    public int getKategori() {
-        return kategori;
+    public void setKodeSatuan(int kode) {
+        this.satuan.setKode(kode);
     }
 
-    public ResultSet getData() {
-        Connection con = Config.connectDB();
-        Statement statement = null;
-        ResultSet result = null;
-        try {
-            statement = con.createStatement();
-            result = statement.executeQuery(BarangQueries.SELECT_ALL_DATA);
-            return result;
-        } catch (SQLException e) {
-            System.out.println("Error disini" + e.getMessage());
-            e.printStackTrace();
-            return null;
-        }
+    public String getKategori() {
+        return kategori.getKategori();
     }
 
-    public ResultSet getSingleData(int kodeBarang) {
-        Connection con = Config.connectDB();
-        PreparedStatement ps = null;
-        ResultSet result = null;
-        try {
-            ps = con.prepareStatement(BarangQueries.SELECT_SINGLE_DATA);
-            ps.setInt(1, kodeBarang);
-            result = ps.executeQuery();
-            return result;
-        } catch (SQLException e) {
-            System.out.println("Error: " + e.getMessage());
-            return null;
-        }
+    public int getKodeKategori() {
+        return kategori.getKode();
     }
 
-    public void deleteData(int kode) {
-        Connection con = Config.connectDB();
-        PreparedStatement ps = null;
-        try {
-            ps = con.prepareStatement(BarangQueries.DELETE_BARANG);
-            ps.setInt(1, kode);
-            ps.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("Error : " + e.getMessage());
-        }
-        if (ps != null) {
-            try {
-                con.close();
-                ps.close();
-            } catch (SQLException e) {
-                /* handle exception */
-                e.printStackTrace();
-            }
-        }
+    public void setKategori(String kategori) {
+        this.kategori.setKategori(kategori);
     }
 
-    public int addData(String nama, int harga, int stok, int kategori, int satuan) {
-        Connection con = Config.connectDB();
-        PreparedStatement ps = null;
-        ResultSet generatedKeys = null;
-        int kode = -1;
-        try {
-            ps = con.prepareStatement(BarangQueries.INSERT_BARANG);
-            ps.setString(1, nama);
-            ps.setInt(2, harga);
-            ps.setInt(3, stok);
-            ps.setInt(4, kategori);
-            ps.setInt(5, satuan);
-            ps.execute();
-
-            generatedKeys = ps.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                kode = generatedKeys.getInt(1);
-            }
-            generatedKeys.close();
-            return kode;
-        } catch (Exception e) {
-            System.out.println("Error :" + e.getMessage());
-            return 0;
-        } finally {
-            if (ps != null) {
-                try {
-                    con.close();
-                    ps.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
-    public void updateData(int kode) {
-        Connection con = Config.connectDB();
-        PreparedStatement ps = null;
-        try {
-            ps = con.prepareStatement(BarangQueries.UPDATE_BARANG);
-            ps.setString(1, nama);
-            ps.setInt(2, harga);
-            ps.setInt(3, stok);
-            ps.setInt(4, kategori);
-            ps.setInt(5, satuan);
-            ps.setInt(6, kode);
-            ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (ps != null) {
-                try {
-                    con.close();
-                    ps.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-    
-    public ResultSet getTotalData(){
-       Connection con = Config.connectDB();
-        Statement statement = null;
-        ResultSet result = null;
-        try {
-            statement = con.createStatement();
-            result = statement.executeQuery(BarangQueries.GET_TOTAL_BARANG);
-            return result;
-        } catch (SQLException e) {
-            System.out.println("Error" + e.getMessage());
-            e.printStackTrace();
-            return null;
-        }
+    public void setKodeKategori(int kode) {
+        this.kategori.setKode(kode);
     }
 }

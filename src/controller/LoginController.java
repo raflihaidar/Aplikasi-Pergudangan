@@ -1,6 +1,6 @@
 package controller;
 
-import dao.UserDao;
+import dao.User_Dao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -9,7 +9,7 @@ import view.MainMenus;
 
 public class LoginController implements ActionListener{
     private Login login;
-    private UserDao userDao;
+    private User_Dao userDao;
     
     public LoginController(Login login){
         this.login = login;
@@ -23,7 +23,7 @@ public class LoginController implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         String username = login.getTxtUsername();
-        userDao = new UserDao(login.getTxtUsername(), login.getTxtPassword());
+        userDao = new User_Dao(login.getTxtUsername(), login.getTxtPassword());
         if(!loginUser()){
             login.setTxtWarning("Username or Password is Invalid");
             login.setTxtUsername("");;
