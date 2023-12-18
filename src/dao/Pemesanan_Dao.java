@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import model.Pemesanan;
 import services.Pemesanan_Service;
@@ -21,8 +22,27 @@ public class Pemesanan_Dao implements Pemesanan_Service {
     }
 
     @Override
-    public List<Pemesanan> getSingleData(int Kode) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Pemesanan> getSingleData(int id) {
+        List<Pemesanan> data = new ArrayList<>();
+        ResultSet result = null;
+        try (PreparedStatement ps = con.prepareStatement(PemesananQueries.GET_SINGLE_PESANAN)) {
+            ps.setInt(1, id);
+            result = ps.executeQuery();
+            while (result.next()) {
+                pemesanan.setId(result.getInt("id"));
+                pemesanan.setDistributor(result.getString("distributor"));
+                pemesanan.setTotal(result.getInt("total"));
+                pemesanan.setTanggal(result.getString("tanggal"));
+                pemesanan.setUser(result.getString("user"));
+                pemesanan.setAlamatDistributor(result.getString("alamat"));
+                pemesanan.setKodeStatus(result.getInt("status"));
+                pemesanan.setStatus(result.getString("nama_status"));
+                data.add(pemesanan);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error getSingle: " + e.getMessage());
+        }
+        return data;
     }
 
     @Override
@@ -63,15 +83,44 @@ public class Pemesanan_Dao implements Pemesanan_Service {
     }
 
     @Override
-    public void deleteData(int kode) {
+    public void updateDetailData(int kodeStatus, int idPemesanan) {
+        PreparedStatement ps = null;
         try {
-            PreparedStatement ps = con.prepareStatement(PemesananQueries.DELETE_PESANAN);
+            ps = con.prepareStatement(PemesananQueries.UPDATE_DETAIL_PEMESANAN);
+            ps.setInt(1, kodeStatus);
+            ps.setInt(2, idPemesanan);
+
+            int rowsUpdated = ps.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Update successful!");
+            } else {
+                System.out.println("No rows updated.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteData(int kode) {
+        PreparedStatement ps = null;
+        Connection con = Config.connectDB();
+        try {
+            ps = con.prepareStatement(PemesananQueries.DELETE_PESANAN);
             ps.setInt(1, kode);
             ps.executeUpdate();
-            con.close();
-            ps.close();
         } catch (Exception e) {
             System.out.println("Error delete : " + e.getMessage());
+        } finally {
+            if (ps != null) {
+                try {
+                    con.close();
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -88,6 +137,23 @@ public class Pemesanan_Dao implements Pemesanan_Service {
             System.out.println("Error : " + e.getMessage());
         }
         return id;
+    }
+
+    @Override
+    public void terminateOrder(int id) {
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(PemesananQueries.BATALKAN_PEMESANAN);
+            ps.setInt(1, id);
+            int rowsUpdated = ps.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Update successful!");
+            } else {
+                System.out.println("No rows updated.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

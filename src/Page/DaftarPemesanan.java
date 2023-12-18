@@ -3,18 +3,11 @@ package Page;
 import Components.TableActionCellEditor;
 import Components.TableActionCellRender;
 import Components.TableActionEvent;
-import Form.PopUpBarang;
 import controller.PemesananController;
-import java.awt.Color;
-import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
 import view.MainMenus;
 
 public class DaftarPemesanan extends javax.swing.JPanel {
-
-    /**
-     * Creates new form Pemesanan
-     */
     private PemesananController controller;
     public DaftarPemesanan(MainMenus mainMenu) {
         initComponents();
@@ -24,7 +17,9 @@ public class DaftarPemesanan extends javax.swing.JPanel {
          TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
-                controller.changePage(new DetailPemesanan());
+                DetailPemesanan detail = new DetailPemesanan(row, table1);
+                controller.getSingleData(row, detail);
+                controller.changePage(detail);
             }
 
             @Override
@@ -165,7 +160,6 @@ public class DaftarPemesanan extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-
         controller.addDataPemesanan();
         controller.changePage(new Pemesanan_Page());
     }//GEN-LAST:event_btnAddActionPerformed

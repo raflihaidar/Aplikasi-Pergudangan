@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package Page;
 
-/**
- *
- * @author rafli
- */
+import Form.ListBarang;
+import java.awt.Color;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+
 public class BarangKeluar extends javax.swing.JPanel {
 
     /**
@@ -138,28 +135,11 @@ public class BarangKeluar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        //
-        //        //            DefaultTableModel model = (DefaultTableModel) table1.getModel();
-        //        // Create a JDialog as the parent for the AddDistributor panel
-        //        PopUpBarang dialog = new PopUpBarang(table1, false);
-        //
-        //        // Create an instance of AddDistributor
-        //
-        //        // Add the AddDistributor panel to the dialog
-        //
-        //        // Set properties for the dialog (adjust as needed)
-        //        dialog.setSize(934, 573);
-        //        dialog.setLocationRelativeTo(this); // Center the dialog relative to the Distributor panel
-        //
-        //        // Make the dialog modal, blocking input to other windows
-        //        dialog.setModal(true);
-        //        dialog.getContentPane().setBackground(Color.WHITE);
-        //
-        //        // Set the default close operation to dispose the dialog
-        //        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        //
-        //        // Set the dialog visible
-        //        dialog.setVisible(true);
+        ListBarang list = new ListBarang();
+        list.setLocationRelativeTo(this);
+        list.setModal(true);
+        list.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        list.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
 
 
@@ -173,4 +153,12 @@ public class BarangKeluar extends javax.swing.JPanel {
     private Components.Table table1;
     private javax.swing.JScrollPane tblPesanan;
     // End of variables declaration//GEN-END:variables
+    
+    public JButton getBtnAdd(){
+        return btnAdd;
+    }
+
+
+
+
 }

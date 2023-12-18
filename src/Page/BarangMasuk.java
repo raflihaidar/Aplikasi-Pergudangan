@@ -1,20 +1,43 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package Page;
 
-/**
- *
- * @author rafli
- */
+import Components.TableActionCellEditor;
+import Components.TableActionCellRender;
+import Components.TableActionEvent;
+import controller.BarangMasukController;
+import helper.Util;
+import view.MainMenus;
+
 public class BarangMasuk extends javax.swing.JPanel {
 
-    /**
-     * Creates new form BarangMasuk
-     */
-    public BarangMasuk() {
+    public BarangMasuk(MainMenus main) {
         initComponents();
+        BarangMasukController controller = new BarangMasukController(table1);
+        controller.getData();
+
+        TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void onEdit(int row) {
+                DetailBarangMasuk_Page detail = new DetailBarangMasuk_Page(row, table1);
+                controller.getSingleData(row, detail);
+                Util.changePage(detail, main);
+            }
+
+            @Override
+            public void onDelete(int row) {
+//                try {
+//                    controller.deleteBarang();
+//                } catch (Exception e) {
+//                    System.out.println("Error : " + e.getMessage());
+//                }
+            }
+
+            @Override
+            public void onAdd(int row) {
+                System.out.println("View row : " + row);
+            }
+        };
+        table1.getColumnModel().getColumn(6).setCellRenderer(new TableActionCellRender());
+        table1.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(event));
     }
 
     /**
@@ -40,17 +63,14 @@ public class BarangMasuk extends javax.swing.JPanel {
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "Kode Barang Masuk", "Tanggal", "Jumlah", "Id Distributor", "Id User", "Action"
+                "Kode Barang Masuk", "Id User", "Id Distributor", "Tanggal", "Jumlah", "Status", "Action"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

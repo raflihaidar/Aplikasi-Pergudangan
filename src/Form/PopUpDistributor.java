@@ -248,7 +248,6 @@ public class PopUpDistributor extends javax.swing.JDialog {
             } else {
                 distrib.addDataDistributor(table);
             }
-            JOptionPane.showMessageDialog(this, "Succecfull");
         }
 
         this.setVisible(false);

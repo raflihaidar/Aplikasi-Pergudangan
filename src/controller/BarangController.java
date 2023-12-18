@@ -41,7 +41,8 @@ public class BarangController {
         getterDao = new Getter_Dao();
     }
 
-    public void getData(DefaultTableModel model) {
+    public void getData() {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
         ResultSet result = getterDao.getData(BarangQueries.SELECT_ALL_DATA);
         try {
             while (result.next()) {
@@ -72,7 +73,6 @@ public class BarangController {
             }
             model = (DefaultTableModel) table.getModel();
             model.removeRow(row);
-            System.out.println("delete data berhasil");
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
         }
@@ -87,8 +87,6 @@ public class BarangController {
         int kode_satuan = popUp.getKodeSatuan();
         String kategori = popUp.getKategori();
         String satuan = popUp.getSatuan();
-        System.out.println(harga);
-        System.out.println(stok);
         this.barang = new Barang(kode, nama, harga, stok, kode_kategori, kode_satuan);
         int kodeBarang = barangDao.addData(barang);
         DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -106,18 +104,20 @@ public class BarangController {
             popUp.setHarga(String.valueOf(barang.getHarga()));
             popUp.setStok(String.valueOf(barang.getStok()));
             popUp.setKategori(barang.getKodeKategori() - 1);
-            popUp.setSatuan(barang.getKodeSatuan() - 1);
+            popUp.setSatuan(barang.getSatuan());
+            System.out.println(barang.getSatuan());
         }
     }
 
     public void updateDataBarang(int row) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
+        System.out.println(popUp.getKodeSatuan());
         barang = new Barang(popUp.getKode(), popUp.getName(), popUp.getHarga(), popUp.getStok(), popUp.getKodeKategori(), popUp.getKodeSatuan());
         System.out.println(popUp.getStok());
         barangDao.updateData(barang);
         JOptionPane.showMessageDialog(null, "Berhasil Update Data");
         model.setRowCount(0);
-        getData(model);
+        getData();
     }
 
     public String getTotalBarang() {

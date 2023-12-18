@@ -88,7 +88,8 @@ public class DistributorController {
 
     public void updateDataDistributor(int row) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        distrib = new Distributor(popUp.getTxtNamaDistributor(), popUp.getTxtAlamatDistributor(), popUp.getTxtTeleponDistributor());
+        System.out.println("popUp : " + popUp.getTxtIdDistributor());
+        distrib = new Distributor(Integer.parseInt(popUp.getTxtIdDistributor()), popUp.getTxtNamaDistributor(), popUp.getTxtAlamatDistributor(), popUp.getTxtTeleponDistributor());
         distributorDao.updateData(distrib);
         JOptionPane.showMessageDialog(null, "Berhasil Update Data");
         model.setRowCount(0);
