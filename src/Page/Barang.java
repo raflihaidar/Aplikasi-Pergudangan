@@ -25,7 +25,7 @@ public class Barang extends javax.swing.JPanel {
         initComponents();
         title.setFont(font);
         BarangController controller = new BarangController(table1);
-        controller.getData((DefaultTableModel) table1.getModel());
+        controller.getData();
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {

@@ -37,6 +37,11 @@ public class DetailPemesananController {
         pemesananModel = new Pemesanan();
     }
 
+    public DetailPemesananController(JTable table) {
+        this.table = table;
+        detailDao = new DetailPemesanan_Dao();
+    }
+
     public void getData(DefaultTableModel model) {
         ResultSet result = getterDao.getData(DetailPesananQueries.SELECT_ALL_DETAIL);
         try {
@@ -50,6 +55,29 @@ public class DetailPemesananController {
                     detail.getSubTotal()});
             }
             table.setModel(model);
+            result.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getSingleData(int row, JTable table) {
+        DefaultTableModel modelPemesanan = (DefaultTableModel) table.getModel();
+        DefaultTableModel modelDetail = (DefaultTableModel) this.table.getModel();
+        int idPesanan = Integer.parseInt(modelPemesanan.getValueAt(row, 0).toString());
+        try {
+            ResultSet result = detailDao.getSingleData(idPesanan);
+            while (result.next()) {
+                DetailPesanan detail = new DetailPesanan();
+                detail.setKodeBarang(result.getInt("kode"));
+                detail.setNamaBarang(result.getString("nama"));
+                detail.setHargaBarang(result.getInt("harga"));
+                detail.setKuantitas(result.getInt("kuantitas"));
+                detail.setSubTotal(result.getInt("subtotal"));
+                modelDetail.addRow(new Object[]{detail.getKodeBarang(), detail.getNamaBarang(), detail.getHargaBarang(), detail.getKuantitas(),
+                    detail.getSubTotal()});
+            }
+            this.table.setModel(modelDetail);
             result.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -74,10 +102,9 @@ public class DetailPemesananController {
         if (model.getRowCount() == 0) {
             JOptionPane.showMessageDialog(pemesanan, "Table is Empty");
         } else {
-            System.out.println(model.getRowCount());
             try {
                 for (int i = 0; i < model.getRowCount(); i++) {
-                    int idPesanan = pesananDao.getLastId() + 1;
+                    int idPesanan = pesananDao.getLastId();
                     int kodeBarang = Integer.parseInt(model.getValueAt(i, 0).toString());
                     int kuantitas = Integer.parseInt(model.getValueAt(i, 3).toString());
                     int subTotal = Integer.parseInt(model.getValueAt(i, 4).toString());

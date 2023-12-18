@@ -24,13 +24,13 @@ public class Pemesanan_Page extends javax.swing.JPanel {
 
         ComboBoxController barangController = new ComboBoxController(cmbBarang, BarangQueries.SELECT_ALL_DATA, BarangQueries.SELECT_ID, "kode", txtKodeBarang);
         barangController.getData("nama", -1);
-        
+
         cmbBarang.addActionListener(barangController);
-        
+
         txtTanggal.setText(TimeStampGenerate.generateTimeStamp());
-        
+
         detailController = new DetailPemesananController(tablePemesanan, this);
-        txtIdPemesanan.setText(String.valueOf(detailController.getLastId() + 1));
+        txtIdPemesanan.setText(String.valueOf(detailController.getLastId()));
     }
 
     /**
@@ -136,6 +136,11 @@ public class Pemesanan_Page extends javax.swing.JPanel {
 
         cmbDistrbutor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbDistrbutor.setSelectedIndex(-1);
+        cmbDistrbutor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbDistrbutorActionPerformed(evt);
+            }
+        });
 
         btnAdd.setText("Simpan");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -350,6 +355,10 @@ public class Pemesanan_Page extends javax.swing.JPanel {
     private void cmbBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBarangActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbBarangActionPerformed
+
+    private void cmbDistrbutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDistrbutorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbDistrbutorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
