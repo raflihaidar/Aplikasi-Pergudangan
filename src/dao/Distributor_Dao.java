@@ -48,7 +48,7 @@ public class Distributor_Dao implements Distributor_Service {
             ps.setString(2, distributor.getAlamat());
             ps.setString(3, distributor.getTelepon());
             ps.execute();
-            
+
             generatedKeys = ps.getGeneratedKeys();
             if (generatedKeys.next()) {
                 id = generatedKeys.getInt(1);
@@ -62,7 +62,7 @@ public class Distributor_Dao implements Distributor_Service {
                 e.printStackTrace();
             }
         }
-        
+
         return id;
     }
 
@@ -75,7 +75,7 @@ public class Distributor_Dao implements Distributor_Service {
             ps.setString(2, distributor.getTelepon());
             ps.setString(3, distributor.getAlamat());
             ps.setInt(4, distributor.getId());
-
+            System.out.println(distributor.getId());
             int rowsUpdated = ps.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("Update successful!");
@@ -89,14 +89,23 @@ public class Distributor_Dao implements Distributor_Service {
 
     @Override
     public void deleteData(int id) {
+        Connection con = Config.connectDB();
+        PreparedStatement ps = null;
         try {
-            PreparedStatement ps = con.prepareStatement(DistributorQueries.DELETE_DATA);
+            ps = con.prepareStatement(DistributorQueries.DELETE_DATA);
             ps.setInt(1, id);
-            ps.executeUpdate();
-            con.close();
-            ps.close();
+            ps.executeUpdate();;
         } catch (Exception e) {
             System.out.println("Error delete : " + e.getMessage());
+        } finally {
+            if (ps != null) {
+                try {
+                    con.close();
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

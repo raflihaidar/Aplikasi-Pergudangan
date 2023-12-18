@@ -12,6 +12,10 @@ public interface Pemesanan_Service {
     public void addData(Pemesanan pemesanan);
 
     public void updateData(Pemesanan pemesanan);
+    
+    public void updateDetailData(int kodeStatus, int idPemesanan);
 
     public void deleteData(int kode);
+    
+    public void terminateOrder(int id);
 }

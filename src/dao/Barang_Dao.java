@@ -31,7 +31,7 @@ public class Barang_Dao implements Barang_Service {
                 barang.setHarga(result.getInt("harga"));
                 barang.setStok(result.getInt("stok"));
                 barang.setKodeKategori(result.getInt("kategori"));
-                barang.setKodeSatuan(result.getInt("satuan"));
+                barang.setSatuan(result.getString("satuan"));
                 data.add(barang);
             }
         } catch (SQLException e) {
@@ -93,14 +93,42 @@ public class Barang_Dao implements Barang_Service {
 
     @Override
     public void deleteData(int kode) {
+        PreparedStatement ps = null;
+        Connection con = Config.connectDB();
         try {
-            PreparedStatement ps = con.prepareStatement(BarangQueries.DELETE_BARANG);
+            ps = con.prepareStatement(BarangQueries.DELETE_BARANG);
             ps.setInt(1, kode);
             ps.executeUpdate();
-            con.close();
-            ps.close();
         } catch (Exception e) {
             System.out.println("Error delete : " + e.getMessage());
+        } finally {
+            if (ps != null) {
+                try {
+                    con.close();
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void updateStok(int kuantitas, int kode) {
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(BarangQueries.UPDATE_STOK);
+            ps.setInt(1, kuantitas);
+            ps.setInt(2, kode);
+
+            int rowsUpdated = ps.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Update successful!");
+            } else {
+                System.out.println("No rows updated.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

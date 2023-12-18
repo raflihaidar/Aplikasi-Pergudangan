@@ -9,6 +9,13 @@ public class Distributor {
     private String alamat;
     private String tanggalDaftar;
 
+    public Distributor(int id, String nama, String alamat, String no_tlp) {
+        this.id = id;
+        this.nama = nama;
+        this.alamat = alamat;
+        this.no_tlp = no_tlp;
+    }
+
     public Distributor(String nama, String alamat, String no_tlp) {
         this.nama = nama;
         this.alamat = alamat;

@@ -330,8 +330,8 @@ public class PopUpBarang extends javax.swing.JDialog {
         return cmbSatuan.getSelectedItem().toString();
     }
 
-    public void setSatuan(int kode) {
-        cmbSatuan.setSelectedIndex(kode);
+    public void setSatuan(String satuan){
+        cmbSatuan.setSelectedItem(satuan);
     }
 
 }

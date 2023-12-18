@@ -21,7 +21,7 @@ public class ComboBox_Dao {
                 id = result.getInt(column);
             }
         } catch (SQLException e) {
-            System.out.println("Error getSingle: " + e.getMessage());
+            System.out.println("Error di comboBox: " + e.getMessage());
         }
         return id;
     }
@@ -38,4 +38,17 @@ public class ComboBox_Dao {
         }
         return id;
     }
+
+//    public int getIdByName(String query, String column, String username) {
+//        ResultSet result = null;
+//        int id = 0;
+//        try (PreparedStatement ps = con.prepareStatement(query)) {
+//            ps.setString(1, username);
+//            result = ps.executeQuery();
+//            return id = Integer.parseInt(result.getString(column));
+//        } catch (SQLException e) {
+//            System.out.println("Error getSingle: " + e.getMessage());
+//        }
+//        return id;
+//    }
 }

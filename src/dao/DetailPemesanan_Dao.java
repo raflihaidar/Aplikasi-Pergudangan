@@ -13,7 +13,7 @@ public class DetailPemesanan_Dao implements DetailPesanan_Service {
 
     public DetailPemesanan_Dao() {
         con = Config.connectDB();
-        DetailPesanan detail = new DetailPesanan();
+        detail = new DetailPesanan();
     }
 
     @Override
@@ -27,6 +27,18 @@ public class DetailPemesanan_Dao implements DetailPesanan_Service {
         } catch (Exception e) {
             System.out.println("Error disini ? :" + e.getMessage());
         }
+    }
+
+    public ResultSet getSingleData(int idPemesanan) {
+        ResultSet result = null;
+        try{
+            PreparedStatement ps = con.prepareStatement(DetailPesananQueries.GET_SINGLE_PEMESANAN);
+            ps.setInt(1, idPemesanan);
+            result = ps.executeQuery();
+        } catch (SQLException e) {
+            System.out.println("Error getSingle: " + e.getMessage());
+        }
+        return result;
     }
 
     public void closeConnection() {

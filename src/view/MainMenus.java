@@ -11,7 +11,6 @@ import Page.Distributor;
 import Page.Kategori;
 import Page.DaftarPemesanan;
 import Page.Satuan;
-import Page.Staff;
 import Page.User;
 import controller.UserController;
 import java.awt.Component;
@@ -324,7 +323,6 @@ public class MainMenus extends javax.swing.JFrame {
         ImageIcon iconTransaction = MyIcon.getIcon("transaction");
         ImageIcon iconDashboard = MyIcon.getIcon("dashboard");
         ImageIcon iconReport = MyIcon.getIcon("report");
-        ImageIcon iconStaff = MyIcon.getIcon("staff");
         ImageIcon iconItem = MyIcon.getIcon("item");
         ImageIcon iconDistributor = MyIcon.getIcon("distributor-2");
         ImageIcon iconSettings = MyIcon.getIcon("settings");
@@ -353,16 +351,6 @@ public class MainMenus extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent ae) {
                 content.removeAll();
                 content.add(new Distributor());
-                content.repaint();
-                content.revalidate();
-            }
-        });
-
-        MenuItem menuStaff = new MenuItem(iconStaff, false, "Staff", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                content.removeAll();
-                content.add(new Staff());
                 content.repaint();
                 content.revalidate();
             }
@@ -402,7 +390,7 @@ public class MainMenus extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 content.removeAll();
-                content.add(new BarangMasuk());
+                content.add(new BarangMasuk(MainMenus.this));
                 content.repaint();
                 content.revalidate();
             }
@@ -443,15 +431,15 @@ public class MainMenus extends javax.swing.JFrame {
             }
         });
         MenuItem menuSettings2 = new MenuItem(iconHakAkses, true, "Hak Akses", null);
-        MenuItem menuSettings3 = new MenuItem(iconLogout, true, "Log Out", new ActionListener() {
+        MenuItem logOut = new MenuItem(iconLogout, false, "Log Out", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 controller.logOutConfirm();
             }
         });
-        MenuItem menuSettings = new MenuItem(iconSettings, false, "Pengaturan", null, menuSettings1, menuSettings2, menuSettings3);
+        MenuItem menuSettings = new MenuItem(iconSettings, false, "Pengaturan", null, menuSettings1, menuSettings2);
 
-        addMenu(menuDashboard, menuMaster, menuStaff, menuDistributor, menuTransaction, menuReport, menuSettings);
+        addMenu(menuDashboard, menuMaster, menuDistributor, menuTransaction, menuReport, menuSettings, logOut);
     }
 
     private void addMenu(MenuItem... menu) {
