@@ -34,7 +34,7 @@ public class DetailBarangMasuk_Dao implements DetailBarangMasuk_Service {
         try {
             ps = con.prepareStatement(DetailBarangMasukQueries.ADD_DATA);
             ps.setInt(1, detail.getKodeBarang());
-            ps.setInt(2, detail.getKodeBarangMasuk());
+            ps.setInt(2, detail.getIdTransaksi());
             ps.setInt(3, detail.getKuantitas());
             ps.setInt(4, detail.getSubTotal());
             ps.execute();

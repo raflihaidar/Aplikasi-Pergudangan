@@ -11,7 +11,7 @@ public class DaftarPemesanan extends javax.swing.JPanel {
     private PemesananController controller;
     public DaftarPemesanan(MainMenus mainMenu) {
         initComponents();
-        controller = new PemesananController(table1, this, mainMenu);
+        controller = new PemesananController(table1, mainMenu);
         controller.getData((DefaultTableModel) table1.getModel());
         
          TableActionEvent event = new TableActionEvent() {
@@ -25,7 +25,7 @@ public class DaftarPemesanan extends javax.swing.JPanel {
             @Override
             public void onDelete(int row) {
                 try{
-                    controller.deleteBarang();
+                    controller.deleteData();
                 }catch(Exception e){
                     System.out.println("Error : " + e.getMessage());
                 }
@@ -160,7 +160,7 @@ public class DaftarPemesanan extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        controller.addDataPemesanan();
+        controller.addData();
         controller.changePage(new Pemesanan_Page());
     }//GEN-LAST:event_btnAddActionPerformed
 

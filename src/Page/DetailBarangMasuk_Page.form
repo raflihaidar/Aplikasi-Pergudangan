@@ -179,7 +179,7 @@
                                                       </Group>
                                                       <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
                                                       <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="jLabel4" min="-2" pref="82" max="-2" attributes="0"/>
+                                                          <Component id="lblDistributor" min="-2" pref="82" max="-2" attributes="0"/>
                                                           <Component id="jLabel3" alignment="0" min="-2" pref="87" max="-2" attributes="0"/>
                                                           <Component id="txtIdPemesanan" alignment="0" min="-2" pref="145" max="-2" attributes="0"/>
                                                           <Component id="txtDistributor" min="-2" pref="204" max="-2" attributes="0"/>
@@ -196,7 +196,7 @@
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                                                       <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="jLabel6" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
+                                                          <Component id="lblAlamat" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
                                                           <Component id="jLabel10" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
                                                           <Component id="txtTglPemesanan" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
                                                           <Component id="txtAlamatDistributor" alignment="0" min="-2" pref="168" max="-2" attributes="0"/>
@@ -225,7 +225,7 @@
                                                           </Group>
                                                           <Group type="102" alignment="0" attributes="0">
                                                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                                              <Component id="cmbStatus" min="-2" pref="121" max="-2" attributes="0"/>
+                                                              <Component id="cmbStatus" min="-2" pref="167" max="-2" attributes="0"/>
                                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                                           </Group>
                                                       </Group>
@@ -272,8 +272,8 @@
                                               </Group>
                                           </Group>
                                           <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblAlamat" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lblDistributor" alignment="3" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
@@ -375,7 +375,7 @@
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIdPemesananActionPerformed"/>
                           </Events>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="jLabel4">
+                        <Component class="javax.swing.JLabel" name="lblDistributor">
                           <Properties>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -404,7 +404,7 @@
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDistributorActionPerformed"/>
                           </Events>
                         </Component>
-                        <Component class="javax.swing.JLabel" name="jLabel6">
+                        <Component class="javax.swing.JLabel" name="lblAlamat">
                           <Properties>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="0" green="0" red="0" type="rgb"/>
@@ -585,10 +585,14 @@
                         <Component class="javax.swing.JComboBox" name="cmbStatus">
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="3">
-                                <StringItem index="0" value="Diterima"/>
-                                <StringItem index="1" value="Disimpan"/>
-                                <StringItem index="2" value="Dibatalkan"/>
+                              <StringArray count="7">
+                                <StringItem index="0" value="Sedang di Proses"/>
+                                <StringItem index="1" value="Dikirim"/>
+                                <StringItem index="2" value="Diterima"/>
+                                <StringItem index="3" value="Dibatalkan"/>
+                                <StringItem index="4" value="Disimpan"/>
+                                <StringItem index="5" value=" "/>
+                                <StringItem index="6" value=" "/>
                               </StringArray>
                             </Property>
                             <Property name="enabled" type="boolean" value="false"/>

@@ -23,7 +23,6 @@ public class PemesananController {
 
     private JTable table;
     private MainMenus mainMenu;
-    private DaftarPemesanan daftarPemesanan;
     private Pemesanan pemesanan;
     private List<Pemesanan> data;
     private Pemesanan_Page pemesananPage = new Pemesanan_Page();
@@ -42,12 +41,11 @@ public class PemesananController {
         this.pemesananDao = new Pemesanan_Dao();
         this.bmController = new BarangMasukController(detail);
         this.table = table;
-         this.detailBmController = new DetailBarangMasukController(table);
+        this.detailBmController = new DetailBarangMasukController(table);
     }
 
-    public PemesananController(JTable table, DaftarPemesanan daftarPemesanan, MainMenus mainMenu) {
+    public PemesananController(JTable table, MainMenus mainMenu) {
         this.mainMenu = mainMenu;
-        this.daftarPemesanan = daftarPemesanan;
         this.pemesanan = new Pemesanan();
         this.detail = new DetailPemesanan();
         this.getterDao = new Getter_Dao();
@@ -69,29 +67,13 @@ public class PemesananController {
                 pemesanan.setStatus(result.getString("status"));
                 ;
                 pemesanan.setTotal(result.getInt("total"));
-                model.addRow(new Object[] { pemesanan.getId(), pemesanan.getIdDistributor(), pemesanan.getIdUser(),
-                        pemesanan.getTanggal(), pemesanan.getTotal(), pemesanan.getStatus() });
+                model.addRow(new Object[]{pemesanan.getId(), pemesanan.getIdDistributor(), pemesanan.getIdUser(),
+                    pemesanan.getTanggal(), pemesanan.getTotal(), pemesanan.getStatus()});
             }
             table.setModel(model);
             result.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-    }
-
-    public void getDataList(String query, String column, JList<String> Jlist) {
-        ResultSet result = getterDao.getData(query);
-        DefaultListModel<String> listModel = new DefaultListModel<>();
-        try {
-            while (result.next()) {
-                String status = result.getString(column);
-                listModel.addElement(status);
-                System.out.println(status);
-            }
-            Jlist.setModel(listModel);
-            result.close();
-        } catch (SQLException e) {
-            System.out.println("Gagal memuat data");
         }
     }
 
@@ -110,25 +92,29 @@ public class PemesananController {
         }
     }
 
-    public void addDataPemesanan() {
+    public void addData() {
         int idUser = userDao.getIdByStatus();
         this.pemesanan = new Pemesanan(idUser);
         pemesananDao.addData(pemesanan);
     }
 
-    public void deleteBarang() {
+    public void deleteData() {
         try {
             DefaultTableModel model = (DefaultTableModel) table.getModel();
             int row = table.getSelectedRow();
             int kode = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
-            System.out.println(kode);
-            pemesananDao.deleteData(kode);
-            if (table.isEditing()) {
-                table.getCellEditor().stopCellEditing();
+            int option = JOptionPane.showConfirmDialog(null, "Apakah Anda Yakin Ingin Menghapus Pesanan", "Question", JOptionPane.YES_NO_OPTION);
+            if (option == 0) {
+                JOptionPane.showMessageDialog(null, "Pesanan Berhasil Dihapus", "Success", JOptionPane.INFORMATION_MESSAGE);
+                pemesananDao.deleteData(kode);
+                if (table.isEditing()) {
+                    table.getCellEditor().stopCellEditing();
+                }
+                model = (DefaultTableModel) table.getModel();
+                model.removeRow(row);
+            }else{
+                JOptionPane.showMessageDialog(null, "Gagal Menghapus Pesanan", "Error", JOptionPane.WARNING_MESSAGE);
             }
-            model = (DefaultTableModel) table.getModel();
-            model.removeRow(row);
-            System.out.println("delete data berhasil");
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
         }
@@ -141,6 +127,7 @@ public class PemesananController {
         mainMenu.getContent().revalidate();
     }
 
+    
     public void terminateOrder(int id) {
         data = pemesananDao.getSingleData(Integer.parseInt(detail.getTxtIdPemesanan()));
         for (Pemesanan pemesanan : data) {

@@ -6,21 +6,10 @@ package model;
  */
 public class DetailBarangMasuk extends DetailTransaksi {
 
-    private BarangMasuk barangMasuk = new BarangMasuk();
-
-    public DetailBarangMasuk(int kodeBarang, int kodeBarangMasuk, int kuantitas, int subtotal) {
-        super(kodeBarang, kuantitas, subtotal);
-        barangMasuk.setIdPemesanan(kodeBarangMasuk);
+    public DetailBarangMasuk(int kodeBarangMasuk, int kodeBarang, int kuantitas, int subtotal) {
+        super(kodeBarangMasuk, kodeBarang, kuantitas, subtotal);
     }
 
     public DetailBarangMasuk() {
-    }
-
-    public int getKodeBarangMasuk() {
-        return barangMasuk.getIdPemesanan();
-    }
-
-    public void setKodeBarangMasuk(int id) {
-        barangMasuk.setIdPemesanan(id);
     }
 }

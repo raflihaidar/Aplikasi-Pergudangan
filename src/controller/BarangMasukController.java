@@ -14,6 +14,7 @@ import java.sql.*;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import Page.DetailBarangMasuk_Page;
+import javax.swing.JOptionPane;
 
 public class BarangMasukController {
 
@@ -51,7 +52,7 @@ public class BarangMasukController {
                 barang.setIdPemesanan(result.getInt("id"));
                 barang.setUsername(result.getString("user"));
                 barang.setDistributor(result.getString("distributor"));
-                barang.setTanggalMasuk(result.getString("tgl_masuk"));
+                barang.setTanggalMasuk(result.getString("tanggal"));
                 barang.setStatusPemesanan(result.getString("status"));
                 barang.setJumlah(result.getInt("jumlah"));
                 model.addRow(new Object[]{barang.getIdPemesanan(), barang.getUsername(), barang.getDistributor(), barang.getTanggalMasuk(), barang.getJumlah(), barang.getStatusPemesanan()});
@@ -74,6 +75,7 @@ public class BarangMasukController {
             detail.setTxtAlamatDistributor(barang.getAlamatDistributor());
             detail.setTxtIdPemesanan(String.valueOf(barang.getIdPemesanan()));
             detail.setTxtStatus(barang.getStatusPemesanan());
+            System.out.println(barang.getStatusPemesanan());
             detail.setTxtKeterangan(barang.getKeterangan());
         }
     }
@@ -81,12 +83,31 @@ public class BarangMasukController {
     public void addDataBarang() {
         int idUser = cb.getDataById(UserQueries.SELECT_ID_BY_NAME, "id", detail.getTxtUser());
         int idDistributor = cb.getDataById(DistributorQueries.SELECT_ID, "id", detail.getDistributor());
-        System.out.println("id user " + idUser);
-        System.out.println("id distributor " + idDistributor);
-        System.out.println("nama dsitributor " + detail.getDistributor());
         String tanggal = detail.getTxtTglPemesanan();
         int jumlah = detail.getJumlahBarang();
         this.barang = new BarangMasuk(idUser, idDistributor, tanggal, jumlah);
         barangMasukDao.addData(barang);
     }
+    
+//        public void deleteData() {
+//        try {
+//            DefaultTableModel model = (DefaultTableModel) table.getModel();
+//            int row = table.getSelectedRow();
+//            int kode = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
+//            int option = JOptionPane.showConfirmDialog(null, "Apakah Anda Yakin Ingin Menghapus Pesanan", "Question", JOptionPane.YES_NO_OPTION);
+//            if (option == 0) {
+//                JOptionPane.showMessageDialog(null, "Pesanan Berhasil Dihapus", "Success", JOptionPane.INFORMATION_MESSAGE);
+//                pemesananDao.deleteData(kode);
+//                if (table.isEditing()) {
+//                    table.getCellEditor().stopCellEditing();
+//                }
+//                model = (DefaultTableModel) table.getModel();
+//                model.removeRow(row);
+//            }else{
+//                JOptionPane.showMessageDialog(null, "Gagal Menghapus Pesanan", "Error", JOptionPane.WARNING_MESSAGE);
+//            }
+//        } catch (Exception e) {
+//            System.out.println("Error : " + e.getMessage());
+//        }
+//    }
 }

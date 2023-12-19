@@ -19,7 +19,7 @@ public class DetailPemesanan_Dao implements DetailPesanan_Service {
     @Override
     public void addData(DetailPesanan detail) {
         try (PreparedStatement ps = con.prepareStatement(DetailPesananQueries.INSERT_DATA)) {
-            ps.setInt(1, detail.getPemesanan());
+            ps.setInt(1, detail.getIdTransaksi());
             ps.setInt(2, detail.getBarang());
             ps.setInt(3, detail.getKuantitas());
             ps.setInt(4, detail.getSubTotal());
