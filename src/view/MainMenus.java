@@ -400,7 +400,7 @@ public class MainMenus extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 content.removeAll();
-                content.add(new BarangKeluar());
+                content.add(new BarangKeluar(MainMenus.this));
                 content.repaint();
                 content.revalidate();
             }

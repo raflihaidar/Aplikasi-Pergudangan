@@ -5,6 +5,7 @@ import dao.BarangMasuk_Dao;
 import dao.Barang_Dao;
 import dao.DetailBarangMasuk_Dao;
 import dao.Getter_Dao;
+import helper.BarangQueries;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -49,6 +50,7 @@ public class DetailBarangMasukController {
         DefaultTableModel modelPemesanan = (DefaultTableModel) table.getModel();
         DefaultTableModel modelDetail = (DefaultTableModel) this.table.getModel();
         int kode_barang_masuk = Integer.parseInt(modelPemesanan.getValueAt(row, 0).toString());
+        System.out.println(kode_barang_masuk);
         try {
             ResultSet result = detailDao.getSingleData(kode_barang_masuk);
             while (result.next()) {
@@ -79,7 +81,7 @@ public class DetailBarangMasukController {
                     int kodeBarangMasuk = barangMasukDao.getLastId();
                     int kuantitas = Integer.parseInt(model.getValueAt(i, 3).toString());
                     int subTotal = Integer.parseInt(model.getValueAt(i, 4).toString());
-                    this.detail = new DetailBarangMasuk(kodeBarang, kodeBarangMasuk, kuantitas, subTotal);
+                    this.detail = new DetailBarangMasuk(kodeBarangMasuk, kodeBarang, kuantitas, subTotal);
                     detailDao.addData(detail);
                 }
             } catch (Exception e) {
@@ -96,7 +98,7 @@ public class DetailBarangMasukController {
             for (int i = 0; i < model.getRowCount(); i++) {
                 int kodeBarang = Integer.parseInt(model.getValueAt(i, 0).toString());
                 int kuantitas = Integer.parseInt(model.getValueAt(i, 3).toString());
-                barangDao.updateStok(kuantitas, kodeBarang);
+                barangDao.updateStok(kuantitas, kodeBarang, BarangQueries.TAMBAH_STOK);
             }
             barangMasukDao.updateData(5, detailPage.getTxtKeterangan(), Integer.parseInt(detailPage.getTxtIdPemesanan()));
                 detailPage.setTxtStatus("Disimpan");

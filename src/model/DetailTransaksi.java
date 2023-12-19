@@ -2,13 +2,13 @@ package model;
 
 public class DetailTransaksi {
 
-    private Pemesanan pemesanan = new Pemesanan();
-    Barang barang = new Barang();
+    private int idTransaksi;
+    private Barang barang = new Barang();
     private int kuantitas;
     private int subTotal;
 
-    public DetailTransaksi(int idPesanan, int kodeBarang, int kuantitas, int subTotal) {
-        pemesanan.setId(idPesanan);
+    public DetailTransaksi(int id, int kodeBarang, int kuantitas, int subTotal) {
+        this.idTransaksi = id;
         barang.setKode(kodeBarang);
         this.kuantitas = kuantitas;
         this.subTotal = subTotal;
@@ -23,12 +23,12 @@ public class DetailTransaksi {
     public DetailTransaksi() {
     }
 
-    public int getPemesanan() {
-        return pemesanan.getId();
+    public int getIdTransaksi() {
+        return idTransaksi;
     }
 
-    public void setPemesanan(int id) {
-        this.pemesanan.setId(id);
+    public void setIdTransaksi(int id) {
+        idTransaksi = id;
     }
 
     public int getBarang() {

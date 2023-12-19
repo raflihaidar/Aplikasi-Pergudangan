@@ -1,5 +1,6 @@
 package Page;
 
+import controller.DetailBarangKeluarController;
 import controller.DetailBarangMasukController;
 import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
@@ -9,28 +10,42 @@ import javax.swing.JTextField;
 
 public class DetailBarangMasuk_Page extends javax.swing.JPanel {
 
-    /**
-     * Creates new form DetailBarangMasuk
-     */
-    public DetailBarangMasuk_Page(int row, JTable table) {
+    DetailBarangMasukController detailBmController;
+    DetailBarangKeluarController detailBkController;
+
+    public DetailBarangMasuk_Page(int row, JTable table, String page) {
         initComponents();
-        DetailBarangMasukController detailController = new DetailBarangMasukController(tableDetailBarang, this);
-        detailController.getSingleData(row, table);
         simpan.setCursor(new Cursor(Cursor.HAND_CURSOR));
         batal.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        
+
+        if (page.equals("Barang Keluar")) {
+            detailBkController = new DetailBarangKeluarController(tableDetailBarang, this);
+            detailBkController.getSingleData(row, table);
+            txtDistributor.setVisible(false);
+            txtAlamatDistributor.setVisible(false);
+            lblDistributor.setVisible(false);
+            lblAlamat.setVisible(false);
+        } else {
+            detailBmController = new DetailBarangMasukController(tableDetailBarang, this);
+            detailBmController.getSingleData(row, table);
+        }
+
         simpan.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                detailController.updateStokBarang();
+                if(page.equals("Barang Keluar")) detailBkController.updateStokBarang();
+                else  detailBmController.updateStokBarang();
             }
         });
-        
+
         batal.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                detailController.cancelBarangMasuk();
+                if(page.equals("Barang Keluar"))  detailBmController.cancelBarangMasuk();
+                else detailBkController.cancelBarangKeluar();
             }
         });
         
+        title.setText("Detail " + page);
+
     }
 
     /**
@@ -54,9 +69,9 @@ public class DetailBarangMasuk_Page extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtIdPemesanan = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        lblDistributor = new javax.swing.JLabel();
         txtDistributor = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        lblAlamat = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -133,8 +148,8 @@ public class DetailBarangMasuk_Page extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Distributor");
+        lblDistributor.setForeground(new java.awt.Color(0, 0, 0));
+        lblDistributor.setText("Distributor");
 
         txtDistributor.setEditable(false);
         txtDistributor.setBackground(new java.awt.Color(255, 255, 255));
@@ -148,8 +163,8 @@ public class DetailBarangMasuk_Page extends javax.swing.JPanel {
             }
         });
 
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Alamat Distributor");
+        lblAlamat.setForeground(new java.awt.Color(0, 0, 0));
+        lblAlamat.setText("Alamat Distributor");
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
@@ -215,7 +230,7 @@ public class DetailBarangMasuk_Page extends javax.swing.JPanel {
         batal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         batal.setText("Batal");
 
-        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Diterima", "Disimpan", "Dibatalkan" }));
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sedang di Proses", "Dikirim", "Diterima", "Dibatalkan", "Disimpan", " ", " " }));
         cmbStatus.setEnabled(false);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -237,7 +252,7 @@ public class DetailBarangMasuk_Page extends javax.swing.JPanel {
                                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(206, 206, 206)
                                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblDistributor, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtIdPemesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtDistributor, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -250,7 +265,7 @@ public class DetailBarangMasuk_Page extends javax.swing.JPanel {
                                 .addGroup(jPanel4Layout.createSequentialGroup()
                                     .addGap(34, 34, 34)
                                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtTglPemesanan, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txtAlamatDistributor, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -272,7 +287,7 @@ public class DetailBarangMasuk_Page extends javax.swing.JPanel {
                                                     .addGap(0, 0, Short.MAX_VALUE))))
                                         .addGroup(jPanel4Layout.createSequentialGroup()
                                             .addGap(12, 12, 12)
-                                            .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(0, 0, Short.MAX_VALUE))))))
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 915, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(44, Short.MAX_VALUE))
@@ -304,8 +319,8 @@ public class DetailBarangMasuk_Page extends javax.swing.JPanel {
                                 .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4)
+                            .addComponent(lblAlamat)
+                            .addComponent(lblDistributor)
                             .addComponent(jLabel7)
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -418,9 +433,7 @@ public class DetailBarangMasuk_Page extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
@@ -431,6 +444,8 @@ public class DetailBarangMasuk_Page extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblAlamat;
+    private javax.swing.JLabel lblDistributor;
     private javax.swing.JLabel simpan;
     private Components.Table tableDetailBarang;
     private javax.swing.JLabel title;

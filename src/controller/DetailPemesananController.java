@@ -22,7 +22,6 @@ public class DetailPemesananController {
     private Pemesanan pemesananModel;
     private DetailPemesanan_Dao detailDao;
     private Pemesanan_Dao pesananDao;
-    private Getter_Dao getterDao;
     private Barang_Dao barangDao;
     private Pemesanan_Page pemesanan;
 
@@ -32,7 +31,6 @@ public class DetailPemesananController {
         detailPesanan = new DetailPesanan();
         detailDao = new DetailPemesanan_Dao();
         pesananDao = new Pemesanan_Dao();
-        getterDao = new Getter_Dao();
         barangDao = new Barang_Dao();
         pemesananModel = new Pemesanan();
     }
@@ -40,25 +38,6 @@ public class DetailPemesananController {
     public DetailPemesananController(JTable table) {
         this.table = table;
         detailDao = new DetailPemesanan_Dao();
-    }
-
-    public void getData(DefaultTableModel model) {
-        ResultSet result = getterDao.getData(DetailPesananQueries.SELECT_ALL_DETAIL);
-        try {
-            while (result.next()) {
-                DetailPesanan detail = new DetailPesanan();
-                detail.setId(result.getInt("id"));
-                detail.setBarang(result.getInt("kode_barang"));
-                detail.setKuantitas(result.getInt("kuantitas"));
-                detail.setSubTotal(result.getInt("subtotal"));
-                model.addRow(new Object[]{detail.getId(), detail.getBarang(), detail.getKuantitas(),
-                    detail.getSubTotal()});
-            }
-            table.setModel(model);
-            result.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     public void getSingleData(int row, JTable table) {

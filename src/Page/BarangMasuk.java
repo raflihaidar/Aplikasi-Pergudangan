@@ -17,7 +17,7 @@ public class BarangMasuk extends javax.swing.JPanel {
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
-                DetailBarangMasuk_Page detail = new DetailBarangMasuk_Page(row, table1);
+                DetailBarangMasuk_Page detail = new DetailBarangMasuk_Page(row, table1, "Barang Masuk");
                 controller.getSingleData(row, detail);
                 Util.changePage(detail, main);
             }

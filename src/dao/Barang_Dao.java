@@ -114,10 +114,10 @@ public class Barang_Dao implements Barang_Service {
     }
 
     @Override
-    public void updateStok(int kuantitas, int kode) {
+    public void updateStok(int kuantitas, int kode, String query) {
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement(BarangQueries.UPDATE_STOK);
+            ps = con.prepareStatement(query);
             ps.setInt(1, kuantitas);
             ps.setInt(2, kode);
 

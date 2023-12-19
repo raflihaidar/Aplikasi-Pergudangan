@@ -8,7 +8,6 @@ import controller.BarangController;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JDialog;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
