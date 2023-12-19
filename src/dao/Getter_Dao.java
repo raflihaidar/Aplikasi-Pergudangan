@@ -42,4 +42,12 @@ public class Getter_Dao implements Getter_Service {
             return null;
         }
     }
+
+    public void closeConnection() {
+        try {
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,17 +1,45 @@
 package Page;
 
+import Components.TableActionCellEditor;
+import Components.TableActionCellRender;
+import Components.TableActionEvent;
 import Form.ListBarang;
-import java.awt.Color;
+import controller.BarangKeluarController;
+import helper.Util;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import view.MainMenus;
 
 public class BarangKeluar extends javax.swing.JPanel {
 
-    /**
-     * Creates new form BarangKeluar
-     */
-    public BarangKeluar() {
+    public BarangKeluar(MainMenus main) {
         initComponents();
+        BarangKeluarController controller = new BarangKeluarController(table1);
+        controller.getData();
+        TableActionEvent event = new TableActionEvent() {
+            @Override
+            public void onEdit(int row) {
+                DetailBarangMasuk_Page detail = new DetailBarangMasuk_Page(row, table1, "Barang Keluar");
+                controller.getSingleData(row, detail);
+                Util.changePage(detail, main);
+            }
+
+            @Override
+            public void onDelete(int row) {
+//                try {
+//                    controller.deleteBarang();
+//                } catch (Exception e) {
+//                    System.out.println("Error : " + e.getMessage());
+//                }
+            }
+
+            @Override
+            public void onAdd(int row) {
+                System.out.println("View row : " + row);
+            }
+        };
+        table1.getColumnModel().getColumn(5).setCellRenderer(new TableActionCellRender());
+        table1.getColumnModel().getColumn(5).setCellEditor(new TableActionCellEditor(event));
     }
 
     /**
@@ -49,17 +77,14 @@ public class BarangKeluar extends javax.swing.JPanel {
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Kode Barang Keluar", "Tanggal", "Total", "Id User", "Action"
+                "Kode", "User", "Total", "Tanggal", "Status", "Action"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -135,7 +160,7 @@ public class BarangKeluar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        ListBarang list = new ListBarang();
+        ListBarang list = new ListBarang(table1);
         list.setLocationRelativeTo(this);
         list.setModal(true);
         list.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -153,12 +178,9 @@ public class BarangKeluar extends javax.swing.JPanel {
     private Components.Table table1;
     private javax.swing.JScrollPane tblPesanan;
     // End of variables declaration//GEN-END:variables
-    
-    public JButton getBtnAdd(){
+
+    public JButton getBtnAdd() {
         return btnAdd;
     }
-
-
-
 
 }

@@ -19,6 +19,7 @@ public class BarangQueries {
             "WHERE b.kode = ?";
     public final static String UPDATE_BARANG = "UPDATE barang SET nama = ?, harga = ?, stok = ?, kode_kategori = ?, kode_satuan = ? WHERE kode = ?";
     public final static String GET_TOTAL_BARANG = "SELECT COUNT(*) FROM barang";
-    public final static String UPDATE_STOK = "UPDATE barang SET stok = stok + ? WHERE kode = ?";
+    public final static String TAMBAH_STOK = "UPDATE barang SET stok = stok + ? WHERE kode = ?";
+    public final static String KURANGI_STOK = "UPDATE barang SET stok = stok - ? WHERE kode = ?";
 
 }
