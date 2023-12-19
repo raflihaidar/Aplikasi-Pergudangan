@@ -107,7 +107,6 @@ public class DistributorController {
             }
             model = (DefaultTableModel) table.getModel();
             model.removeRow(row);
-            System.out.println("delete data berhasil");
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
         }

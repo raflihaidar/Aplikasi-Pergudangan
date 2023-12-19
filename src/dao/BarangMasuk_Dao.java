@@ -102,4 +102,26 @@ public class BarangMasuk_Dao implements BarangMasuk_Services {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void deleteData(int id) {
+        PreparedStatement ps = null;
+        Connection con = Config.connectDB();
+        try {
+            ps = con.prepareStatement(BarangMasukQueries.DELETE_DATA);
+            ps.setInt(1, id);
+            ps.executeUpdate();;
+        } catch (Exception e) {
+            System.out.println("Error delete : " + e.getMessage());
+        } finally {
+            if (ps != null) {
+                try {
+                    con.close();
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }
