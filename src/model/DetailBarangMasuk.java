@@ -6,8 +6,8 @@ package model;
  */
 public class DetailBarangMasuk extends DetailTransaksi {
 
-    public DetailBarangMasuk(int kodeBarangMasuk, int kodeBarang, int kuantitas, int subtotal) {
-        super(kodeBarangMasuk, kodeBarang, kuantitas, subtotal);
+    public DetailBarangMasuk(int idBarangMasuk, int kodeBarang, int kuantitas, int subtotal) {
+        super(idBarangMasuk, kodeBarang, kuantitas, subtotal);
     }
 
     public DetailBarangMasuk() {

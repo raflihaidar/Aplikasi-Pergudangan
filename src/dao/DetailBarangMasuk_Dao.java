@@ -3,13 +3,14 @@ package dao;
 import config.Config;
 import helper.DetailBarangMasukQueries;
 import model.DetailBarangMasuk;
-import services.DetailBarangMasuk_Service;
 import java.sql.*;
+import model.DetailTransaksi;
+import services.DetailTransaksi_Service;
 
-public class DetailBarangMasuk_Dao implements DetailBarangMasuk_Service {
+public class DetailBarangMasuk_Dao implements DetailTransaksi_Service {
 
     private Connection con;
-    private DetailBarangMasuk detail;
+    private DetailTransaksi detail;
 
     public DetailBarangMasuk_Dao() {
         con = Config.connectDB();
@@ -29,11 +30,11 @@ public class DetailBarangMasuk_Dao implements DetailBarangMasuk_Service {
     }
 
     @Override
-    public void addData(DetailBarangMasuk detail) {
+    public void addData(DetailTransaksi detail) {
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(DetailBarangMasukQueries.ADD_DATA);
-            ps.setInt(1, detail.getKodeBarang());
+            ps.setInt(1, detail.getBarang().getKode());
             ps.setInt(2, detail.getIdTransaksi());
             ps.setInt(3, detail.getKuantitas());
             ps.setInt(4, detail.getSubTotal());

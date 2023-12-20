@@ -9,13 +9,17 @@ public class Barang {
     private Satuan satuan = new Satuan();
     private Kategori kategori = new Kategori();
 
-    public Barang(int kode, String nama, int harga, int stok, int kategori, int satuan) {
+    public Barang(int kode, String nama, int harga, int stok, int kodekategori, int kodeSatuan) {
         this.kode = kode;
         this.nama = nama;
         this.harga = harga;
         this.stok = stok;
-        this.kategori.setKode(kategori);
-        this.satuan.setKode(satuan);
+        this.kategori.setKode(kodekategori);
+        this.satuan.setKode(kodeSatuan);
+    }
+
+    public Barang(int kode) {
+        this.kode = kode;
     }
 
     public Barang() {
@@ -53,35 +57,11 @@ public class Barang {
         return stok;
     }
 
-    public String getSatuan() {
-        return satuan.getSatuan();
+    public Satuan getSatuan() {
+        return satuan;
     }
 
-    public int getKodeSatuan() {
-        return satuan.getKode();
-    }
-
-    public void setSatuan(String satuan) {
-        this.satuan.setSatuan(satuan);
-    }
-
-    public void setKodeSatuan(int kode) {
-        this.satuan.setKode(kode);
-    }
-
-    public String getKategori() {
-        return kategori.getKategori();
-    }
-
-    public int getKodeKategori() {
-        return kategori.getKode();
-    }
-
-    public void setKategori(String kategori) {
-        this.kategori.setKategori(kategori);
-    }
-
-    public void setKodeKategori(int kode) {
-        this.kategori.setKode(kode);
+    public Kategori getKategori() {
+        return kategori;
     }
 }

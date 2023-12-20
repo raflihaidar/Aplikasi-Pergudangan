@@ -17,9 +17,7 @@ public class Distributor {
     }
 
     public Distributor(String nama, String alamat, String no_tlp) {
-        this.nama = nama;
-        this.alamat = alamat;
-        this.no_tlp = no_tlp;
+       this(0, nama, alamat, no_tlp);
     }
 
     public Distributor() {

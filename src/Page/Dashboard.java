@@ -6,6 +6,8 @@ import controller.BarangKeluarController;
 import controller.BarangMasukController;
 import controller.DistributorController;
 import controller.KlasifikasiController;
+import controller.PemesananController;
+import controller.UserController;
 import helper.KategoriQueries;
 import helper.SatuanQueries;
 import java.awt.Font;
@@ -21,6 +23,7 @@ public class Dashboard extends javax.swing.JPanel {
     ImageIcon iconIncome = MyIcon.getIcon("income");
     ImageIcon iconOutbound = MyIcon.getIcon("outbound");
     ImageIcon iconDistributor = MyIcon.getIcon("distributor-2");
+    ImageIcon iconOder = MyIcon.getIcon("order");
     Font font = new Font("Poppins", Font.BOLD, 18);
 
     public Dashboard() {
@@ -32,15 +35,17 @@ public class Dashboard extends javax.swing.JPanel {
         KlasifikasiController satuanController = new KlasifikasiController();
         KlasifikasiController kategoriController = new KlasifikasiController();
         DistributorController distributorController = new DistributorController();
+        UserController userController = new UserController();
+        PemesananController pesananController= new PemesananController();
 
         card1.setData(new Card(iconBarang, "Barang", barangController.getTotalBarang()));
         card2.setData(new Card(iconCategory, "Kategori Barang", kategoriController.getTotalData(KategoriQueries.SELECT_ALL_KATEGORI)));
         card3.setData(new Card(iconSatuan, "Satuan Barang", satuanController.getTotalData(SatuanQueries.GET_TOTAL_SATUAN)));
         card4.setData(new Card(iconOutbound, "Barang Keluar", bkController.getTotalData()));
         card5.setData(new Card(iconIncome, "Barang Masuk", bmController.getTotalData()));
-        card6.setData(new Card(iconStaff, "Staff", "20"));
+        card6.setData(new Card(iconStaff, "Staff", userController.getTotalStaff()));
         card7.setData(new Card(iconDistributor, "Distributor", distributorController.getTotalDistributor()));
-        card8.setData(new Card(iconDistributor, "Tanggal", "20"));
+        card8.setData(new Card(iconOder, "Pesanan Diterima", pesananController.getTotalPesanan()));
         title.setFont(font);
     }
 

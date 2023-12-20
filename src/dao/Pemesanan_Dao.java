@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Pemesanan;
+import model.Transaksi;
 import services.Pemesanan_Service;
 
 public class Pemesanan_Dao implements Pemesanan_Service {
@@ -22,21 +23,21 @@ public class Pemesanan_Dao implements Pemesanan_Service {
     }
 
     @Override
-    public List<Pemesanan> getSingleData(int id) {
-        List<Pemesanan> data = new ArrayList<>();
+    public List<Transaksi> getSingleData(int id) {
+        List<Transaksi> data = new ArrayList<>();
         ResultSet result = null;
         try (PreparedStatement ps = con.prepareStatement(PemesananQueries.GET_SINGLE_PESANAN)) {
             ps.setInt(1, id);
             result = ps.executeQuery();
             while (result.next()) {
                 pemesanan.setId(result.getInt("id"));
-                pemesanan.setDistributor(result.getString("distributor"));
+                pemesanan.getDistributor().setNama(result.getString("distributor"));
                 pemesanan.setTotal(result.getInt("total"));
                 pemesanan.setTanggal(result.getString("tanggal"));
-                pemesanan.setUser(result.getString("user"));
-                pemesanan.setAlamatDistributor(result.getString("alamat"));
-                pemesanan.setKodeStatus(result.getInt("status"));
-                pemesanan.setStatus(result.getString("nama_status"));
+                pemesanan.getUser().setFullName(result.getString("user"));
+                pemesanan.getDistributor().setAlamat(result.getString("alamat"));
+                pemesanan.getStatus().setKode(result.getInt("status"));
+                pemesanan.getStatus().setStatus(result.getString("nama_status"));
                 data.add(pemesanan);
             }
         } catch (SQLException e) {
@@ -46,9 +47,9 @@ public class Pemesanan_Dao implements Pemesanan_Service {
     }
 
     @Override
-    public void addData(Pemesanan pemesanan) {
+    public void addData(Transaksi pemesanan) {
         try (PreparedStatement ps = con.prepareStatement(PemesananQueries.INSERT_PESANAN)) {
-            ps.setInt(1, pemesanan.getIdUser());
+            ps.setInt(1, pemesanan.getUser().getId());
             ps.execute();
         } catch (Exception e) {
             System.out.println("Error :" + e.getMessage());
@@ -62,11 +63,11 @@ public class Pemesanan_Dao implements Pemesanan_Service {
     }
 
     @Override
-    public void updateData(Pemesanan pemesanan) {
+    public void updateData(Transaksi pemesanan) {
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(PemesananQueries.UPDATE_PESANAN);
-            ps.setInt(1, pemesanan.getIdDistributor());
+            ps.setInt(1, pemesanan.getDistributor().getId());
             ps.setInt(2, pemesanan.getTotal());
             ps.setInt(3, pemesanan.getId());
 

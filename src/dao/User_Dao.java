@@ -7,27 +7,24 @@ import java.sql.*;
 import java.util.ArrayList;
 import model.User;
 import services.Login_Service;
-import services.Register_Service;
 import services.User_Service;
 
-public class User_Dao implements User_Service, Login_Service, Register_Service {
+public class User_Dao implements User_Service, Login_Service {
 
     private Connection con;
     private User user;
-
-    public User_Dao() {
-        con = Config.connectDB();
-        user = new User();
-    }
 
     public User_Dao(String username, String password) {
         con = Config.connectDB();
         user = new User(username, password);
     }
 
+    public User_Dao() {
+        this(null, null);
+    }
+
     public User_Dao(String password) {
-        con = Config.connectDB();
-        user = new User(password);
+        this(null, password);
     }
 
     @Override
@@ -45,8 +42,8 @@ public class User_Dao implements User_Service, Login_Service, Register_Service {
                 user.setEmail(String.valueOf(result.getString("email")));
                 user.setAlamat(result.getString("alamat"));
                 user.setTglAktif(result.getString("tgl_aktif"));
-                user.setKodeJabatan(result.getInt("kode_jabatan"));
-                user.setKodeStatus(result.getInt("status_kode"));
+                user.getJabatan().setKode(result.getInt("kode_jabatan"));
+                user.getStatus().setKode(result.getInt("status_kode"));
                 data.add(user);
             }
         } catch (SQLException e) {
@@ -62,8 +59,8 @@ public class User_Dao implements User_Service, Login_Service, Register_Service {
             ps.setString(1, user.getFullName());
             ps.setString(2, user.getUsername());
             ps.setString(3, user.getPassword());
-            ps.setInt(4, user.getKodeGender());
-            ps.setInt(5, user.getKodeJabatan());
+            ps.setInt(4, user.getGender().getKode());
+            ps.setInt(5, user.getJabatan().getKode());
             ps.setInt(6, 1);
             ps.execute();
         } catch (Exception e) {
@@ -87,8 +84,8 @@ public class User_Dao implements User_Service, Login_Service, Register_Service {
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getNoHp());
             ps.setString(5, user.getAlamat());
-            ps.setInt(6, user.getKodeStatus());
-            ps.setInt(7, user.getKodeJabatan());
+            ps.setInt(6, user.getStatus().getKode());
+            ps.setInt(7, user.getJabatan().getKode());
             ps.setInt(8, user.getId());
 
             int rowsUpdated = ps.executeUpdate();
@@ -160,31 +157,12 @@ public class User_Dao implements User_Service, Login_Service, Register_Service {
     }
 
     @Override
-    public boolean isValidPassword() {
-        // Memeriksa panjang minimal
-        if (user.getPassword().length() < 8) {
-            return false;
-        }
-
-        // Memeriksa keberadaan angka
-        if (!user.getPassword().matches(".*\\d.*")) {
-            return false;
-        }
-
-        // Memeriksa keberadaan huruf besar
-        if (!user.getPassword().matches(".*[A-Z].*")) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public int getIdByStatus() {
         ResultSet result = null;
         int id = 0;
         try (PreparedStatement ps = con.prepareStatement(UserQueries.SELECT_DATA_BY_STATUS)) {
             result = ps.executeQuery();
-            while(result.next()){
+            while (result.next()) {
                 id = result.getInt(1);
             }
         } catch (SQLException e) {
@@ -192,4 +170,5 @@ public class User_Dao implements User_Service, Login_Service, Register_Service {
         }
         return id;
     }
+
 }

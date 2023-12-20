@@ -2,10 +2,12 @@ package Page;
 
 import controller.ComboBoxController;
 import controller.DetailPemesananController;
+import controller.PemesananController;
 import helper.BarangQueries;
 import helper.DistributorQueries;
 import helper.TimeStampGenerate;
 import java.awt.Font;
+import view.MainMenus;
 
 public class Pemesanan_Page extends javax.swing.JPanel {
 
@@ -345,7 +347,7 @@ public class Pemesanan_Page extends javax.swing.JPanel {
         // TODO add your handling code here:
         detailController = new DetailPemesananController(tablePemesanan, this);
         detailController.updateData();
-        detailController.addDataDetail();
+        detailController.addDataDetail();        
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void txtIdPemesananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdPemesananActionPerformed

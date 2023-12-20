@@ -4,6 +4,13 @@ public class Status {
 
     private int kode;
     private String status;
+    
+     public Status(int kode){
+       this.kode = kode;
+    }
+    
+    public Status(){
+    }
 
     public int getKode() {
         return kode;
