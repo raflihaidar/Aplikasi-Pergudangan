@@ -21,24 +21,20 @@ public class BarangController {
     private Barang_Dao barangDao;
     private Getter_Dao getterDao;
 
-    public BarangController() {
-        barang = new Barang();
-        getterDao = new Getter_Dao();
-    }
-
-    public BarangController(JTable table) {
-        this.table = table;
-        barang = new Barang();
-        barangDao = new Barang_Dao();
-        getterDao = new Getter_Dao();
-    }
-
     public BarangController(PopUpBarang popUp, JTable table) {
         this.popUp = popUp;
         this.table = table;
         barang = new Barang();
         barangDao = new Barang_Dao();
         getterDao = new Getter_Dao();
+    }
+
+    public BarangController(JTable table) {
+        this(null, table);
+    }
+
+    public BarangController() {
+        this(null, null);
     }
 
     public void getData() {
@@ -51,9 +47,9 @@ public class BarangController {
                 barang.setNama(result.getString("nama"));
                 barang.setHarga(result.getInt("harga"));
                 barang.setStok(result.getInt("stok"));
-                barang.setKategori(result.getString("kategori"));
-                barang.setSatuan(result.getString("satuan"));
-                model.addRow(new Object[]{barang.getKode(), barang.getNama(), barang.getHarga(), barang.getStok(), barang.getKategori(), barang.getSatuan()});
+                barang.getKategori().setKategori(result.getString("kategori"));
+                barang.getSatuan().setSatuan(result.getString("satuan"));
+                model.addRow(new Object[]{barang.getKode(), barang.getNama(), barang.getHarga(), barang.getStok(), barang.getKategori().getKategori(), barang.getSatuan().getSatuan()});
             }
             table.setModel(model);
             result.close();
@@ -83,11 +79,11 @@ public class BarangController {
         String nama = popUp.getName();
         int harga = popUp.getHarga();
         int stok = popUp.getStok();
-        int kode_kategori = popUp.getKodeKategori();
-        int kode_satuan = popUp.getKodeSatuan();
+        int kodekategori = popUp.getKodeKategori();
+        int kodesatuan = popUp.getKodeSatuan();
         String kategori = popUp.getKategori();
         String satuan = popUp.getSatuan();
-        this.barang = new Barang(kode, nama, harga, stok, kode_kategori, kode_satuan);
+        this.barang = new Barang(kode, nama, harga, stok, kodekategori, kodesatuan);
         int kodeBarang = barangDao.addData(barang);
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.addRow(new Object[]{kodeBarang, nama, harga, stok, kategori, satuan});
@@ -96,15 +92,15 @@ public class BarangController {
 
     public void getSingleData(int row, JTable table, PopUpBarang popUp) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        String username = model.getValueAt(row, 0).toString();
+        int username = Integer.parseInt(model.getValueAt(row, 0).toString());
         data = barangDao.getSingleData(username);
         for (Barang barang : data) {
             popUp.setKode(String.valueOf(barang.getKode()));
             popUp.setName(barang.getNama());
             popUp.setHarga(String.valueOf(barang.getHarga()));
             popUp.setStok(String.valueOf(barang.getStok()));
-            popUp.setKategori(barang.getKodeKategori() - 1);
-            popUp.setSatuan(barang.getSatuan());
+            popUp.setKategori(barang.getKategori().getKode() - 1);
+            popUp.setSatuan(barang.getSatuan().getSatuan());
             System.out.println(barang.getSatuan());
         }
     }

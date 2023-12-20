@@ -5,7 +5,6 @@ import dao.BarangKeluar_Dao;
 import dao.Getter_Dao;
 import dao.User_Dao;
 import helper.BarangKeluarQueries;
-import helper.BarangMasukQueries;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -46,13 +45,13 @@ public class BarangKeluarController {
         try {
             while (result.next()) {
                 Transaksi transaksi = new BarangKeluar();
-                transaksi.setIdPemesanan(result.getInt("id"));
-                transaksi.setUsername(result.getString("user"));
-                transaksi.setTotalPemesanan(result.getInt("total"));
-                transaksi.setTanggalMasuk(result.getString("tanggal"));
-                transaksi.setStatusPemesanan(result.getString("status"));
+                transaksi.setId(result.getInt("id"));
+                transaksi.getUser().setUsername(result.getString("user"));
+                transaksi.setTotal(result.getInt("total"));
+                transaksi.setTanggal(result.getString("tanggal"));
+                transaksi.getStatus().setStatus(result.getString("status"));
                 transaksi.setJumlah(result.getInt("jumlah"));
-                model.addRow(new Object[]{transaksi.getIdPemesanan(), transaksi.getUsername(), transaksi.getTotalPemesanan(), transaksi.getTanggalMasuk(), transaksi.getStatusPemesanan()});
+                model.addRow(new Object[]{transaksi.getId(), transaksi.getUser().getUsername(), transaksi.getTotal(), transaksi.getTanggal(), transaksi.getStatus().getStatus()});
             }
             table.setModel(model);
             result.close();
@@ -66,11 +65,10 @@ public class BarangKeluarController {
         int id = Integer.parseInt(model.getValueAt(row, 0).toString());
         data = barangKeluarDao.getSingleData(id);
         for (Transaksi transaksi : data) {
-            detail.setTxtUser(String.valueOf(transaksi.getUsername()));
-            detail.setTxtTglPemesanan(String.valueOf(transaksi.getTanggalMasuk()));
-            detail.setTxtIdPemesanan(String.valueOf(transaksi.getIdPemesanan()));
-            detail.setTxtStatus(transaksi.getStatusPemesanan());
-            System.out.println("status : " + transaksi.getStatusPemesanan());
+            detail.setTxtUser(String.valueOf(transaksi.getUser().getUsername()));
+            detail.setTxtTglPemesanan(String.valueOf(transaksi.getTanggal()));
+            detail.setTxtIdPemesanan(String.valueOf(transaksi.getId()));
+            detail.setTxtStatus(transaksi.getStatus().getStatus());
             detail.setTxtKeterangan(transaksi.getKeterangan());
         }
     }

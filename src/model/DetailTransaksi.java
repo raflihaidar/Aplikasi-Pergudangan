@@ -9,15 +9,13 @@ public class DetailTransaksi {
 
     public DetailTransaksi(int id, int kodeBarang, int kuantitas, int subTotal) {
         this.idTransaksi = id;
-        barang.setKode(kodeBarang);
+        this.barang.setKode(kodeBarang);
         this.kuantitas = kuantitas;
         this.subTotal = subTotal;
     }
 
     public DetailTransaksi(int kodeBarang, int kuantitas, int subTotal) {
-        barang.setKode(kodeBarang);
-        this.kuantitas = kuantitas;
-        this.subTotal = subTotal;
+        this(0, kodeBarang, kuantitas, subTotal);
     }
 
     public DetailTransaksi() {
@@ -31,36 +29,8 @@ public class DetailTransaksi {
         idTransaksi = id;
     }
 
-    public int getBarang() {
-        return barang.getKode();
-    }
-
-    public void setBarang(int kode) {
-        this.barang.setKode(kode);
-    }
-
-    public String getNamaBarang() {
-        return barang.getNama();
-    }
-
-    public void setNamaBarang(String nama) {
-        this.barang.setNama(nama);
-    }
-
-    public int getKodeBarang() {
-        return barang.getKode();
-    }
-
-    public void setKodeBarang(int id) {
-        this.barang.setKode(id);
-    }
-
-    public int getHargaBarang() {
-        return barang.getHarga();
-    }
-
-    public void setHargaBarang(int nama) {
-        this.barang.setHarga(nama);
+    public Barang getBarang() {
+        return barang;
     }
 
     public int getKuantitas() {

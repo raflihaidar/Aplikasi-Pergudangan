@@ -17,4 +17,5 @@ public class PemesananQueries {
                                                         + " SET status = ?"
                                                          + " WHERE id = ?";
    public static final String BATALKAN_PEMESANAN = "UPDATE pemesanan set status = 4 WHERE id = ?";
+   public static final String TOTAL_PESANAN = "SELECT COUNT(*) FROM pemesanan WHERE status = 3";
 }

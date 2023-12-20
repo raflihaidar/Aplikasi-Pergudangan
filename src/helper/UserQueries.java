@@ -21,4 +21,5 @@ public class UserQueries {
     public static final String IS_AUTHENTICATED = "UPDATE user SET isAuthenticated = ? WHERE username = ?";
     public static final String UPDATE_USER = "UPDATE user SET nama = ?, username = ?, email = ?, "
                                            + "no_hp = ?, alamat = ?,  status = ?, kode_jabatan = ? WHERE id = ?";
+    public static final String SELECT_STAFF = "SELECT COUNT(*) AS jumlah FROM user WHERE kode_jabatan = 1"; 
 }

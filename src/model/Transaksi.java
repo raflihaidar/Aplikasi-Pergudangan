@@ -2,109 +2,71 @@ package model;
 
 public class Transaksi {
 
-    private Pemesanan pemesanan = new Pemesanan();
+    private int id;
+    private User user = new User();
+    private Distributor distributor = new Distributor();
+    private Status status = new Status();
+    private String tanggal;
+    private int total;
     private int jumlah;
     private String keterangan;
 
-    public Transaksi(Pemesanan pemesanan, int jumlah) {
-        this.pemesanan = pemesanan;
+    public Transaksi(int id, int idUser, int idDistributor, String tanggal, int total, int jumlah,
+            String keterangan, int idStatus) {
+        this.id = id;
+        this.user.setId(idUser);
+        this.distributor.setId(idDistributor);
+        this.tanggal = tanggal;
+        this.total = total;
         this.jumlah = jumlah;
+        this.keterangan = keterangan;
     }
 
-    public Transaksi(int idUser, int idDistributor, String tgl_masuk, int jumlah) {
-        pemesanan.setIdUser(idUser);
-        pemesanan.setIdDistributor(idDistributor);
-        pemesanan.setTanggal(tgl_masuk);
-        this.jumlah = jumlah;
+    public Transaksi(int id, int idDistributor, int total) {
+        this(id, 0, idDistributor, null, total, 0, null, 0);
     }
 
-    public Transaksi(int idUser, int total, int jumlah) {
-        pemesanan.setIdUser(idUser);
-        pemesanan.setTotal(total);
-        this.jumlah = jumlah;
+    public Transaksi(int idUser, int idDistributor, String tanggal, int jumlah) {
+        this(0, idUser, idDistributor, tanggal, 0, jumlah, null, 0);
+    }
+
+    public Transaksi(int idUser) {
+        this.user.setId(idUser);
     }
 
     public Transaksi() {
     }
 
-    public int getIdPemesanan() {
-        return pemesanan.getId();
+    public int getId() {
+        return id;
     }
 
-    public void setIdPemesanan(int id) {
-        pemesanan.setId(id);
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getStatusPemesanan() {
-        return pemesanan.getStatus();
+    public User getUser() {
+        return user;
     }
 
-    public void setStatusPemesanan(String status) {
-        pemesanan.setStatus(status);
+    public Distributor getDistributor() {
+        return distributor;
     }
 
-    public int getKodeStatusPemesanan() {
-        return pemesanan.getkodeStatus();
+    public String getTanggal() {
+        return tanggal;
     }
 
-    public void setKodeStatusPemesanan(int kode) {
-        pemesanan.setKodeStatus(kode);
+    public void setTanggal(String tanggal) {
+        this.tanggal = tanggal;
     }
 
-    public int getTotalPemesanan() {
-        return pemesanan.getTotal();
+    public int getTotal() {
+        return total;
     }
 
-    public void setTotalPemesanan(int total) {
-        pemesanan.setTotal(total);
-    }
-
-    public int getIdUser() {
-        return pemesanan.getIdUser();
-    }
-
-    public String getUsername() {
-        return pemesanan.getUser();
-    }
-
-    public void setUsername(String nama) {
-        pemesanan.setUser(nama);
-    }
-
-    public void setIdUser(int id) {
-        pemesanan.setIdUser(id);
-    }
-
-    public int getIdDistributor() {
-        return pemesanan.getIdDistributor();
-    }
-
-    public void setIdDistributor(int id) {
-        pemesanan.setIdDistributor(id);
-    }
-
-    public String getDistributor() {
-        return pemesanan.getDistributor();
-    }
-
-    public void setDistributor(String nama) {
-        pemesanan.setDistributor(nama);
-    }
-
-    public String getAlamatDistributor() {
-        return pemesanan.getAlamatDistributor();
-    }
-
-    public void setAlamatDistributor(String alamat) {
-        pemesanan.setAlamatDistributor(alamat);
-    }
-
-    public String getTanggalMasuk() {
-        return pemesanan.getTanggal();
-    }
-
-    public void setTanggalMasuk(String tanggal) {
-        pemesanan.setTanggal(tanggal);
+    public void setTotal(int total) {
+        this.total = total;
     }
 
     public int getJumlah() {
@@ -121,5 +83,9 @@ public class Transaksi {
 
     public void setKeterangan(String keterangan) {
         this.keterangan = keterangan;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 }

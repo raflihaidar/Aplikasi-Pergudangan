@@ -1,17 +1,17 @@
 package services;
 
 import java.util.List;
-import model.Pemesanan;
+import model.Transaksi;
 
 public interface Pemesanan_Service {
 
-    public List<Pemesanan> getSingleData(int Kode);
+    public List<Transaksi> getSingleData(int Kode);
     
      public int getLastId();
 
-    public void addData(Pemesanan pemesanan);
+    public void addData(Transaksi transaksi);
 
-    public void updateData(Pemesanan pemesanan);
+    public void updateData(Transaksi transaksi);
     
     public void updateDetailData(int kodeStatus, int idPemesanan);
 

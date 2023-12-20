@@ -12,12 +12,12 @@ public class DaftarPemesanan extends javax.swing.JPanel {
     
     private PemesananController controller;
     Font font = new Font("Poppins", Font.BOLD,18);
-    
+    private MainMenus mainMenu;
     public DaftarPemesanan(MainMenus mainMenu) {
         initComponents();
         controller = new PemesananController(table1, mainMenu);
         controller.getData((DefaultTableModel) table1.getModel());
-        
+        this.mainMenu = mainMenu;
          TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
@@ -45,6 +45,10 @@ public class DaftarPemesanan extends javax.swing.JPanel {
         table1.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(event));
         
         title.setFont(font);
+    }
+    
+    public DaftarPemesanan(){
+        initComponents();
     }
 
     /**

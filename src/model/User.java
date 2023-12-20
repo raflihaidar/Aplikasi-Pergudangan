@@ -1,27 +1,61 @@
 package model;
 
-public class User {
+import services.PasswordValidator;
+
+public class User implements PasswordValidator {
 
     private int id;
-    private String username;
-    private String password;
     private String fullName;
     private String email;
     private String noHp;
-    private String tglLahir;
     private String alamat;
     private String tglAktif;
+    private String username;
+    private String password;
+    private String tglLahir;
     private Jabatan jabatan = new Jabatan();
     private Gender gender = new Gender();
     private Status status = new Status();
     private boolean isAuthenticated;
 
-    public int getId() {
-        return id;
+    public User(int id, String username, String password, String fullName, String email, String noHp, String tglLahir, String alamat, String tglAktif, int kodeJabatan, int kodeGender, int kodeStatus, boolean isAuthenticated) {
+        this.id = id;
+        this.fullName = fullName;
+        this.email = email;
+        this.noHp = noHp;
+        this.alamat = alamat;
+        this.tglAktif = tglAktif;
+        this.username = username;
+        this.password = password;
+        this.tglLahir = tglLahir;
+        this.jabatan.setKode(kodeJabatan);
+        this.gender.setKode(kodeGender);
+        this.status.setKode(kodeStatus);
+        this.isAuthenticated = isAuthenticated;
     }
 
-    public void setId(int id) {
+    public User(String fullname, String username, String password, int kodeJabatan, int kodeGender) {
+        this(0, username, password, fullname, null, null, null, null, null, kodeJabatan, kodeGender, 0, false);
+    }
+
+    public User(int id, String fullname, String username, String email, String noHp, String alamat, int kodeJabatan, int kodeStatus) {
+        this(id, username, null, fullname, email, noHp, null, alamat, null, kodeJabatan, 0, kodeStatus, false);
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(String username) {
+        this.username = username;
+    }
+
+    public User(int id) {
         this.id = id;
+    }
+
+    public User() {
     }
 
     public String getUsername() {
@@ -40,28 +74,48 @@ public class User {
         this.password = password;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public String getTglLahir() {
+        return tglLahir;
+    }
+
+    public void setTglLahir(String tglLahir) {
+        this.tglLahir = tglLahir;
+    }
+
+    public boolean isIsAuthenticated() {
+        return isAuthenticated;
+    }
+
+    public void setIsAuthenticated(boolean isAuthenticated) {
+        this.isAuthenticated = isAuthenticated;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public Jabatan getJabatan() {
+        return jabatan;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getFullName() {
         return fullName;
     }
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
-    }
-
-    public String getStatus() {
-        return status.getStatus();
-    }
-
-    public int getKodeStatus() {
-        return status.getKode();
-    }
-
-    public void setStatus(String status) {
-        this.status.setStatus(status);
-    }
-    
-    public void setKodeStatus(int kode) {
-        this.status.setKode(kode);
     }
 
     public String getEmail() {
@@ -80,14 +134,6 @@ public class User {
         this.noHp = noHp;
     }
 
-    public String getTglLahir() {
-        return tglLahir;
-    }
-
-    public void setTglLahir(String tglLahir) {
-        this.tglLahir = tglLahir;
-    }
-
     public String getAlamat() {
         return alamat;
     }
@@ -104,78 +150,7 @@ public class User {
         this.tglAktif = tglAktif;
     }
 
-    public String getGender() {
-        return gender.getGender();
-    }
-
-    public int getKodeGender() {
-        return gender.getKode();
-    }
-
-    public void setGender(String gender) {
-        this.gender.setGender(gender);
-    }
-
-    public void setGender(int gender) {
-        this.gender.setKode(gender);
-    }
-
-    public String getJabatan() {
-        return jabatan.getJabatan();
-    }
-
-    public int getKodeJabatan() {
-        return jabatan.getKode();
-    }
-
-    public void setJabatan(String jabatan) {
-        this.jabatan.setJabatan(jabatan);
-    }
-
-    public void setKodeJabatan(int jabatan) {
-        this.jabatan.setKode(jabatan);
-    }
-
-    public boolean isIsAuthenticated() {
-        return isAuthenticated;
-    }
-
-    public void setIsAuthenticated(boolean isAuthenticated) {
-        this.isAuthenticated = isAuthenticated;
-    }
-
-    public User(String fullname, String username, String password, int kode_gender, int kode_jabatan) {
-        this.fullName = fullname;
-        this.username = username;
-        this.password = password;
-        this.gender.setKode(kode_gender);
-        this.jabatan.setKode(kode_jabatan);
-    }
-
-    public User(int id, String fullname, String username, String email, String noHp, String alamat, int kode_jabatan, int kode_status) {
-        this.id = id;
-        this.fullName = fullname;
-        this.username = username;
-        this.email = email;
-        this.noHp = noHp;
-        this.alamat = alamat;
-        this.status.setKode(kode_status);
-        this.jabatan.setKode(kode_jabatan);
-    }
-
-    public User() {
-    }
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-        System.out.println(username);
-    }
-
-    public User(String username) {
-        this.username = username;
-    }
-
+    @Override
     public boolean isValidPassword() {
         // Memeriksa panjang minimal
         if (this.password.length() < 8) {
@@ -193,4 +168,5 @@ public class User {
         }
         return true;
     }
+
 }

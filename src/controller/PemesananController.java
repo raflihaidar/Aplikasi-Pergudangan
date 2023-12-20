@@ -1,59 +1,64 @@
 package controller;
 
 import java.sql.*;
-import Page.DaftarPemesanan;
 import Page.DetailPemesanan;
-import Page.Pemesanan_Page;
 import dao.ComboBox_Dao;
 import model.Pemesanan;
 import dao.Getter_Dao;
 import dao.Pemesanan_Dao;
 import dao.User_Dao;
+import helper.BarangQueries;
 import helper.PemesananQueries;
 import java.util.List;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import model.Transaksi;
 import view.MainMenus;
 
 public class PemesananController {
 
-    private JTable table;
-    private MainMenus mainMenu;
-    private Pemesanan pemesanan;
-    private List<Pemesanan> data;
-    private Pemesanan_Page pemesananPage = new Pemesanan_Page();
-    private DetailPemesanan detail;
-    private Pemesanan_Dao pemesananDao;
-    private Getter_Dao getterDao;
-    private ComboBox_Dao distributorDao;
-    private User_Dao userDao;
-    private BarangMasukController bmController;
-    private DetailBarangMasukController detailBmController;
+private JTable table;
+private BarangMasukController bmController;
+private DetailBarangMasukController detailBmController;
+private MainMenus mainMenu;
+private Transaksi pemesanan;
+private List<Transaksi> data;
+private DetailPemesanan detail;
+private Pemesanan_Dao pemesananDao;
+private Getter_Dao getterDao;
+private ComboBox_Dao distributorDao;
+private User_Dao userDao;
 
-    public PemesananController(DetailPemesanan detail, JTable table) {
-        this.detail = detail;
-        this.getterDao = new Getter_Dao();
-        this.distributorDao = new ComboBox_Dao();
-        this.pemesananDao = new Pemesanan_Dao();
-        this.bmController = new BarangMasukController(detail);
-        this.table = table;
-        this.detailBmController = new DetailBarangMasukController(table);
-    }
+// Konstruktor untuk DetailPemesanan
+public PemesananController(DetailPemesanan detail, JTable table) {
+    initializeCommonObjects();
+    this.detail = detail;
+    this.bmController = new BarangMasukController(detail);
+    this.table = table;
+    this.detailBmController = new DetailBarangMasukController(table);
+}
 
-    public PemesananController(JTable table, MainMenus mainMenu) {
-        this.mainMenu = mainMenu;
-        this.pemesanan = new Pemesanan();
-        this.detail = new DetailPemesanan();
-        this.getterDao = new Getter_Dao();
-        this.distributorDao = new ComboBox_Dao();
-        this.userDao = new User_Dao();
-        this.pemesananDao = new Pemesanan_Dao();
-        this.table = table;
-    }
+// Konstruktor untuk MainMenus
+public PemesananController(JTable table, MainMenus mainMenu) {
+    this(null, table);
+    this.mainMenu = mainMenu;
+    this.pemesanan = new Pemesanan();
+    this.detail = new DetailPemesanan();
+}
+
+public PemesananController() {
+    getterDao = new Getter_Dao();
+}
+
+// Metode untuk inisialisasi objek yang sama pada kedua konstruktor
+private void initializeCommonObjects() {
+    this.pemesananDao = new Pemesanan_Dao();
+    this.getterDao = new Getter_Dao();
+    this.distributorDao = new ComboBox_Dao();
+    this.userDao = new User_Dao();
+}
 
     public void getData(DefaultTableModel model) {
         ResultSet result = getterDao.getData(PemesananQueries.GET_ALL_PESANAN);
@@ -61,14 +66,14 @@ public class PemesananController {
             while (result.next()) {
                 Pemesanan pemesanan = new Pemesanan();
                 pemesanan.setId(result.getInt("id"));
-                pemesanan.setIdUser(result.getInt("id_user"));
-                pemesanan.setIdDistributor(result.getInt("id_distributor"));
+                pemesanan.getUser().setId(result.getInt("id_user"));
+                pemesanan.getDistributor().setId(result.getInt("id_distributor"));
                 pemesanan.setTanggal(result.getString("tanggal"));
-                pemesanan.setStatus(result.getString("status"));
-                ;
+                pemesanan.getStatus().setStatus(result.getString("status"));
                 pemesanan.setTotal(result.getInt("total"));
-                model.addRow(new Object[]{pemesanan.getId(), pemesanan.getIdDistributor(), pemesanan.getIdUser(),
-                    pemesanan.getTanggal(), pemesanan.getTotal(), pemesanan.getStatus()});
+                
+                model.addRow(new Object[]{pemesanan.getId(), pemesanan.getDistributor().getId(), pemesanan.getUser().getId(),
+                    pemesanan.getTanggal(), pemesanan.getTotal(), pemesanan.getStatus().getStatus()});
             }
             table.setModel(model);
             result.close();
@@ -81,13 +86,13 @@ public class PemesananController {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         int id = Integer.parseInt(model.getValueAt(row, 0).toString());
         data = pemesananDao.getSingleData(id);
-        for (Pemesanan pemesanan : data) {
-            detail.setTxtUser(String.valueOf(pemesanan.getUser()));
+        for (Transaksi pemesanan : data) {
+            detail.setTxtUser(String.valueOf(pemesanan.getUser().getFullName()));
             detail.setTxtTotalPemesanan("Rp " + String.valueOf(pemesanan.getTotal()));
             detail.setTxtTglPemesanan(String.valueOf(pemesanan.getTanggal()));
-            detail.setStatusPemesanan(pemesanan.getkodeStatus() - 1);
-            detail.setTxtDistributor(String.valueOf(pemesanan.getDistributor()));
-            detail.setTxtAlamatDistributor(pemesanan.getAlamatDistributor());
+            detail.setStatusPemesanan(pemesanan.getStatus().getKode() - 1);
+            detail.setTxtDistributor(String.valueOf(pemesanan.getDistributor().getNama()));
+            detail.setTxtAlamatDistributor(pemesanan.getDistributor().getAlamat());
             detail.setTxtIdPemesanan(String.valueOf(pemesanan.getId()));
         }
     }
@@ -112,7 +117,7 @@ public class PemesananController {
                 }
                 model = (DefaultTableModel) table.getModel();
                 model.removeRow(row);
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Gagal Menghapus Pesanan", "Error", JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception e) {
@@ -127,11 +132,10 @@ public class PemesananController {
         mainMenu.getContent().revalidate();
     }
 
-    
     public void terminateOrder(int id) {
         data = pemesananDao.getSingleData(Integer.parseInt(detail.getTxtIdPemesanan()));
-        for (Pemesanan pemesanan : data) {
-            if (!pemesanan.getStatus().equals("Dibatalkan") && !pemesanan.getStatus().equals("Diterima")) {
+        for (Transaksi pemesanan : data) {
+            if (!pemesanan.getStatus().getStatus().equals("Dibatalkan") && !pemesanan.getStatus().getStatus().equals("Diterima")) {
                 this.pemesananDao = new Pemesanan_Dao();
                 int message = JOptionPane.showConfirmDialog(null, "Batalkan Pemesanan", "Peringatan",
                         JOptionPane.YES_NO_OPTION);
@@ -145,9 +149,8 @@ public class PemesananController {
 
     public void modifyOrder() {
         data = pemesananDao.getSingleData(Integer.parseInt(detail.getTxtIdPemesanan()));
-        System.out.println(detail.getTxtIdPemesanan());
-        for (Pemesanan pemesanan : data) {
-            if (!pemesanan.getStatus().equals("Dibatalkan") && !pemesanan.getStatus().equals("Diterima")) {
+        for (Transaksi pemesanan : data) {
+            if (!pemesanan.getStatus().getStatus().equals("Dibatalkan") && !pemesanan.getStatus().getStatus().equals("Diterima")) {
                 if (detail.getLblModify().equals("Modify")) {
                     detail.setLblModify("Simpan");
                     detail.getStatusPemesanan().setEnabled(true);
@@ -165,6 +168,21 @@ public class PemesananController {
                     }
                 }
             }
+        }
+    }
+    
+        public String getTotalPesanan() {
+        ResultSet result = getterDao.getData(PemesananQueries.TOTAL_PESANAN);
+        int total = 0;
+        try {
+            while (result.next()) {
+                total = result.getInt(1);
+            }
+            result.close();
+            return String.valueOf(total);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return String.valueOf(total);
         }
     }
 }

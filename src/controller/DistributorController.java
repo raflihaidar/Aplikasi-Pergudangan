@@ -75,8 +75,8 @@ public class DistributorController {
 
     public void getSingleData(int row, JTable table, PopUpDistributor popUp) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        String username = model.getValueAt(row, 0).toString();
-        data = distributorDao.getSingleData(username);
+        int id = Integer.parseInt(model.getValueAt(row, 0).toString());
+        data = distributorDao.getSingleData(id);
         for (Distributor distributor : data) {
             popUp.setTxtIdDistributor(String.valueOf(distributor.getId()));
             popUp.setTxtNamaDistributor(distributor.getNama());

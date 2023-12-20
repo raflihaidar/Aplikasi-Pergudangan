@@ -71,6 +71,7 @@ public class MainMenus extends javax.swing.JFrame {
         txtUsernameMain = new javax.swing.JLabel();
         profileImage = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         sidebar = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listMenu = new javax.swing.JPanel();
@@ -139,32 +140,49 @@ public class MainMenus extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/logo-simag.png"))); // NOI18N
+
         javax.swing.GroupLayout navbarLayout = new javax.swing.GroupLayout(navbar);
         navbar.setLayout(navbarLayout);
         navbarLayout.setHorizontalGroup(
             navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, navbarLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(title)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 795, Short.MAX_VALUE)
-                .addComponent(txtUsernameMain, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(navbarLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(profileImage, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, navbarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(721, 721, 721)
+                .addGroup(navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(navbarLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtUsernameMain, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(profileImage, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(navbarLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         navbarLayout.setVerticalGroup(
             navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(navbarLayout.createSequentialGroup()
+                .addGroup(navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(navbarLayout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(profileImage, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                            .addComponent(txtUsernameMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 4, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, navbarLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, navbarLayout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(navbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(profileImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtUsernameMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
         getContentPane().add(navbar, java.awt.BorderLayout.PAGE_START);
@@ -308,6 +326,7 @@ public class MainMenus extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel content;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel listMenu;
     private javax.swing.JPanel navbar;
@@ -322,14 +341,14 @@ public class MainMenus extends javax.swing.JFrame {
         ImageIcon iconMaster = MyIcon.getIcon("master");
         ImageIcon iconTransaction = MyIcon.getIcon("transaction");
         ImageIcon iconDashboard = MyIcon.getIcon("dashboard");
-        ImageIcon iconReport = MyIcon.getIcon("report");
+//        ImageIcon iconReport = MyIcon.getIcon("report");
         ImageIcon iconItem = MyIcon.getIcon("item");
         ImageIcon iconDistributor = MyIcon.getIcon("distributor-2");
         ImageIcon iconSettings = MyIcon.getIcon("settings");
         ImageIcon iconIncome = MyIcon.getIcon("income");
         ImageIcon iconOutbound = MyIcon.getIcon("outbound");
         ImageIcon iconOrder = MyIcon.getIcon("order");
-        ImageIcon iconTransactionReport = MyIcon.getIcon("transaction-report");
+//        ImageIcon iconTransactionReport = MyIcon.getIcon("transaction-report");
         ImageIcon iconCategory = MyIcon.getIcon("category");
         ImageIcon iconSatuan = MyIcon.getIcon("satuan");
         ImageIcon iconUser = MyIcon.getIcon("manage-user");
@@ -418,8 +437,8 @@ public class MainMenus extends javax.swing.JFrame {
         MenuItem menuTransaction = new MenuItem(iconTransaction, false, "Transaksi", null, menuTransaction1, menuTransaction2,
                 menuTransaction3);
 
-        MenuItem menuReport1 = new MenuItem(iconTransactionReport, true, "Transaksi", null);
-        MenuItem menuReport = new MenuItem(iconReport, false, "Laporan", null, menuReport1);
+//        MenuItem menuReport1 = new MenuItem(iconTransactionReport, true, "Transaksi", null);
+//        MenuItem menuReport = new MenuItem(iconReport, false, "Laporan", null, menuReport1);
 
         MenuItem menuSettings1 = new MenuItem(iconUser, true, "User", new ActionListener() {
             @Override
@@ -439,7 +458,7 @@ public class MainMenus extends javax.swing.JFrame {
         });
         MenuItem menuSettings = new MenuItem(iconSettings, false, "Pengaturan", null, menuSettings1, menuSettings2);
 
-        addMenu(menuDashboard, menuMaster, menuDistributor, menuTransaction, menuReport, menuSettings, logOut);
+        addMenu(menuDashboard, menuMaster, menuDistributor, menuTransaction, menuSettings, logOut);
     }
 
     private void addMenu(MenuItem... menu) {

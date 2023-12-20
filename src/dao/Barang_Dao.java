@@ -19,19 +19,19 @@ public class Barang_Dao implements Barang_Service {
     }
 
     @Override
-    public List<Barang> getSingleData(String username) {
+    public List<Barang> getSingleData(int kode) {
         List<Barang> data = new ArrayList<>();
         ResultSet result = null;
         try (PreparedStatement ps = con.prepareStatement(BarangQueries.SELECT_SINGLE_DATA)) {
-            ps.setString(1, username);
+            ps.setInt(1, kode);
             result = ps.executeQuery();
             while (result.next()) {
                 barang.setKode(result.getInt("kode"));
                 barang.setNama(result.getString("nama"));
                 barang.setHarga(result.getInt("harga"));
                 barang.setStok(result.getInt("stok"));
-                barang.setKodeKategori(result.getInt("kategori"));
-                barang.setSatuan(result.getString("satuan"));
+                barang.getKategori().setKode(result.getInt("kategori"));
+                barang.getSatuan().setSatuan(result.getString("satuan"));
                 data.add(barang);
             }
         } catch (SQLException e) {
@@ -48,8 +48,8 @@ public class Barang_Dao implements Barang_Service {
             ps.setString(1, barang.getNama());
             ps.setInt(2, barang.getHarga());
             ps.setInt(3, barang.getStok());
-            ps.setInt(4, barang.getKodeKategori());
-            ps.setInt(5, barang.getKodeSatuan());
+            ps.setInt(4, barang.getKategori().getKode());
+            ps.setInt(5, barang.getSatuan().getKode());
             ps.execute();
 
             generatedKeys = ps.getGeneratedKeys();
@@ -76,8 +76,8 @@ public class Barang_Dao implements Barang_Service {
             ps.setString(1, barang.getNama());
             ps.setInt(2, barang.getHarga());
             ps.setInt(3, barang.getStok());
-            ps.setInt(4, barang.getKodeKategori());
-            ps.setInt(5, barang.getKodeSatuan());
+            ps.setInt(4, barang.getKategori().getKode());
+            ps.setInt(5, barang.getSatuan().getKode());
             ps.setInt(6, barang.getKode());
 
             int rowsUpdated = ps.executeUpdate();
