@@ -8,9 +8,9 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import model.BarangKeluar;
 import model.Transaksi;
-import services.BarangKeluar_Service;
+import services.Transaksi_Service;
 
-public class BarangKeluar_Dao implements BarangKeluar_Service {
+public class BarangKeluar_Dao implements Transaksi_Service {
 
     private Connection con;
     private Transaksi transaksi;
@@ -35,15 +35,21 @@ public class BarangKeluar_Dao implements BarangKeluar_Service {
     }
 
     @Override
-    public void addData(Transaksi transaksi) {
+    public int addData(Transaksi transaksi) {
         PreparedStatement ps = null;
+        ResultSet generatedKeys = null;
+        int kode = 0;
         try {
             ps = con.prepareStatement(BarangKeluarQueries.INSERT_DATA);
-            ps.setInt(1, transaksi.getIdUser());
-            ps.setInt(2, transaksi.getTotalPemesanan());
+            ps.setInt(1, transaksi.getUser().getId());
+            ps.setInt(2, transaksi.getTotal());
             ps.setInt(3, transaksi.getJumlah());
             ps.setString(4, transaksi.getKeterangan());
             ps.execute();
+            generatedKeys = ps.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                kode = generatedKeys.getInt(1);
+            }
             JOptionPane.showMessageDialog(null, "Barang Berhasil ditambahkan");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Barang Gagal Ditambahkan");
@@ -57,6 +63,8 @@ public class BarangKeluar_Dao implements BarangKeluar_Service {
                 }
             }
         }
+
+        return kode;
     }
 
     @Override
@@ -67,11 +75,11 @@ public class BarangKeluar_Dao implements BarangKeluar_Service {
             ps.setInt(1, Kode);
             result = ps.executeQuery();
             while (result.next()) {
-                transaksi.setIdPemesanan(result.getInt("id"));
-                transaksi.setUsername(result.getString("user"));
-                transaksi.setTanggalMasuk(result.getString("tanggal"));
+                transaksi.setId(result.getInt("id"));
+                transaksi.getUser().setUsername(result.getString("user"));
+                transaksi.setTanggal(result.getString("tanggal"));
                 transaksi.setJumlah(result.getInt("jumlah"));
-                transaksi.setStatusPemesanan(result.getString("status"));
+                transaksi.getStatus().setStatus(result.getString("status"));
                 transaksi.setKeterangan(result.getString("keterangan"));
                 data.add(transaksi);
             }
@@ -80,7 +88,7 @@ public class BarangKeluar_Dao implements BarangKeluar_Service {
         }
         return data;
     }
-    
+
     @Override
     public void updateData(int idStatus, String keterangan, int kode) {
         PreparedStatement ps = null;
@@ -90,7 +98,6 @@ public class BarangKeluar_Dao implements BarangKeluar_Service {
             ps.setString(2, keterangan);
             ps.setInt(3, kode);
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Berhasil Mengirim Barang");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,6 +105,23 @@ public class BarangKeluar_Dao implements BarangKeluar_Service {
 
     @Override
     public void deleteData(int id) {
-        System.out.println("Delete Data");
+        PreparedStatement ps = null;
+        Connection con = Config.connectDB();
+        try {
+            ps = con.prepareStatement(BarangKeluarQueries.DELETE_DATA);
+            ps.setInt(1, id);
+            ps.executeUpdate();;
+        } catch (Exception e) {
+            System.out.println("Error delete : " + e.getMessage());
+        } finally {
+            if (ps != null) {
+                try {
+                    con.close();
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

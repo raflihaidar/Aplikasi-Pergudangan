@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import model.BarangMasuk;
 import model.DetailBarangMasuk;
 import model.DetailPesanan;
+import model.DetailTransaksi;
 
 public class DetailBarangMasukController {
 
@@ -23,18 +24,9 @@ public class DetailBarangMasukController {
     private BarangMasuk_Dao barangMasukDao;
     private DetailBarangMasuk_Dao detailDao;
     private Barang_Dao barangDao;
-    private DetailBarangMasuk detail;
+    private DetailTransaksi detail;
     private DetailBarangMasuk_Page detailPage;
     private List<BarangMasuk> data;
-
-    public DetailBarangMasukController(JTable table) {
-        detail = new DetailBarangMasuk();
-        barangMasukDao = new BarangMasuk_Dao();
-        getterDao = new Getter_Dao();
-        barangDao = new Barang_Dao();
-        detailDao = new DetailBarangMasuk_Dao();
-        this.table = table;
-    }
 
     public DetailBarangMasukController(JTable table, DetailBarangMasuk_Page detailPage) {
         detail = new DetailBarangMasuk();
@@ -46,6 +38,10 @@ public class DetailBarangMasukController {
         this.table = table;
     }
 
+    public DetailBarangMasukController(JTable table) {
+        this(table, null);
+    }
+
     public void getSingleData(int row, JTable table) {
         DefaultTableModel modelPemesanan = (DefaultTableModel) table.getModel();
         DefaultTableModel modelDetail = (DefaultTableModel) this.table.getModel();
@@ -55,12 +51,12 @@ public class DetailBarangMasukController {
             ResultSet result = detailDao.getSingleData(kode_barang_masuk);
             while (result.next()) {
                 DetailPesanan detail = new DetailPesanan();
-                detail.setKodeBarang(result.getInt("kode"));
-                detail.setNamaBarang(result.getString("nama"));
-                detail.setHargaBarang(result.getInt("harga"));
+                detail.getBarang().setKode(result.getInt("kode"));
+                detail.getBarang().setNama(result.getString("nama"));
+                detail.getBarang().setHarga(result.getInt("harga"));
                 detail.setKuantitas(result.getInt("kuantitas"));
                 detail.setSubTotal(result.getInt("subtotal"));
-                modelDetail.addRow(new Object[]{detail.getKodeBarang(), detail.getNamaBarang(), detail.getHargaBarang(), detail.getKuantitas(),
+                modelDetail.addRow(new Object[]{detail.getBarang().getKode(), detail.getBarang().getNama(), detail.getBarang().getHarga(), detail.getKuantitas(),
                     detail.getSubTotal()});
             }
             this.table.setModel(modelDetail);
@@ -101,7 +97,7 @@ public class DetailBarangMasukController {
                 barangDao.updateStok(kuantitas, kodeBarang, BarangQueries.TAMBAH_STOK);
             }
             barangMasukDao.updateData(5, detailPage.getTxtKeterangan(), Integer.parseInt(detailPage.getTxtIdPemesanan()));
-                detailPage.setTxtStatus("Disimpan");
+            detailPage.setTxtStatus("Disimpan");
             JOptionPane.showMessageDialog(null, "Berhasil Update Data");
             detailDao.closeConnection();
         }

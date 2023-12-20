@@ -21,39 +21,45 @@ public class UserController {
     private User user;
     private List<User> data;
     private User_Dao userDao;
-    private Getter_Dao dao;
+    private Getter_Dao getterDao;
+
+    public UserController(JTable table, JFrame frame, PopUpUser popUp, User user, String username) {
+        this.table = table;
+        this.frame = frame;
+        this.popUp = popUp;
+        this.user = user;
+        this.userDao = (username != null) ? new User_Dao(username) : new User_Dao();
+        this.getterDao = new Getter_Dao();
+    }
 
     public UserController(JTable table) {
-        this.table = table;
-        this.userDao = new User_Dao();
-        this.dao = new Getter_Dao();
-        this.user = new User();
+        this(table, null, null, new User(), null);
     }
 
     public UserController(User user) {
-        this.user = user;
+        this(null, null, null, user, null);
     }
 
     public UserController(JFrame frame, String username) {
-        this.frame = frame;
-        this.userDao = new User_Dao(username);
+        this(null, frame, null, new User(), username);
     }
 
     public UserController(PopUpUser popUp, JTable table) {
-        this.table = table;
-        this.popUp = popUp;
-        this.userDao = new User_Dao();
-        this.dao = new Getter_Dao();
+        this(table, null, popUp, new User(), null);
+    }
+    
+    public UserController(){
+        this.getterDao = new Getter_Dao();
     }
 
     public void getData(DefaultTableModel model) {
-         ResultSet result = dao.getData(UserQueries.SELECT_ALL_USERS);
+        ResultSet result = getterDao.getData(UserQueries.SELECT_ALL_USERS);
         try {
             while (result.next()) {
                 user.setUsername(result.getString("username"));
-                user.setJabatan(result.getString("jabatan"));
-                user.setStatus(result.getString("status"));
-                model.addRow(new Object[]{user.getUsername(), user.getJabatan(), user.getStatus()});
+                user.getJabatan().setJabatan(result.getString("jabatan"));
+                user.getStatus().setStatus(result.getString("status"));
+                model.addRow(new Object[]{user.getUsername(), user.getJabatan().getJabatan(), user.getStatus().getStatus()});
             }
             table.setModel(model);
             result.close();
@@ -62,7 +68,7 @@ public class UserController {
         }
     }
 
-      public void getSingleData(int row, JTable table, PopUpUser modal) {
+    public void getSingleData(int row, JTable table, PopUpUser modal) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         String username = model.getValueAt(row, 0).toString();
         data = userDao.getSingleData(username);
@@ -73,8 +79,8 @@ public class UserController {
             modal.setTxtEmail(user.getEmail());
             modal.setTxtNoHp(user.getNoHp());
             modal.setTxtAlamat(user.getAlamat());
-            modal.setCmbJabatan(user.getKodeJabatan() - 1);
-            modal.setCmbStatus(user.getKodeStatus() - 1);
+            modal.setCmbJabatan(user.getJabatan().getKode() - 1);
+            modal.setCmbStatus(user.getStatus().getKode() - 1);
         }
     }
 
@@ -89,7 +95,7 @@ public class UserController {
             }
             model = (DefaultTableModel) table.getModel();
             model.removeRow(row);
-            System.out.println("delete data berhasil");
+            JOptionPane.showMessageDialog(null, "Delete Data Berhasil", "Success", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
         }
@@ -97,7 +103,8 @@ public class UserController {
 
     public void updateUser(int row) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        user = new User(popUp.getTxtId(), popUp.getTxtNama(), popUp.getTxtUsername(), popUp.getTxtEmail(), popUp.getTxtNoHp(), popUp.getTxtAlamat(), popUp.getCmbJabatan(), popUp.getCmbStatus());
+        user = new User(popUp.getTxtId(), popUp.getTxtNama(), popUp.getTxtUsername(), popUp.getTxtEmail(),
+                popUp.getTxtNoHp(), popUp.getTxtAlamat(), popUp.getCmbJabatan(), popUp.getCmbStatus());
         userDao.updateData(user);
         JOptionPane.showMessageDialog(frame, "Berhasil Update Data");
         model.setRowCount(0);
@@ -109,5 +116,20 @@ public class UserController {
         this.frame.dispose();
         Login login = new Login();
         login.setVisible(true);
+    }
+
+    public String getTotalStaff() {
+        ResultSet result = getterDao.getData(UserQueries.SELECT_STAFF);
+        int total = 0;
+        try {
+            while (result.next()) {
+                total = result.getInt(1);
+            }
+            result.close();
+            return String.valueOf(total);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return String.valueOf(total);
+        }
     }
 }

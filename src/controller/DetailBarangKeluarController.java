@@ -79,12 +79,12 @@ public class DetailBarangKeluarController {
             ResultSet result = transDao.getSingleData(kode_barang_masuk);
             while (result.next()) {
                 DetailPesanan detail = new DetailPesanan();
-                detail.setKodeBarang(result.getInt("kode"));
-                detail.setNamaBarang(result.getString("nama"));
-                detail.setHargaBarang(result.getInt("harga"));
+                detail.getBarang().setKode(result.getInt("kode"));
+                detail.getBarang().setNama(result.getString("nama"));
+                detail.getBarang().setHarga(result.getInt("harga"));
                 detail.setKuantitas(result.getInt("kuantitas"));
                 detail.setSubTotal(result.getInt("subtotal"));
-                modelDetail.addRow(new Object[]{detail.getKodeBarang(), detail.getNamaBarang(), detail.getHargaBarang(), detail.getKuantitas(),
+                modelDetail.addRow(new Object[]{detail.getBarang().getKode(), detail.getBarang().getNama(), detail.getBarang().getHarga(), detail.getKuantitas(),
                     detail.getSubTotal()});
             }
             this.table.setModel(modelDetail);
@@ -108,8 +108,8 @@ public class DetailBarangKeluarController {
             getterDao.closeConnection();
         }
     }
-    
-        public void cancelBarangKeluar() {
+
+    public void cancelBarangKeluar() {
         if (!detailPage.getTxtStatus().equals("Disimpan") && !detailPage.getTxtStatus().equals("Dibatalkan")) {
             int option = JOptionPane.showConfirmDialog(detailPage, "Apakah Anda Yakin ?", null, JOptionPane.YES_NO_OPTION);
             if (option == 0) {

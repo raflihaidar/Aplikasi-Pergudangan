@@ -1,11 +1,10 @@
 package controller;
 
+import Page.DaftarPemesanan;
 import Page.Pemesanan_Page;
 import dao.Barang_Dao;
 import dao.DetailPemesanan_Dao;
-import dao.Getter_Dao;
 import dao.Pemesanan_Dao;
-import helper.DetailPesananQueries;
 import javax.swing.JTable;
 import java.sql.*;
 import java.util.List;
@@ -13,12 +12,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Barang;
 import model.DetailPesanan;
+import model.DetailTransaksi;
 import model.Pemesanan;
 
 public class DetailPemesananController {
 
     private JTable table;
-    private DetailPesanan detailPesanan;
+    private DetailTransaksi detailPesanan;
     private Pemesanan pemesananModel;
     private DetailPemesanan_Dao detailDao;
     private Pemesanan_Dao pesananDao;
@@ -36,8 +36,7 @@ public class DetailPemesananController {
     }
 
     public DetailPemesananController(JTable table) {
-        this.table = table;
-        detailDao = new DetailPemesanan_Dao();
+        this(table, null);
     }
 
     public void getSingleData(int row, JTable table) {
@@ -47,13 +46,13 @@ public class DetailPemesananController {
         try {
             ResultSet result = detailDao.getSingleData(idPesanan);
             while (result.next()) {
-                DetailPesanan detail = new DetailPesanan();
-                detail.setKodeBarang(result.getInt("kode"));
-                detail.setNamaBarang(result.getString("nama"));
-                detail.setHargaBarang(result.getInt("harga"));
+                DetailTransaksi detail = new DetailPesanan();
+                detail.getBarang().setKode(result.getInt("kode"));
+                detail.getBarang().setNama(result.getString("nama"));
+                detail.getBarang().setHarga(result.getInt("harga"));
                 detail.setKuantitas(result.getInt("kuantitas"));
                 detail.setSubTotal(result.getInt("subtotal"));
-                modelDetail.addRow(new Object[]{detail.getKodeBarang(), detail.getNamaBarang(), detail.getHargaBarang(), detail.getKuantitas(),
+                modelDetail.addRow(new Object[]{detail.getBarang().getKode(), detail.getBarang().getNama(), detail.getBarang().getHarga(), detail.getKuantitas(),
                     detail.getSubTotal()});
             }
             this.table.setModel(modelDetail);
@@ -64,7 +63,7 @@ public class DetailPemesananController {
     }
 
     public void addToTable() {
-        String username = pemesanan.getTxtKodeBarang();
+        int username = Integer.parseInt(pemesanan.getTxtKodeBarang());
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         List<Barang> data = barangDao.getSingleData(username);
         for (Barang barang : data) {
@@ -90,6 +89,7 @@ public class DetailPemesananController {
                     this.detailPesanan = new DetailPesanan(idPesanan, kodeBarang, kuantitas, subTotal);
                     detailDao.addData(detailPesanan);
                 }
+                JOptionPane.showConfirmDialog(pemesanan, "Ingin Menambahkan Pesanan ?", "Question", JOptionPane.YES_NO_OPTION);
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

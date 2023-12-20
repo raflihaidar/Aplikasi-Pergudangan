@@ -75,8 +75,8 @@ public class DistributorController {
 
     public void getSingleData(int row, JTable table, PopUpDistributor popUp) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        String username = model.getValueAt(row, 0).toString();
-        data = distributorDao.getSingleData(username);
+        int id = Integer.parseInt(model.getValueAt(row, 0).toString());
+        data = distributorDao.getSingleData(id);
         for (Distributor distributor : data) {
             popUp.setTxtIdDistributor(String.valueOf(distributor.getId()));
             popUp.setTxtNamaDistributor(distributor.getNama());
@@ -107,7 +107,6 @@ public class DistributorController {
             }
             model = (DefaultTableModel) table.getModel();
             model.removeRow(row);
-            System.out.println("delete data berhasil");
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
         }

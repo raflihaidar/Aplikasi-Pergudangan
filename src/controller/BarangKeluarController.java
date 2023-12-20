@@ -45,13 +45,13 @@ public class BarangKeluarController {
         try {
             while (result.next()) {
                 Transaksi transaksi = new BarangKeluar();
-                transaksi.setIdPemesanan(result.getInt("id"));
-                transaksi.setUsername(result.getString("user"));
-                transaksi.setTotalPemesanan(result.getInt("total"));
-                transaksi.setTanggalMasuk(result.getString("tanggal"));
-                transaksi.setStatusPemesanan(result.getString("status"));
+                transaksi.setId(result.getInt("id"));
+                transaksi.getUser().setUsername(result.getString("user"));
+                transaksi.setTotal(result.getInt("total"));
+                transaksi.setTanggal(result.getString("tanggal"));
+                transaksi.getStatus().setStatus(result.getString("status"));
                 transaksi.setJumlah(result.getInt("jumlah"));
-                model.addRow(new Object[]{transaksi.getIdPemesanan(), transaksi.getUsername(), transaksi.getTotalPemesanan(), transaksi.getTanggalMasuk(), transaksi.getStatusPemesanan()});
+                model.addRow(new Object[]{transaksi.getId(), transaksi.getUser().getUsername(), transaksi.getTotal(), transaksi.getTanggal(), transaksi.getStatus().getStatus()});
             }
             table.setModel(model);
             result.close();
@@ -65,11 +65,10 @@ public class BarangKeluarController {
         int id = Integer.parseInt(model.getValueAt(row, 0).toString());
         data = barangKeluarDao.getSingleData(id);
         for (Transaksi transaksi : data) {
-            detail.setTxtUser(String.valueOf(transaksi.getUsername()));
-            detail.setTxtTglPemesanan(String.valueOf(transaksi.getTanggalMasuk()));
-            detail.setTxtIdPemesanan(String.valueOf(transaksi.getIdPemesanan()));
-            detail.setTxtStatus(transaksi.getStatusPemesanan());
-            System.out.println("status : " + transaksi.getStatusPemesanan());
+            detail.setTxtUser(String.valueOf(transaksi.getUser().getUsername()));
+            detail.setTxtTglPemesanan(String.valueOf(transaksi.getTanggal()));
+            detail.setTxtIdPemesanan(String.valueOf(transaksi.getId()));
+            detail.setTxtStatus(transaksi.getStatus().getStatus());
             detail.setTxtKeterangan(transaksi.getKeterangan());
         }
     }
@@ -81,26 +80,42 @@ public class BarangKeluarController {
         this.transaksi = new BarangKeluar(idUser, total, jumlah);
         barangKeluarDao.addData(transaksi);
     }
+
+    public void deleteData() {
+        try {
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            int row = table.getSelectedRow();
+            int kode = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
+            int option = JOptionPane.showConfirmDialog(null, "Apakah Anda Yakin Ingin Menghapus Pesanan", "Question", JOptionPane.YES_NO_OPTION);
+            if (option == 0) {
+                JOptionPane.showMessageDialog(null, "Pesanan Berhasil Dihapus", "Success", JOptionPane.INFORMATION_MESSAGE);
+                barangKeluarDao.deleteData(kode);
+                if (table.isEditing()) {
+                    table.getCellEditor().stopCellEditing();
+                }
+                model = (DefaultTableModel) table.getModel();
+                model.removeRow(row);
+            } else {
+                JOptionPane.showMessageDialog(null, "Gagal Menghapus Pesanan", "Error", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (Exception e) {
+            System.out.println("Error : " + e.getMessage());
+        }
+    }
     
-//        public void deleteData() {
-//        try {
-//            DefaultTableModel model = (DefaultTableModel) table.getModel();
-//            int row = table.getSelectedRow();
-//            int kode = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
-//            int option = JOptionPane.showConfirmDialog(null, "Apakah Anda Yakin Ingin Menghapus Pesanan", "Question", JOptionPane.YES_NO_OPTION);
-//            if (option == 0) {
-//                JOptionPane.showMessageDialog(null, "Pesanan Berhasil Dihapus", "Success", JOptionPane.INFORMATION_MESSAGE);
-//                pemesananDao.deleteData(kode);
-//                if (table.isEditing()) {
-//                    table.getCellEditor().stopCellEditing();
-//                }
-//                model = (DefaultTableModel) table.getModel();
-//                model.removeRow(row);
-//            }else{
-//                JOptionPane.showMessageDialog(null, "Gagal Menghapus Pesanan", "Error", JOptionPane.WARNING_MESSAGE);
-//            }
-//        } catch (Exception e) {
-//            System.out.println("Error : " + e.getMessage());
-//        }
-//    }
+        public String getTotalData() {
+        ResultSet result = getterDao.getData(BarangKeluarQueries.GET_TOTAL_DATA);
+        int total = 0;
+        try {
+            while (result.next()) {
+                total = result.getInt(1);
+            }
+            result.close();
+            return String.valueOf(total);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return String.valueOf(total);
+        }
+    }
+    
 }

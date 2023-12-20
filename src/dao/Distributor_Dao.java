@@ -19,11 +19,11 @@ public class Distributor_Dao implements Distributor_Service {
     }
 
     @Override
-    public List<Distributor> getSingleData(String username) {
+    public List<Distributor> getSingleData(int id) {
         List<Distributor> data = new ArrayList<>();
         ResultSet result = null;
         try (PreparedStatement ps = con.prepareStatement(DistributorQueries.SELECT_SINGLE_DATA)) {
-            ps.setString(1, username);
+            ps.setInt(1, id);
             result = ps.executeQuery();
             while (result.next()) {
                 distributor.setId(result.getInt("id"));

@@ -22,7 +22,7 @@ public class DetailBarangKeluar_Dao implements DetailTransaksi_Service {
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(DetailBarangKeluar_Queries.ADD_DATA);
-            ps.setInt(1, detail.getKodeBarang());
+            ps.setInt(1, detail.getBarang().getKode());
             ps.setInt(2, detail.getIdTransaksi());
             ps.setInt(3, detail.getKuantitas());
             ps.setInt(4, detail.getSubTotal());
