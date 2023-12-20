@@ -145,6 +145,7 @@ public class PemesananController {
 
     public void modifyOrder() {
         data = pemesananDao.getSingleData(Integer.parseInt(detail.getTxtIdPemesanan()));
+        System.out.println(detail.getTxtIdPemesanan());
         for (Pemesanan pemesanan : data) {
             if (!pemesanan.getStatus().equals("Dibatalkan") && !pemesanan.getStatus().equals("Diterima")) {
                 if (detail.getLblModify().equals("Modify")) {

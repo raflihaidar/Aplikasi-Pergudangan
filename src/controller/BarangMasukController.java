@@ -14,6 +14,7 @@ import java.sql.*;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import Page.DetailBarangMasuk_Page;
+import helper.BarangQueries;
 import javax.swing.JOptionPane;
 
 public class BarangMasukController {
@@ -41,6 +42,10 @@ public class BarangMasukController {
         barang = new BarangMasuk();
         barangMasukDao = new BarangMasuk_Dao();
         cb = new ComboBox_Dao();
+    }
+
+    public BarangMasukController() {
+        getterDao = new Getter_Dao();
     }
 
     public void getData() {
@@ -88,26 +93,41 @@ public class BarangMasukController {
         this.barang = new BarangMasuk(idUser, idDistributor, tanggal, jumlah);
         barangMasukDao.addData(barang);
     }
-    
-//        public void deleteData() {
-//        try {
-//            DefaultTableModel model = (DefaultTableModel) table.getModel();
-//            int row = table.getSelectedRow();
-//            int kode = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
-//            int option = JOptionPane.showConfirmDialog(null, "Apakah Anda Yakin Ingin Menghapus Pesanan", "Question", JOptionPane.YES_NO_OPTION);
-//            if (option == 0) {
-//                JOptionPane.showMessageDialog(null, "Pesanan Berhasil Dihapus", "Success", JOptionPane.INFORMATION_MESSAGE);
-//                pemesananDao.deleteData(kode);
-//                if (table.isEditing()) {
-//                    table.getCellEditor().stopCellEditing();
-//                }
-//                model = (DefaultTableModel) table.getModel();
-//                model.removeRow(row);
-//            }else{
-//                JOptionPane.showMessageDialog(null, "Gagal Menghapus Pesanan", "Error", JOptionPane.WARNING_MESSAGE);
-//            }
-//        } catch (Exception e) {
-//            System.out.println("Error : " + e.getMessage());
-//        }
-//    }
+
+    public void deleteData() {
+        try {
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            int row = table.getSelectedRow();
+            int kode = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
+            int option = JOptionPane.showConfirmDialog(null, "Apakah Anda Yakin Ingin Menghapus Pesanan", "Question", JOptionPane.YES_NO_OPTION);
+            if (option == 0) {
+                JOptionPane.showMessageDialog(null, "Pesanan Berhasil Dihapus", "Success", JOptionPane.INFORMATION_MESSAGE);
+                barangMasukDao.deleteData(kode);
+                if (table.isEditing()) {
+                    table.getCellEditor().stopCellEditing();
+                }
+                model = (DefaultTableModel) table.getModel();
+                model.removeRow(row);
+            } else {
+                JOptionPane.showMessageDialog(null, "Gagal Menghapus Pesanan", "Error", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (Exception e) {
+            System.out.println("Error : " + e.getMessage());
+        }
+    }
+
+    public String getTotalData() {
+        ResultSet result = getterDao.getData(BarangMasukQueries.GET_TOTAL_DATA);
+        int total = 0;
+        try {
+            while (result.next()) {
+                total = result.getInt(1);
+            }
+            result.close();
+            return String.valueOf(total);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return String.valueOf(total);
+        }
+    }
 }

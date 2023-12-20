@@ -10,4 +10,6 @@ public interface BarangMasuk_Services {
     public List<BarangMasuk> getSingleData(int Kode);
     
     public void updateData(int status, String keterangan, int id);
+    
+    public void deleteData(int id);
 }

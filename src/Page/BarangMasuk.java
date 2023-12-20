@@ -5,9 +5,12 @@ import Components.TableActionCellRender;
 import Components.TableActionEvent;
 import controller.BarangMasukController;
 import helper.Util;
+import java.awt.Font;
 import view.MainMenus;
 
 public class BarangMasuk extends javax.swing.JPanel {
+    
+    Font font = new Font("Poppins", Font.BOLD,18);
 
     public BarangMasuk(MainMenus main) {
         initComponents();
@@ -24,11 +27,11 @@ public class BarangMasuk extends javax.swing.JPanel {
 
             @Override
             public void onDelete(int row) {
-//                try {
-//                    controller.deleteBarang();
-//                } catch (Exception e) {
-//                    System.out.println("Error : " + e.getMessage());
-//                }
+                try {
+                    controller.deleteData();
+                } catch (Exception e) {
+                    System.out.println("Error : " + e.getMessage());
+                }
             }
 
             @Override
@@ -38,6 +41,7 @@ public class BarangMasuk extends javax.swing.JPanel {
         };
         table1.getColumnModel().getColumn(6).setCellRenderer(new TableActionCellRender());
         table1.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(event));
+        title.setFont(font);
     }
 
     /**
@@ -53,7 +57,7 @@ public class BarangMasuk extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         tblPesanan = new javax.swing.JScrollPane();
         table1 = new Components.Table();
-        jLabel1 = new javax.swing.JLabel();
+        title = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
@@ -81,10 +85,9 @@ public class BarangMasuk extends javax.swing.JPanel {
 
         jPanel2.add(tblPesanan, "card2");
 
-        jLabel1.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Barang Masuk");
+        title.setFont(new java.awt.Font("SimSun", 1, 14)); // NOI18N
+        title.setForeground(new java.awt.Color(0, 0, 0));
+        title.setText("Barang Masuk");
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/search.png"))); // NOI18N
@@ -94,26 +97,23 @@ public class BarangMasuk extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 944, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 944, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
+                .addGap(34, 34, 34)
+                .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(46, 46, 46)
@@ -145,11 +145,11 @@ public class BarangMasuk extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;
     private Components.Table table1;
     private javax.swing.JScrollPane tblPesanan;
+    private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }

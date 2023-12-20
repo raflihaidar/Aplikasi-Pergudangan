@@ -80,7 +80,7 @@ public class BarangKeluar_Dao implements BarangKeluar_Service {
         }
         return data;
     }
-    
+
     @Override
     public void updateData(int idStatus, String keterangan, int kode) {
         PreparedStatement ps = null;
@@ -90,7 +90,6 @@ public class BarangKeluar_Dao implements BarangKeluar_Service {
             ps.setString(2, keterangan);
             ps.setInt(3, kode);
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Berhasil Mengirim Barang");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,6 +97,23 @@ public class BarangKeluar_Dao implements BarangKeluar_Service {
 
     @Override
     public void deleteData(int id) {
-        System.out.println("Delete Data");
+        PreparedStatement ps = null;
+        Connection con = Config.connectDB();
+        try {
+            ps = con.prepareStatement(BarangKeluarQueries.DELETE_DATA);
+            ps.setInt(1, id);
+            ps.executeUpdate();;
+        } catch (Exception e) {
+            System.out.println("Error delete : " + e.getMessage());
+        } finally {
+            if (ps != null) {
+                try {
+                    con.close();
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

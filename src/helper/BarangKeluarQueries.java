@@ -14,4 +14,6 @@ public class BarangKeluarQueries {
                                                 + "WHERE bk.id = ?";
     public final static String GET_LAST_ID = "SELECT id FROM barang_keluar ORDER BY id DESC LIMIT 1";
     public final static String UPDATE_DATA = "UPDATE barang_keluar SET status = ?, keterangan = ? WHERE id = ?";
+    public final static String DELETE_DATA = "DELETE FROM barang_keluar WHERE id = ?";
+    public final static String GET_TOTAL_DATA = "SELECT COUNT(*) FROM barang_keluar";
 }

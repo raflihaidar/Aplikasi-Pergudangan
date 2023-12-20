@@ -16,4 +16,6 @@ public class BarangMasukQueries {
                                                 + "WHERE bm.id = ? AND s.status NOT IN ('Dikirim', 'Sedang di Proses')";
     public final static String GET_LAST_ID = "SELECT id FROM barang_masuk ORDER BY id DESC LIMIT 1";
     public final static String UPDATE_DATA = "UPDATE barang_masuk SET status = ?, keterangan = ? WHERE id = ?";
+    public final static String DELETE_DATA = "DELETE FROM barang_masuk WHERE id = ?";
+    public final static String GET_TOTAL_DATA = "SELECT COUNT(*) FROM barang_masuk";
 }
