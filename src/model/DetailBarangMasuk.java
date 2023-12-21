@@ -1,9 +1,4 @@
 package model;
-
-/**
- *
- * @author rafli
- */
 public class DetailBarangMasuk extends DetailTransaksi {
 
     public DetailBarangMasuk(int idBarangMasuk, int kodeBarang, int kuantitas, int subtotal) {

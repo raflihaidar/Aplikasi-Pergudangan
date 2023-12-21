@@ -7,7 +7,7 @@ import model.DetailPesanan;
 import model.DetailTransaksi;
 import services.DetailTransaksi_Service;
 
-public class DetailPemesanan_Dao implements DetailTransaksi_Service  {
+public class DetailPemesanan_Dao implements DetailTransaksi_Service {
 
     private Connection con;
     private DetailTransaksi detail;
@@ -32,7 +32,7 @@ public class DetailPemesanan_Dao implements DetailTransaksi_Service  {
 
     public ResultSet getSingleData(int idPemesanan) {
         ResultSet result = null;
-        try{
+        try {
             PreparedStatement ps = con.prepareStatement(DetailPesananQueries.GET_SINGLE_PEMESANAN);
             ps.setInt(1, idPemesanan);
             result = ps.executeQuery();

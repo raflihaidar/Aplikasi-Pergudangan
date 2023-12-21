@@ -28,7 +28,7 @@ public class DetailPemesananController {
     public DetailPemesananController(JTable table, Pemesanan_Page pemesanan) {
         this.table = table;
         this.pemesanan = pemesanan;
-        detailPesanan = new DetailPesanan();
+        detailPesanan = new DetailPesanan(); //Polymorpism
         detailDao = new DetailPemesanan_Dao();
         pesananDao = new Pemesanan_Dao();
         barangDao = new Barang_Dao();
