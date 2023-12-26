@@ -43,8 +43,8 @@ public class ActionPanel extends javax.swing.JPanel {
         cmdEdit = new Button();
         cmdDelete = new Button();
 
-        ImageIcon iconEdit = MyIcon.getIcon("edit");
-        ImageIcon iconDelete = MyIcon.getIcon("delete");
+        ImageIcon iconEdit = new javax.swing.ImageIcon(getClass().getResource("/resources/edit.png"));
+        ImageIcon iconDelete = new javax.swing.ImageIcon(getClass().getResource("/resources/delete.png"));
 
         cmdEdit.setIcon(iconEdit);
         cmdDelete.setIcon(iconDelete);

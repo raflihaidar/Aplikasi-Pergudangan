@@ -1,19 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Components;
 
+import java.awt.image.BufferedImage;
+import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 /**
  *
  * @author rafli
  */
-public class MyIcon {
+public class MyIcon extends ImageIcon {
+
     private static ImageIcon icon;
-    
-    public static ImageIcon getIcon(String name){
-        return icon = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/image/" + name + ".png");
+    private URL url;
+    private BufferedImage img = null;
+
+    public MyIcon(String name) {
+        try {
+            this.url = getClass().getResource(name + ".png");
+            this.img = ImageIO.read(url);
+        } catch (Exception e) {
+            
+        }
+
+//        return icon = new javax.swing.ImageIcon(System.getProperty("user.dir") + "/src/resources/" + name + ".png");
     }
 }

@@ -307,9 +307,13 @@ public class PopUpBarang extends javax.swing.JDialog {
     }
 
     public int getKodeKategori() {
-        controllerKategori = new ComboBoxController(cmbKategori, KategoriQueries.SELECT_ID);
-        String kategori = cmbKategori.getSelectedItem().toString();
-        return controllerKategori.getId(kategori);
+        if (cmbKategori.getSelectedIndex() != -1) {
+            controllerKategori = new ComboBoxController(cmbKategori, KategoriQueries.SELECT_ID);
+            String kategori = cmbKategori.getSelectedItem().toString();
+            return controllerKategori.getId(kategori);
+        } else {
+            return -1;
+        }
     }
 
     public String getKategori() {
@@ -321,16 +325,20 @@ public class PopUpBarang extends javax.swing.JDialog {
     }
 
     public int getKodeSatuan() {
-        controllerSatuan = new ComboBoxController(cmbSatuan, SatuanQueries.SELECT_ID);
-        String satuan = cmbSatuan.getSelectedItem().toString();
-        return controllerSatuan.getId(satuan);
+        if (cmbKategori.getSelectedIndex() != -1) {
+            controllerSatuan = new ComboBoxController(cmbSatuan, SatuanQueries.SELECT_ID);
+            String satuan = cmbSatuan.getSelectedItem().toString();
+            return controllerSatuan.getId(satuan);
+        } else {
+            return -1;
+        }
     }
 
     public String getSatuan() {
         return cmbSatuan.getSelectedItem().toString();
     }
 
-    public void setSatuan(String satuan){
+    public void setSatuan(String satuan) {
         cmbSatuan.setSelectedItem(satuan);
     }
 

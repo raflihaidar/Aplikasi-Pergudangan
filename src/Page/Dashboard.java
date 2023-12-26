@@ -16,14 +16,14 @@ import model.Card;
 
 public class Dashboard extends javax.swing.JPanel {
 
-    ImageIcon iconStaff = MyIcon.getIcon("staff");
-    ImageIcon iconBarang = MyIcon.getIcon("item");
-    ImageIcon iconCategory = MyIcon.getIcon("category");
-    ImageIcon iconSatuan = MyIcon.getIcon("satuan");
-    ImageIcon iconIncome = MyIcon.getIcon("income");
-    ImageIcon iconOutbound = MyIcon.getIcon("outbound");
-    ImageIcon iconDistributor = MyIcon.getIcon("distributor-2");
-    ImageIcon iconOder = MyIcon.getIcon("order");
+    ImageIcon iconStaff = new javax.swing.ImageIcon(getClass().getResource("/resources/staff.png"));
+    ImageIcon iconBarang = new javax.swing.ImageIcon(getClass().getResource("/resources/item.png"));
+    ImageIcon iconCategory =  new javax.swing.ImageIcon(getClass().getResource("/resources/category.png"));
+    ImageIcon iconSatuan = new javax.swing.ImageIcon(getClass().getResource("/resources/satuan.png"));
+    ImageIcon iconIncome = new javax.swing.ImageIcon(getClass().getResource("/resources/income.png"));
+    ImageIcon iconOutbound = new javax.swing.ImageIcon(getClass().getResource("/resources/outbound.png"));
+    ImageIcon iconDistributor = new javax.swing.ImageIcon(getClass().getResource("/resources/distributor-2.png"));
+    ImageIcon iconOder = new javax.swing.ImageIcon(getClass().getResource("/resources/order.png"));
     Font font = new Font("Poppins", Font.BOLD, 18);
 
     public Dashboard() {

@@ -75,19 +75,23 @@ public class BarangController {
     }
 
     public void addDataBarang(JTable table) {
-        int kode = popUp.getKode();
-        String nama = popUp.getName();
-        int harga = popUp.getHarga();
-        int stok = popUp.getStok();
-        int kodekategori = popUp.getKodeKategori();
-        int kodesatuan = popUp.getKodeSatuan();
-        String kategori = popUp.getKategori();
-        String satuan = popUp.getSatuan();
-        this.barang = new Barang(kode, nama, harga, stok, kodekategori, kodesatuan);
-        int kodeBarang = barangDao.addData(barang);
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.addRow(new Object[]{kodeBarang, nama, harga, stok, kategori, satuan});
-        table.setModel(model);
+        try {
+            int kode = popUp.getKode();
+            String nama = popUp.getName();
+            int harga = popUp.getHarga();
+            int stok = popUp.getStok();
+            int kodekategori = popUp.getKodeKategori();
+            int kodesatuan = popUp.getKodeSatuan();
+            String kategori = popUp.getKategori();
+            String satuan = popUp.getSatuan();
+            this.barang = new Barang(kode, nama, harga, stok, kodekategori, kodesatuan);
+            int kodeBarang = barangDao.addData(barang);
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            model.addRow(new Object[]{kodeBarang, nama, harga, stok, kategori, satuan});
+            table.setModel(model);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(popUp, "Masuukkan Angka");
+        }
     }
 
     public void getSingleData(int row, JTable table, PopUpBarang popUp) {
@@ -107,9 +111,7 @@ public class BarangController {
 
     public void updateDataBarang(int row) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        System.out.println(popUp.getKodeSatuan());
         barang = new Barang(popUp.getKode(), popUp.getName(), popUp.getHarga(), popUp.getStok(), popUp.getKodeKategori(), popUp.getKodeSatuan());
-        System.out.println(popUp.getStok());
         barangDao.updateData(barang);
         JOptionPane.showMessageDialog(null, "Berhasil Update Data");
         model.setRowCount(0);

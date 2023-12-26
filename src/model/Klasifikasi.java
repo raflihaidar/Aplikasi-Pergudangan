@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 public class Klasifikasi {
 
@@ -45,7 +46,7 @@ public class Klasifikasi {
             return null;
         }
     }
-    
+
     public ResultSet getSingleData(int kode, String query) {
         Connection con = Config.connectDB();
         PreparedStatement ps = null;
@@ -61,7 +62,6 @@ public class Klasifikasi {
             return null;
         }
     }
-
 
     public int addData(String query) {
         Connection con = Config.connectDB();
@@ -98,6 +98,8 @@ public class Klasifikasi {
         Connection con = Config.connectDB();
         PreparedStatement ps = null;
         try {
+            Statement s = con.createStatement();
+            s.executeUpdate("PRAGMA foreign_keys = ON; ");
             ps = con.prepareStatement(query);
             ps.setInt(1, kode);
             ps.executeUpdate();
@@ -123,7 +125,7 @@ public class Klasifikasi {
             ps.setInt(2, kode);
             ps.executeUpdate();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error : " + e.getMessage());
         } finally {
             if (ps != null) {
                 try {
@@ -135,9 +137,9 @@ public class Klasifikasi {
             }
         }
     }
-    
-    public ResultSet getTotalData(String query){
-       Connection con = Config.connectDB();
+
+    public ResultSet getTotalData(String query) {
+        Connection con = Config.connectDB();
         Statement statement = null;
         ResultSet result = null;
         try {

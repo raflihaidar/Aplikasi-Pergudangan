@@ -28,7 +28,7 @@ public class DetailPemesananController {
     public DetailPemesananController(JTable table, Pemesanan_Page pemesanan) {
         this.table = table;
         this.pemesanan = pemesanan;
-        detailPesanan = new DetailPesanan(); //Polymorpism
+        detailPesanan = new DetailPesanan(); // Polymorpism
         detailDao = new DetailPemesanan_Dao();
         pesananDao = new Pemesanan_Dao();
         barangDao = new Barang_Dao();
@@ -52,8 +52,9 @@ public class DetailPemesananController {
                 detail.getBarang().setHarga(result.getInt("harga"));
                 detail.setKuantitas(result.getInt("kuantitas"));
                 detail.setSubTotal(result.getInt("subtotal"));
-                modelDetail.addRow(new Object[]{detail.getBarang().getKode(), detail.getBarang().getNama(), detail.getBarang().getHarga(), detail.getKuantitas(),
-                    detail.getSubTotal()});
+                modelDetail.addRow(new Object[] { detail.getBarang().getKode(), detail.getBarang().getNama(),
+                        detail.getBarang().getHarga(), detail.getKuantitas(),
+                        detail.getSubTotal() });
             }
             this.table.setModel(modelDetail);
             result.close();
@@ -70,7 +71,7 @@ public class DetailPemesananController {
             String namaBarang = barang.getNama();
             int kodeBarang = barang.getKode();
             int hargaBarang = barang.getHarga();
-            model.addRow(new Object[]{kodeBarang, namaBarang, hargaBarang});
+            model.addRow(new Object[] { kodeBarang, namaBarang, hargaBarang });
         }
         table.setModel(model);
     }
@@ -89,7 +90,8 @@ public class DetailPemesananController {
                     this.detailPesanan = new DetailPesanan(idPesanan, kodeBarang, kuantitas, subTotal);
                     detailDao.addData(detailPesanan);
                 }
-                JOptionPane.showConfirmDialog(pemesanan, "Ingin Menambahkan Pesanan ?", "Question", JOptionPane.YES_NO_OPTION);
+                JOptionPane.showConfirmDialog(pemesanan, "Ingin Menambahkan Pesanan ?", "Question",
+                        JOptionPane.YES_NO_OPTION);
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
