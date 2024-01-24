@@ -8,7 +8,11 @@
 
 <p>Transaksi</p>
 
+![Transaksi](https://github.com/raflihaidar/Aplikasi-Pergudangan/assets/108960274/c9356f58-ae00-4daf-a302-a53a85903928)
+
 <p>Pemantauan Stok</p>
+
+![master barang](https://github.com/raflihaidar/Aplikasi-Pergudangan/assets/108960274/b475570a-a339-4671-b910-a9cf7fba7cd4)
 
 
 ## Deskripsi
