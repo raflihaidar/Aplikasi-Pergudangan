@@ -1,8 +1,10 @@
 # SIMAG (Sistem Management Pergudangan)
 
 ## Preview
+
 <p>Dashboard</p>
-![dashboard simag](https://github.com/raflihaidar/Aplikasi-Pergudangan/assets/108960274/f86da28e-d56a-4c71-9562-c05ade2131f3)
+
+![dashboard simag](https://github.com/raflihaidar/Aplikasi-Pergudangan/assets/108960274/61184dab-d07b-4c40-9913-45994e5e8314)
 
 <p>Transaksi</p>
 
