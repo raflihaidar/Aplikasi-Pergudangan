@@ -28,3 +28,8 @@
   <li>Pengiriman Barang</li>
   <li>Management User</li>
 </ul>
+
+## Contributor
+1. Rafli Haidar Nashif
+2. Maulana Haqi Hibansyah Alam
+3. Mohammad Rendy Prasetyo Putro
